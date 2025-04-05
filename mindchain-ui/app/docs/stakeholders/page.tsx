@@ -1,10 +1,17 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight } from "lucide-react"
-import Link from "next/link"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function StakeholdersPage() {
   return (
@@ -20,8 +27,8 @@ export default function StakeholdersPage() {
       <div>
         <h1 className="text-3xl font-bold mb-2">Stakeholder Identification</h1>
         <p className="text-lg text-muted-foreground mb-4">
-          Following IEEE 42010 standard to identify stakeholders, their concerns, and the viewpoints and views
-          addressing these concerns.
+          Following IEEE 42010 standard to identify stakeholders, their
+          concerns, and the viewpoints and views addressing these concerns.
         </p>
         <Separator className="my-4" />
       </div>
@@ -36,29 +43,36 @@ export default function StakeholdersPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                IEEE 42010 is a standard for architecture description that provides a framework for identifying
-                stakeholders, their concerns, and the viewpoints and views that address these concerns. This framework
-                helps ensure that the architecture meets the needs of all stakeholders and addresses their specific
+                IEEE 42010 is a standard for architecture description that
+                provides a framework for identifying stakeholders, their
+                concerns, and the viewpoints and views that address these
+                concerns. This framework helps ensure that the architecture
+                meets the needs of all stakeholders and addresses their specific
                 concerns.
               </p>
 
               <div className="mt-4">
-                <h4 className="font-semibold mb-2">Key Components of IEEE 42010:</h4>
+                <h4 className="font-semibold mb-2">
+                  Key Components of IEEE 42010:
+                </h4>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>
-                    <span className="font-medium">Stakeholders:</span> Individuals, groups, or organizations with
-                    interests in or concerns about the system
+                    <span className="font-medium">Stakeholders:</span>{" "}
+                    Individuals, groups, or organizations with interests in or
+                    concerns about the system
                   </li>
                   <li>
-                    <span className="font-medium">Concerns:</span> Interests or requirements that stakeholders have
-                    regarding the system
+                    <span className="font-medium">Concerns:</span> Interests or
+                    requirements that stakeholders have regarding the system
                   </li>
                   <li>
-                    <span className="font-medium">Viewpoints:</span> Perspectives from which to view the system that
-                    address specific concerns
+                    <span className="font-medium">Viewpoints:</span>{" "}
+                    Perspectives from which to view the system that address
+                    specific concerns
                   </li>
                   <li>
-                    <span className="font-medium">Views:</span> Representations of the system from specific viewpoints
+                    <span className="font-medium">Views:</span> Representations
+                    of the system from specific viewpoints
                   </li>
                 </ul>
               </div>
@@ -95,7 +109,8 @@ export default function StakeholdersPage() {
                       <TableRow>
                         <TableCell className="font-medium">Students</TableCell>
                         <TableCell>
-                          Undergraduate and graduate students at IIIT Hyderabad who seek academic and research support
+                          Undergraduate and graduate students at IIIT Hyderabad
+                          who seek academic and research support
                         </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
@@ -110,12 +125,15 @@ export default function StakeholdersPage() {
                       <TableRow>
                         <TableCell className="font-medium">Faculty</TableCell>
                         <TableCell>
-                          Professors and instructors who provide expertise and answer student queries
+                          Professors and instructors who provide expertise and
+                          answer student queries
                         </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Relevant query matching based on expertise</li>
-                            <li>Manageable workload and notification frequency</li>
+                            <li>
+                              Manageable workload and notification frequency
+                            </li>
                             <li>Efficient communication tools</li>
                             <li>Integration with existing workflows</li>
                             <li>Recognition for contributions</li>
@@ -125,11 +143,14 @@ export default function StakeholdersPage() {
                       <TableRow>
                         <TableCell className="font-medium">Staff</TableCell>
                         <TableCell>
-                          Administrative and support staff who assist with event coordination and administrative queries
+                          Administrative and support staff who assist with event
+                          coordination and administrative queries
                         </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
-                            <li>Clear categorization of administrative queries</li>
+                            <li>
+                              Clear categorization of administrative queries
+                            </li>
                             <li>Integration with institutional systems</li>
                             <li>Efficient workflow management</li>
                             <li>Reporting and analytics</li>
@@ -158,8 +179,13 @@ export default function StakeholdersPage() {
                     </TableHeader>
                     <TableBody>
                       <TableRow>
-                        <TableCell className="font-medium">System Administrators</TableCell>
-                        <TableCell>IT staff responsible for maintaining and operating the MindChain platform</TableCell>
+                        <TableCell className="font-medium">
+                          System Administrators
+                        </TableCell>
+                        <TableCell>
+                          IT staff responsible for maintaining and operating the
+                          MindChain platform
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>System reliability and uptime</li>
@@ -171,8 +197,13 @@ export default function StakeholdersPage() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-medium">Department Coordinators</TableCell>
-                        <TableCell>Staff who oversee the use of MindChain within specific departments</TableCell>
+                        <TableCell className="font-medium">
+                          Department Coordinators
+                        </TableCell>
+                        <TableCell>
+                          Staff who oversee the use of MindChain within specific
+                          departments
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Department-specific analytics</li>
@@ -183,8 +214,13 @@ export default function StakeholdersPage() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-medium">IT Support Staff</TableCell>
-                        <TableCell>Personnel who provide technical support to users of the system</TableCell>
+                        <TableCell className="font-medium">
+                          IT Support Staff
+                        </TableCell>
+                        <TableCell>
+                          Personnel who provide technical support to users of
+                          the system
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Troubleshooting tools</li>
@@ -216,8 +252,13 @@ export default function StakeholdersPage() {
                     </TableHeader>
                     <TableBody>
                       <TableRow>
-                        <TableCell className="font-medium">Software Developers</TableCell>
-                        <TableCell>Engineers who build and maintain the MindChain platform</TableCell>
+                        <TableCell className="font-medium">
+                          Software Developers
+                        </TableCell>
+                        <TableCell>
+                          Engineers who build and maintain the MindChain
+                          platform
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Code maintainability and quality</li>
@@ -229,8 +270,13 @@ export default function StakeholdersPage() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-medium">UX/UI Designers</TableCell>
-                        <TableCell>Designers responsible for the user experience and interface</TableCell>
+                        <TableCell className="font-medium">
+                          UX/UI Designers
+                        </TableCell>
+                        <TableCell>
+                          Designers responsible for the user experience and
+                          interface
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Design system consistency</li>
@@ -241,8 +287,13 @@ export default function StakeholdersPage() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-medium">Data Scientists</TableCell>
-                        <TableCell>Specialists who develop and improve the matching algorithm</TableCell>
+                        <TableCell className="font-medium">
+                          Data Scientists
+                        </TableCell>
+                        <TableCell>
+                          Specialists who develop and improve the matching
+                          algorithm
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Data quality and availability</li>
@@ -253,8 +304,12 @@ export default function StakeholdersPage() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-medium">QA Engineers</TableCell>
-                        <TableCell>Quality assurance specialists who test the system</TableCell>
+                        <TableCell className="font-medium">
+                          QA Engineers
+                        </TableCell>
+                        <TableCell>
+                          Quality assurance specialists who test the system
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Testability of components</li>
@@ -286,8 +341,13 @@ export default function StakeholdersPage() {
                     </TableHeader>
                     <TableBody>
                       <TableRow>
-                        <TableCell className="font-medium">Institute Leadership</TableCell>
-                        <TableCell>Directors, deans, and other leadership at IIIT Hyderabad</TableCell>
+                        <TableCell className="font-medium">
+                          Institute Leadership
+                        </TableCell>
+                        <TableCell>
+                          Directors, deans, and other leadership at IIIT
+                          Hyderabad
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Alignment with institutional goals</li>
@@ -299,8 +359,12 @@ export default function StakeholdersPage() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-medium">Project Sponsors</TableCell>
-                        <TableCell>Individuals or groups funding the MindChain project</TableCell>
+                        <TableCell className="font-medium">
+                          Project Sponsors
+                        </TableCell>
+                        <TableCell>
+                          Individuals or groups funding the MindChain project
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Budget adherence</li>
@@ -311,8 +375,13 @@ export default function StakeholdersPage() {
                         </TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell className="font-medium">Regulatory Compliance</TableCell>
-                        <TableCell>Legal and compliance officers ensuring adherence to regulations</TableCell>
+                        <TableCell className="font-medium">
+                          Regulatory Compliance
+                        </TableCell>
+                        <TableCell>
+                          Legal and compliance officers ensuring adherence to
+                          regulations
+                        </TableCell>
                         <TableCell>
                           <ul className="list-disc pl-5 space-y-1">
                             <li>Data privacy compliance</li>
@@ -335,7 +404,9 @@ export default function StakeholdersPage() {
 
           <Card className="mb-6">
             <CardHeader>
-              <CardTitle className="text-xl">Mapping Concerns to Viewpoints</CardTitle>
+              <CardTitle className="text-xl">
+                Mapping Concerns to Viewpoints
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
@@ -349,9 +420,12 @@ export default function StakeholdersPage() {
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell className="font-medium">Functional Viewpoint</TableCell>
+                    <TableCell className="font-medium">
+                      Functional Viewpoint
+                    </TableCell>
                     <TableCell>
-                      Describes the system's functional elements, their responsibilities, interfaces, and interactions
+                      Describes the system&apos;s functional elements, their
+                      responsibilities, interfaces, and interactions
                     </TableCell>
                     <TableCell>
                       <ul className="list-disc pl-5 space-y-1">
@@ -364,8 +438,13 @@ export default function StakeholdersPage() {
                     <TableCell>Students, Faculty, Staff, Developers</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium">Information Viewpoint</TableCell>
-                    <TableCell>Describes how the system stores, manages, and manipulates data</TableCell>
+                    <TableCell className="font-medium">
+                      Information Viewpoint
+                    </TableCell>
+                    <TableCell>
+                      Describes how the system stores, manages, and manipulates
+                      data
+                    </TableCell>
                     <TableCell>
                       <ul className="list-disc pl-5 space-y-1">
                         <li>Data integrity</li>
@@ -374,13 +453,18 @@ export default function StakeholdersPage() {
                         <li>Data persistence</li>
                       </ul>
                     </TableCell>
-                    <TableCell>Data Scientists, System Administrators, Regulatory Compliance</TableCell>
+                    <TableCell>
+                      Data Scientists, System Administrators, Regulatory
+                      Compliance
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium">Deployment Viewpoint</TableCell>
+                    <TableCell className="font-medium">
+                      Deployment Viewpoint
+                    </TableCell>
                     <TableCell>
-                      Describes the environment in which the system will be deployed and the dependencies on its
-                      environment
+                      Describes the environment in which the system will be
+                      deployed and the dependencies on its environment
                     </TableCell>
                     <TableCell>
                       <ul className="list-disc pl-5 space-y-1">
@@ -390,11 +474,18 @@ export default function StakeholdersPage() {
                         <li>Infrastructure requirements</li>
                       </ul>
                     </TableCell>
-                    <TableCell>System Administrators, IT Support Staff, Developers</TableCell>
+                    <TableCell>
+                      System Administrators, IT Support Staff, Developers
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium">Development Viewpoint</TableCell>
-                    <TableCell>Describes the architecture that supports the software development process</TableCell>
+                    <TableCell className="font-medium">
+                      Development Viewpoint
+                    </TableCell>
+                    <TableCell>
+                      Describes the architecture that supports the software
+                      development process
+                    </TableCell>
                     <TableCell>
                       <ul className="list-disc pl-5 space-y-1">
                         <li>Code maintainability</li>
@@ -406,9 +497,12 @@ export default function StakeholdersPage() {
                     <TableCell>Software Developers, QA Engineers</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium">Usability Viewpoint</TableCell>
+                    <TableCell className="font-medium">
+                      Usability Viewpoint
+                    </TableCell>
                     <TableCell>
-                      Describes the user interface, user experience, and accessibility aspects of the system
+                      Describes the user interface, user experience, and
+                      accessibility aspects of the system
                     </TableCell>
                     <TableCell>
                       <ul className="list-disc pl-5 space-y-1">
@@ -418,12 +512,17 @@ export default function StakeholdersPage() {
                         <li>Responsive design</li>
                       </ul>
                     </TableCell>
-                    <TableCell>Students, Faculty, Staff, UX/UI Designers</TableCell>
+                    <TableCell>
+                      Students, Faculty, Staff, UX/UI Designers
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium">Security Viewpoint</TableCell>
+                    <TableCell className="font-medium">
+                      Security Viewpoint
+                    </TableCell>
                     <TableCell>
-                      Describes how the system protects sensitive data and prevents unauthorized access
+                      Describes how the system protects sensitive data and
+                      prevents unauthorized access
                     </TableCell>
                     <TableCell>
                       <ul className="list-disc pl-5 space-y-1">
@@ -433,12 +532,18 @@ export default function StakeholdersPage() {
                         <li>Audit trails</li>
                       </ul>
                     </TableCell>
-                    <TableCell>System Administrators, Regulatory Compliance, Institute Leadership</TableCell>
+                    <TableCell>
+                      System Administrators, Regulatory Compliance, Institute
+                      Leadership
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium">Performance Viewpoint</TableCell>
+                    <TableCell className="font-medium">
+                      Performance Viewpoint
+                    </TableCell>
                     <TableCell>
-                      Describes the performance characteristics of the system and how they affect user experience
+                      Describes the performance characteristics of the system
+                      and how they affect user experience
                     </TableCell>
                     <TableCell>
                       <ul className="list-disc pl-5 space-y-1">
@@ -448,7 +553,9 @@ export default function StakeholdersPage() {
                         <li>Scalability</li>
                       </ul>
                     </TableCell>
-                    <TableCell>Students, Faculty, System Administrators, Developers</TableCell>
+                    <TableCell>
+                      Students, Faculty, System Administrators, Developers
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -467,8 +574,9 @@ export default function StakeholdersPage() {
               <div>
                 <h3 className="text-lg font-semibold mb-2">1. Logical View</h3>
                 <p className="mb-2">
-                  The logical view represents the functional elements of the system and their relationships. It
-                  addresses concerns related to system functionality, organization, and structure.
+                  The logical view represents the functional elements of the
+                  system and their relationships. It addresses concerns related
+                  to system functionality, organization, and structure.
                 </p>
                 <div className="bg-muted p-4 rounded-md">
                   <p className="font-medium mb-1">Key Diagrams:</p>
@@ -483,8 +591,9 @@ export default function StakeholdersPage() {
               <div>
                 <h3 className="text-lg font-semibold mb-2">2. Process View</h3>
                 <p className="mb-2">
-                  The process view addresses concerns related to concurrency, distribution, performance, and
-                  scalability. It shows how the runtime elements of the system interact.
+                  The process view addresses concerns related to concurrency,
+                  distribution, performance, and scalability. It shows how the
+                  runtime elements of the system interact.
                 </p>
                 <div className="bg-muted p-4 rounded-md">
                   <p className="font-medium mb-1">Key Diagrams:</p>
@@ -497,10 +606,13 @@ export default function StakeholdersPage() {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold mb-2">3. Development View</h3>
+                <h3 className="text-lg font-semibold mb-2">
+                  3. Development View
+                </h3>
                 <p className="mb-2">
-                  The development view addresses concerns related to software management, reuse, constraints, and
-                  development environment. It shows the organization of modules and components.
+                  The development view addresses concerns related to software
+                  management, reuse, constraints, and development environment.
+                  It shows the organization of modules and components.
                 </p>
                 <div className="bg-muted p-4 rounded-md">
                   <p className="font-medium mb-1">Key Diagrams:</p>
@@ -515,8 +627,9 @@ export default function StakeholdersPage() {
               <div>
                 <h3 className="text-lg font-semibold mb-2">4. Physical View</h3>
                 <p className="mb-2">
-                  The physical view addresses concerns related to system topology, distribution, and deployment. It
-                  shows how software elements are mapped to hardware.
+                  The physical view addresses concerns related to system
+                  topology, distribution, and deployment. It shows how software
+                  elements are mapped to hardware.
                 </p>
                 <div className="bg-muted p-4 rounded-md">
                   <p className="font-medium mb-1">Key Diagrams:</p>
@@ -531,8 +644,9 @@ export default function StakeholdersPage() {
               <div>
                 <h3 className="text-lg font-semibold mb-2">5. Scenarios</h3>
                 <p className="mb-2">
-                  Scenarios illustrate how the various architectural elements work together to fulfill key requirements.
-                  They serve as a validation mechanism for the architecture.
+                  Scenarios illustrate how the various architectural elements
+                  work together to fulfill key requirements. They serve as a
+                  validation mechanism for the architecture.
                 </p>
                 <div className="bg-muted p-4 rounded-md">
                   <p className="font-medium mb-1">Key Diagrams:</p>
@@ -561,6 +675,5 @@ export default function StakeholdersPage() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
-

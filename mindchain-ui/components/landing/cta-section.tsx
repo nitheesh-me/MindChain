@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import Link from "next/link"
-import { motion, useInView } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { useRef } from "react";
+import Link from "next/link";
+import { motion, useInView } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 export function CtaSection() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px 0px" })
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
 
   return (
     <section className="py-20">
@@ -25,10 +25,12 @@ export function CtaSection() {
           <div className="relative z-10 p-12 md:p-16 text-white">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to get started with MindChain?</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Ready to get started with MindChain?
+                </h2>
                 <p className="text-white/80 mb-8">
-                  Join the IIIT Hyderabad community in revolutionizing how we connect, learn, and solve problems
-                  together.
+                  Join the IIIT Hyderabad community in revolutionizing how we
+                  connect, learn, and solve problems together.
                 </p>
 
                 <Button
@@ -53,8 +55,12 @@ export function CtaSection() {
                           <span className="text-white font-bold">?</span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-lg font-bold">Have a Question?</h4>
-                          <p className="text-white/80 text-sm">Get matched with experts</p>
+                          <h4 className="text-lg font-bold">
+                            Have a Question?
+                          </h4>
+                          <p className="text-white/80 text-sm">
+                            Get matched with experts
+                          </p>
                         </div>
                       </div>
 
@@ -63,8 +69,12 @@ export function CtaSection() {
                           <span className="text-white font-bold">!</span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-lg font-bold">Share Your Expertise</h4>
-                          <p className="text-white/80 text-sm">Help others with your knowledge</p>
+                          <h4 className="text-lg font-bold">
+                            Share Your Expertise
+                          </h4>
+                          <p className="text-white/80 text-sm">
+                            Help others with your knowledge
+                          </p>
                         </div>
                       </div>
 
@@ -73,8 +83,12 @@ export function CtaSection() {
                           <span className="text-white font-bold">+</span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-lg font-bold">Build Connections</h4>
-                          <p className="text-white/80 text-sm">Grow your academic network</p>
+                          <h4 className="text-lg font-bold">
+                            Build Connections
+                          </h4>
+                          <p className="text-white/80 text-sm">
+                            Grow your academic network
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -89,5 +103,5 @@ export function CtaSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

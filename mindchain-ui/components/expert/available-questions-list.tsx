@@ -1,22 +1,29 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
-import { Search, Filter } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
-import { Label } from "@/components/ui/label"
-import { QuestionCard } from "./question-card"
+import { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Search, Filter } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import { Label } from "@/components/ui/label";
+import { QuestionCard } from "./question-card";
 
 // Mock available questions data
 const mockAvailableQuestions = [
   {
     id: "q1",
     title: "Need help with Machine Learning project",
-    description: "I am working on a classification problem and facing issues with model accuracy.",
+    description:
+      "I am working on a classification problem and facing issues with model accuracy.",
     category: "academic",
     subcategory: "Machine Learning",
     urgency: "high",
@@ -28,7 +35,8 @@ const mockAvailableQuestions = [
   {
     id: "q2",
     title: "Question about VLSI course project",
-    description: "I need guidance on the final project requirements for the VLSI Design course.",
+    description:
+      "I need guidance on the final project requirements for the VLSI Design course.",
     category: "academic",
     subcategory: "VLSI Design",
     urgency: "medium",
@@ -40,7 +48,8 @@ const mockAvailableQuestions = [
   {
     id: "q3",
     title: "Research collaboration opportunity",
-    description: "Looking for faculty members interested in collaborating on a research paper about NLP.",
+    description:
+      "Looking for faculty members interested in collaborating on a research paper about NLP.",
     category: "research",
     subcategory: "Natural Language Processing",
     urgency: "low",
@@ -52,7 +61,8 @@ const mockAvailableQuestions = [
   {
     id: "q4",
     title: "Help organizing a technical workshop",
-    description: "Need assistance in organizing a workshop on web development for first-year students.",
+    description:
+      "Need assistance in organizing a workshop on web development for first-year students.",
     category: "event",
     subcategory: "Workshop",
     urgency: "medium",
@@ -61,22 +71,24 @@ const mockAvailableQuestions = [
     matchCriteria: ["Event Organization", "Web Development", "Workshop"],
     askedBy: "Sneha Gupta",
   },
-]
+];
 
 export function AvailableQuestionsList() {
-  const [questions, setQuestions] = useState(mockAvailableQuestions)
-  const [loading, setLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [categoryFilter, setCategoryFilter] = useState("all")
-  const [minMatchScore, setMinMatchScore] = useState(70)
-  const [sortBy, setSortBy] = useState("match")
+  const [questions, setQuestions] = useState(mockAvailableQuestions);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [minMatchScore, setMinMatchScore] = useState(70);
+  const [sortBy, setSortBy] = useState("match");
 
   useEffect(() => {
     // Simulate API call
     setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [])
+      setLoading(false);
+    }, 1000);
+
+    setQuestions(mockAvailableQuestions);
+  }, []);
 
   // Filter and sort questions
   const filteredQuestions = questions
@@ -87,37 +99,40 @@ export function AvailableQuestionsList() {
         !q.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
         !q.description.toLowerCase().includes(searchQuery.toLowerCase())
       ) {
-        return false
+        return false;
       }
 
       // Category filter
       if (categoryFilter !== "all" && q.category !== categoryFilter) {
-        return false
+        return false;
       }
 
       // Match score filter
       if (q.matchScore < minMatchScore) {
-        return false
+        return false;
       }
 
-      return true
+      return true;
     })
     .sort((a, b) => {
       // Sort by selected criteria
       switch (sortBy) {
         case "match":
-          return b.matchScore - a.matchScore
+          return b.matchScore - a.matchScore;
         case "recent":
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        case "urgency":
-          const urgencyOrder = { high: 3, medium: 2, low: 1 }
           return (
-            urgencyOrder[b.urgency as keyof typeof urgencyOrder] - urgencyOrder[a.urgency as keyof typeof urgencyOrder]
-          )
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        case "urgency":
+          const urgencyOrder = { high: 3, medium: 2, low: 1 };
+          return (
+            urgencyOrder[b.urgency as keyof typeof urgencyOrder] -
+            urgencyOrder[a.urgency as keyof typeof urgencyOrder]
+          );
         default:
-          return 0
+          return 0;
       }
-    })
+    });
 
   if (loading) {
     return (
@@ -126,7 +141,7 @@ export function AvailableQuestionsList() {
         <Skeleton className="h-64 w-full" />
         <Skeleton className="h-64 w-full" />
       </div>
-    )
+    );
   }
 
   return (
@@ -174,7 +189,9 @@ export function AvailableQuestionsList() {
               <Label htmlFor="match-score" className="text-sm">
                 Minimum Match Score: {minMatchScore}%
               </Label>
-              <span className="text-xs text-muted-foreground">Drag to adjust</span>
+              <span className="text-xs text-muted-foreground">
+                Drag to adjust
+              </span>
             </div>
             <Slider
               id="match-score"
@@ -190,7 +207,9 @@ export function AvailableQuestionsList() {
       </Card>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Available Questions ({filteredQuestions.length})</h2>
+        <h2 className="text-xl font-semibold">
+          Available Questions ({filteredQuestions.length})
+        </h2>
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Filter className="h-4 w-4" />
           <span>Showing questions that match your expertise</span>
@@ -200,13 +219,15 @@ export function AvailableQuestionsList() {
       {filteredQuestions.length === 0 ? (
         <Card className="rounded-xl">
           <CardContent className="p-8 text-center">
-            <p className="text-muted-foreground">No questions match your current filters.</p>
+            <p className="text-muted-foreground">
+              No questions match your current filters.
+            </p>
             <Button
               variant="link"
               onClick={() => {
-                setSearchQuery("")
-                setCategoryFilter("all")
-                setMinMatchScore(70)
+                setSearchQuery("");
+                setCategoryFilter("all");
+                setMinMatchScore(70);
               }}
             >
               Clear all filters
@@ -221,6 +242,5 @@ export function AvailableQuestionsList() {
         </div>
       )}
     </div>
-  )
+  );
 }
-

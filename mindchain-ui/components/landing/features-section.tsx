@@ -1,22 +1,29 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { Brain, Bell, MessageCircle, Database, UserCheck, Shield } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  Brain,
+  Bell,
+  MessageCircle,
+  Database,
+  UserCheck,
+  Shield,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface FeatureCardProps {
-  icon: React.ReactNode
-  title: string
-  description: string
-  delay: number
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  delay: number;
 }
 
 function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px 0px" })
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
 
   return (
     <motion.div
@@ -27,18 +34,20 @@ function FeatureCard({ icon, title, description, delay }: FeatureCardProps) {
     >
       <Card className="h-full card-hover rounded-2xl border shadow-lg">
         <CardContent className="p-6">
-          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">{icon}</div>
+          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+            {icon}
+          </div>
           <h3 className="text-xl font-bold mb-2">{title}</h3>
           <p className="text-foreground/70">{description}</p>
         </CardContent>
       </Card>
     </motion.div>
-  )
+  );
 }
 
 export function FeaturesSection() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px 0px" })
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
 
   return (
     <section id="features" className="py-20 bg-muted/50">
@@ -50,10 +59,12 @@ export function FeaturesSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Powerful Features</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Powerful Features
+          </h2>
           <p className="text-lg text-foreground/70">
-            MindChain combines intelligent matching, real-time communication, and contextual awareness to provide a
-            seamless support experience.
+            MindChain combines intelligent matching, real-time communication,
+            and contextual awareness to provide a seamless support experience.
           </p>
         </motion.div>
 
@@ -102,5 +113,5 @@ export function FeaturesSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

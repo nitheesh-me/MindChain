@@ -1,28 +1,32 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { Search, Users, Bell, MessageCircle, CheckCircle } from "lucide-react"
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Search, Users, Bell, MessageCircle, CheckCircle } from "lucide-react";
 
 interface StepProps {
-  number: number
-  icon: React.ReactNode
-  title: string
-  description: string
-  delay: number
+  number: number;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  delay: number;
 }
 
 function Step({ number, icon, title, description, delay }: StepProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px 0px" })
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
 
   return (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, x: number % 2 === 0 ? 50 : -50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: number % 2 === 0 ? 50 : -50 }}
+      animate={
+        isInView
+          ? { opacity: 1, x: 0 }
+          : { opacity: 0, x: number % 2 === 0 ? 50 : -50 }
+      }
       transition={{ duration: 0.6, delay }}
       className="flex items-start gap-6"
     >
@@ -31,17 +35,19 @@ function Step({ number, icon, title, description, delay }: StepProps) {
       </div>
 
       <div>
-        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">{icon}</div>
+        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+          {icon}
+        </div>
         <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="text-foreground/70">{description}</p>
       </div>
     </motion.div>
-  )
+  );
 }
 
 export function HowItWorksSection() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px 0px" })
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
 
   return (
     <section id="how-it-works" className="py-20">
@@ -53,9 +59,12 @@ export function HowItWorksSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">How MindChain Works</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            How MindChain Works
+          </h2>
           <p className="text-lg text-foreground/70">
-            Our platform simplifies the process of finding and connecting with the right experts at IIIT Hyderabad.
+            Our platform simplifies the process of finding and connecting with
+            the right experts at IIIT Hyderabad.
           </p>
         </motion.div>
 
@@ -102,5 +111,5 @@ export function HowItWorksSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

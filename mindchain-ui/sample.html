@@ -1,364 +1,417 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Expert Network Infographic</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
-  <style>
-    /* Base Reset & Typography */
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      overflow: hidden;
-      background: #fdfdfd;
-      color: #333;
-      background-image: url('https://www.transparenttextures.com/patterns/diagmonds-light.png');
-    }
-    /* Infographic styled gradient overlay */
-    #gradientOverlay {
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
-      pointer-events: none;
-      z-index: 1;
-    }
-    /* Canvas for drawing connections */
-    #networkCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 2;
-    }
-    /* Network container */
-    #network {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 3;
-    }
-    /* User nodes styled as bold icons */
-    .user {
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      cursor: pointer;
-      font-size: 30px;
-      z-index: 4;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-align: center;
-      line-height: 40px;
-      border: 2px solid #fff;
-      border-radius: 50%;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-      background: #fff;
-    }
-    .user:hover {
-      transform: scale(1.3);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    .seeker::after, .expert::after {
-      content: attr(data-type);
-      position: absolute;
-      top: -22px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-      background: rgba(255,255,255,0.9);
-      padding: 2px 4px;
-      border-radius: 3px;
-      border: 1px solid #ccc;
-    }
-    /* Message bubble styling */
-    .message {
-      width: 15px;
-      height: 15px;
-      background: #d32f2f;
-      border-radius: 50%;
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 10px;
-      opacity: 0;
-      z-index: 5;
-      box-shadow: 0 0 8px rgba(211,47,47,0.8);
-    }
-    /* Dashboard styled like a headline box */
-    #dashboard {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: #fff;
-      border: 2px solid #333;
-      padding: 15px;
-      border-radius: 4px;
-      font-size: 16px;
-      font-weight: bold;
-      z-index: 10;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-    }
-    #dashboard div {
-      margin-bottom: 5px;
-    }
-  </style>
-</head>
-<body>
-  <div id="gradientOverlay"></div>
-  <canvas id="networkCanvas"></canvas>
-  <div id="network"></div>
-  <div id="dashboard">
-    <div>Seekers: <span id="seekerCount">0</span></div>
-    <div>Experts: <span id="expertCount">0</span></div>
-    <div>Messages Sent: <span id="messageCount">0</span></div>
-  </div>
-
-  <script>
-    gsap.registerPlugin(MotionPathPlugin);
-
-    // Simulation Constants
-    const USER_SIZE = 40;
-    const MESSAGE_SIZE = 15;
-    const MAX_CONNECTIONS_PER_EXPERT = 2;
-    const SEEKER_ICON = "😊";
-    const EXPERT_ICON = "🎓";
-    const FRUSTRATED_ICON = "😡";
-    const OVERWHELMED_ICON = "🔥";
-    const ONBOARD_INTERVAL_SEEKER = 8000;
-    const ONBOARD_INTERVAL_EXPERT = 15000;
-    const USER_LIFETIME_MIN = 25000;
-    const USER_LIFETIME_MAX = 35000;
-    const QUESTION_INTERVAL = 15000;
-    const MESSAGE_DURATION = 1.5;
-    const EXPERT_RESPONSE_DELAY = 2000;
-    const ANSWER_DELAY = 2000;
-
-    // Feature Toggle
-    const showMessageText = true; // Set to false for just dots
-
-    const questionsList = [
-      ["How to learn JavaScript?", "Start with MDN docs and build small projects!"],
-      ["Best practices for UI/UX?", "Consistency and accessibility are key!"],
-      ["How do I improve SEO?", "Focus on quality content and proper keywords."],
-      ["What’s the best way to debug?", "Use browser DevTools and console logs!"]
-    ];
-
-    // Data Stores
-    let experts = [];
-    let seekers = [];
-    let allUsers = [];
-    let messageCount = 0;
-
-    // Dashboard Update Function
-    const updateDashboard = () => {
-      document.getElementById("seekerCount").innerText = seekers.length;
-      document.getElementById("expertCount").innerText = experts.length;
-      document.getElementById("messageCount").innerText = messageCount;
-    };
-
-    // Setup canvas for drawing connections
-    const canvas = document.getElementById("networkCanvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    window.addEventListener("resize", () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-
-    // Manage active lines
-    const activeLines = [];
-    const fadeDuration = 1000; // in milliseconds
-
-    // Instead of individual intervals, update lines via requestAnimationFrame
-    const animateLines = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const now = Date.now();
-      // Draw each active line and update opacity based on elapsed time
-      for (let i = activeLines.length - 1; i >= 0; i--) {
-        const line = activeLines[i];
-        const elapsed = now - line.startTime;
-        const progress = elapsed / fadeDuration;
-        if (progress >= 1) {
-          activeLines.splice(i, 1);
-          continue;
-        }
-        const alpha = 1 - progress;
-        ctx.save();
-        ctx.strokeStyle = `rgba(211,47,47,${alpha})`;
-        ctx.lineWidth = 2;
-        ctx.shadowColor = 'rgba(211,47,47,1)';
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.moveTo(line.x1, line.y1);
-        ctx.lineTo(line.x2, line.y2);
-        ctx.stroke();
-        ctx.restore();
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expert Network Infographic</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+    <style>
+      /* Base Reset & Typography */
+      * {
+        box-sizing: border-box;
       }
-      requestAnimationFrame(animateLines);
-    };
-    requestAnimationFrame(animateLines);
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        overflow: hidden;
+        background: #fdfdfd;
+        color: #333;
+        background-image: url("https://www.transparenttextures.com/patterns/diagmonds-light.png");
+      }
+      /* Infographic styled gradient overlay */
+      #gradientOverlay {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(0, 0, 0, 0.05)
+        );
+        pointer-events: none;
+        z-index: 1;
+      }
+      /* Canvas for drawing connections */
+      #networkCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 2;
+      }
+      /* Network container */
+      #network {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 3;
+      }
+      /* User nodes styled as bold icons */
+      .user {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        cursor: pointer;
+        font-size: 30px;
+        z-index: 4;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        text-align: center;
+        line-height: 40px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        background: #fff;
+      }
+      .user:hover {
+        transform: scale(1.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+      .seeker::after,
+      .expert::after {
+        content: attr(data-type);
+        position: absolute;
+        top: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2px 4px;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+      }
+      /* Message bubble styling */
+      .message {
+        width: 15px;
+        height: 15px;
+        background: #d32f2f;
+        border-radius: 50%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 10px;
+        opacity: 0;
+        z-index: 5;
+        box-shadow: 0 0 8px rgba(211, 47, 47, 0.8);
+      }
+      /* Dashboard styled like a headline box */
+      #dashboard {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #fff;
+        border: 2px solid #333;
+        padding: 15px;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 10;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      }
+      #dashboard div {
+        margin-bottom: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gradientOverlay"></div>
+    <canvas id="networkCanvas"></canvas>
+    <div id="network"></div>
+    <div id="dashboard">
+      <div>Seekers: <span id="seekerCount">0</span></div>
+      <div>Experts: <span id="expertCount">0</span></div>
+      <div>Messages Sent: <span id="messageCount">0</span></div>
+    </div>
 
-    // Instead of animateLine, push new lines into activeLines array
-    const pushLine = (x1, y1, x2, y2) => {
-      activeLines.push({
-        x1, y1, x2, y2,
-        startTime: Date.now()
-      });
-    };
+    <script>
+      gsap.registerPlugin(MotionPathPlugin);
 
-    // Create a new user node
-    const createUser = (type) => {
-      const x = Math.random() * (window.innerWidth - USER_SIZE);
-      const y = Math.random() * (window.innerHeight - USER_SIZE);
-      const user = document.createElement("div");
-      user.classList.add("user", type);
-      user.style.left = `${x}px`;
-      user.style.top = `${y}px`;
-      user.dataset.connections = "0";
-      user.dataset.type = type;
-      user.innerHTML = type === "seeker" ? SEEKER_ICON : EXPERT_ICON;
-      document.getElementById("network").appendChild(user);
+      // Simulation Constants
+      const USER_SIZE = 40;
+      const MESSAGE_SIZE = 15;
+      const MAX_CONNECTIONS_PER_EXPERT = 2;
+      const SEEKER_ICON = "😊";
+      const EXPERT_ICON = "🎓";
+      const FRUSTRATED_ICON = "😡";
+      const OVERWHELMED_ICON = "🔥";
+      const ONBOARD_INTERVAL_SEEKER = 8000;
+      const ONBOARD_INTERVAL_EXPERT = 15000;
+      const USER_LIFETIME_MIN = 25000;
+      const USER_LIFETIME_MAX = 35000;
+      const QUESTION_INTERVAL = 15000;
+      const MESSAGE_DURATION = 1.5;
+      const EXPERT_RESPONSE_DELAY = 2000;
+      const ANSWER_DELAY = 2000;
 
-      allUsers.push(user);
-      if (type === "seeker") seekers.push(user);
-      else experts.push(user);
+      // Feature Toggle
+      const showMessageText = true; // Set to false for just dots
 
-      updateDashboard();
-      return user;
-    };
+      const questionsList = [
+        [
+          "How to learn JavaScript?",
+          "Start with MDN docs and build small projects!",
+        ],
+        ["Best practices for UI/UX?", "Consistency and accessibility are key!"],
+        [
+          "How do I improve SEO?",
+          "Focus on quality content and proper keywords.",
+        ],
+        [
+          "What’s the best way to debug?",
+          "Use browser DevTools and console logs!",
+        ],
+      ];
 
-    // Animate a message and connection line between two nodes
-    const createMessageTrail = (fromX, fromY, toX, toY, text) => {
-      const msg = document.createElement("div");
-      msg.classList.add("message");
-      msg.innerText = showMessageText ? text : "";
-      document.getElementById("network").appendChild(msg);
-      gsap.set(msg, { left: fromX, top: fromY, opacity: 1 });
-      gsap.to(msg, {
-        duration: MESSAGE_DURATION,
-        left: toX,
-        top: toY,
-        opacity: 0,
-        ease: "power1.inOut",
-        onComplete: () => msg.remove()
-      });
-      pushLine(fromX, fromY, toX, toY);
-      messageCount++;
-      updateDashboard();
-    };
+      // Data Stores
+      let experts = [];
+      let seekers = [];
+      let allUsers = [];
+      let messageCount = 0;
 
-    // Animate a question flow between a seeker and an expert
-    const animateQuestionFlow = (seeker) => {
-      const [question, answer] = questionsList[Math.floor(Math.random() * questionsList.length)];
-      let frustrationLevel = 0;
-
-      const availableExperts = experts.filter(expert => parseInt(expert.dataset.connections) < MAX_CONNECTIONS_PER_EXPERT);
-
-      const attemptExpert = (index) => {
-        if (index >= availableExperts.length) {
-          gsap.to(seeker, { scale: 1.2, duration: 0.5, repeat: 3, yoyo: true });
-          seeker.innerHTML = frustrationLevel > 2 ? OVERWHELMED_ICON : FRUSTRATED_ICON;
-          return;
-        }
-
-        const expert = availableExperts[index];
-        const seekerCenterX = seeker.offsetLeft + USER_SIZE / 2;
-        const seekerCenterY = seeker.offsetTop + USER_SIZE / 2;
-        const expertCenterX = expert.offsetLeft + USER_SIZE / 2;
-        const expertCenterY = expert.offsetTop + USER_SIZE / 2;
-
-        expert.dataset.connections = parseInt(expert.dataset.connections) + 1;
-
-        createMessageTrail(seekerCenterX, seekerCenterY, expertCenterX, expertCenterY, question);
-
-        setTimeout(() => {
-          createMessageTrail(expertCenterX, expertCenterY, seekerCenterX, seekerCenterY, answer);
-          setTimeout(() => {
-            gsap.to(seeker, { scale: 1.2, duration: 0.3, repeat: 2, yoyo: true });
-            seeker.innerHTML = SEEKER_ICON;
-            expert.dataset.connections = Math.max(0, parseInt(expert.dataset.connections) - 1);
-            updateDashboard();
-          }, ANSWER_DELAY);
-        }, EXPERT_RESPONSE_DELAY);
+      // Dashboard Update Function
+      const updateDashboard = () => {
+        document.getElementById("seekerCount").innerText = seekers.length;
+        document.getElementById("expertCount").innerText = experts.length;
+        document.getElementById("messageCount").innerText = messageCount;
       };
 
-      attemptExpert(0);
-    };
+      // Setup canvas for drawing connections
+      const canvas = document.getElementById("networkCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-    // Move user nodes with fluid motion
-    const moveUsersRandomly = () => {
-      allUsers.forEach(user => {
-        gsap.to(user, {
-          x: "+=" + (Math.random() * 50 - 25),
-          y: "+=" + (Math.random() * 50 - 25),
-          duration: 2 + Math.random() * 3,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut"
-        });
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
       });
-    };
 
-    // Remove a user from the simulation
-    const removeUser = (user) => {
-      allUsers = allUsers.filter(u => u !== user);
-      if (user.dataset.type === "seeker") {
-        seekers = seekers.filter(u => u !== user);
-      } else {
-        experts = experts.filter(u => u !== user);
-      }
-      gsap.to(user, {
-        opacity: 0,
-        duration: 1,
-        onComplete: () => {
-          user.remove();
-          updateDashboard();
+      // Manage active lines
+      const activeLines = [];
+      const fadeDuration = 1000; // in milliseconds
+
+      // Instead of individual intervals, update lines via requestAnimationFrame
+      const animateLines = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const now = Date.now();
+        // Draw each active line and update opacity based on elapsed time
+        for (let i = activeLines.length - 1; i >= 0; i--) {
+          const line = activeLines[i];
+          const elapsed = now - line.startTime;
+          const progress = elapsed / fadeDuration;
+          if (progress >= 1) {
+            activeLines.splice(i, 1);
+            continue;
+          }
+          const alpha = 1 - progress;
+          ctx.save();
+          ctx.strokeStyle = `rgba(211,47,47,${alpha})`;
+          ctx.lineWidth = 2;
+          ctx.shadowColor = "rgba(211,47,47,1)";
+          ctx.shadowBlur = 10;
+          ctx.beginPath();
+          ctx.moveTo(line.x1, line.y1);
+          ctx.lineTo(line.x2, line.y2);
+          ctx.stroke();
+          ctx.restore();
         }
-      });
-    };
+        requestAnimationFrame(animateLines);
+      };
+      requestAnimationFrame(animateLines);
 
-    // Trigger question flows for all seekers randomly
-    const triggerRandomQuestions = () => {
-      seekers.forEach(seeker => {
-        setTimeout(() => {
-          animateQuestionFlow(seeker);
-        }, Math.random() * QUESTION_INTERVAL);
-      });
-    };
+      // Instead of animateLine, push new lines into activeLines array
+      const pushLine = (x1, y1, x2, y2) => {
+        activeLines.push({
+          x1,
+          y1,
+          x2,
+          y2,
+          startTime: Date.now(),
+        });
+      };
 
-    // Onboard a new user and schedule removal after a random lifetime
-    const onboardNewUser = (type) => {
-      const user = createUser(type);
-      const lifetime = USER_LIFETIME_MIN + Math.random() * (USER_LIFETIME_MAX - USER_LIFETIME_MIN);
-      setTimeout(() => removeUser(user), lifetime);
-    };
+      // Create a new user node
+      const createUser = (type) => {
+        const x = Math.random() * (window.innerWidth - USER_SIZE);
+        const y = Math.random() * (window.innerHeight - USER_SIZE);
+        const user = document.createElement("div");
+        user.classList.add("user", type);
+        user.style.left = `${x}px`;
+        user.style.top = `${y}px`;
+        user.dataset.connections = "0";
+        user.dataset.type = type;
+        user.innerHTML = type === "seeker" ? SEEKER_ICON : EXPERT_ICON;
+        document.getElementById("network").appendChild(user);
 
-    // Initialize the simulation
-    const initSimulation = () => {
-      for (let i = 0; i < 5; i++) {
-        onboardNewUser("seeker");
-        onboardNewUser("expert");
-      }
-      moveUsersRandomly();
-      triggerRandomQuestions();
-      setInterval(() => onboardNewUser("seeker"), ONBOARD_INTERVAL_SEEKER);
-      setInterval(() => onboardNewUser("expert"), ONBOARD_INTERVAL_EXPERT);
-      setInterval(triggerRandomQuestions, QUESTION_INTERVAL);
-    };
+        allUsers.push(user);
+        if (type === "seeker") seekers.push(user);
+        else experts.push(user);
 
-    window.addEventListener("DOMContentLoaded", initSimulation);
-  </script>
-</body>
+        updateDashboard();
+        return user;
+      };
+
+      // Animate a message and connection line between two nodes
+      const createMessageTrail = (fromX, fromY, toX, toY, text) => {
+        const msg = document.createElement("div");
+        msg.classList.add("message");
+        msg.innerText = showMessageText ? text : "";
+        document.getElementById("network").appendChild(msg);
+        gsap.set(msg, { left: fromX, top: fromY, opacity: 1 });
+        gsap.to(msg, {
+          duration: MESSAGE_DURATION,
+          left: toX,
+          top: toY,
+          opacity: 0,
+          ease: "power1.inOut",
+          onComplete: () => msg.remove(),
+        });
+        pushLine(fromX, fromY, toX, toY);
+        messageCount++;
+        updateDashboard();
+      };
+
+      // Animate a question flow between a seeker and an expert
+      const animateQuestionFlow = (seeker) => {
+        const [question, answer] =
+          questionsList[Math.floor(Math.random() * questionsList.length)];
+        let frustrationLevel = 0;
+
+        const availableExperts = experts.filter(
+          (expert) =>
+            parseInt(expert.dataset.connections) < MAX_CONNECTIONS_PER_EXPERT,
+        );
+
+        const attemptExpert = (index) => {
+          if (index >= availableExperts.length) {
+            gsap.to(seeker, {
+              scale: 1.2,
+              duration: 0.5,
+              repeat: 3,
+              yoyo: true,
+            });
+            seeker.innerHTML =
+              frustrationLevel > 2 ? OVERWHELMED_ICON : FRUSTRATED_ICON;
+            return;
+          }
+
+          const expert = availableExperts[index];
+          const seekerCenterX = seeker.offsetLeft + USER_SIZE / 2;
+          const seekerCenterY = seeker.offsetTop + USER_SIZE / 2;
+          const expertCenterX = expert.offsetLeft + USER_SIZE / 2;
+          const expertCenterY = expert.offsetTop + USER_SIZE / 2;
+
+          expert.dataset.connections = parseInt(expert.dataset.connections) + 1;
+
+          createMessageTrail(
+            seekerCenterX,
+            seekerCenterY,
+            expertCenterX,
+            expertCenterY,
+            question,
+          );
+
+          setTimeout(() => {
+            createMessageTrail(
+              expertCenterX,
+              expertCenterY,
+              seekerCenterX,
+              seekerCenterY,
+              answer,
+            );
+            setTimeout(() => {
+              gsap.to(seeker, {
+                scale: 1.2,
+                duration: 0.3,
+                repeat: 2,
+                yoyo: true,
+              });
+              seeker.innerHTML = SEEKER_ICON;
+              expert.dataset.connections = Math.max(
+                0,
+                parseInt(expert.dataset.connections) - 1,
+              );
+              updateDashboard();
+            }, ANSWER_DELAY);
+          }, EXPERT_RESPONSE_DELAY);
+        };
+
+        attemptExpert(0);
+      };
+
+      // Move user nodes with fluid motion
+      const moveUsersRandomly = () => {
+        allUsers.forEach((user) => {
+          gsap.to(user, {
+            x: "+=" + (Math.random() * 50 - 25),
+            y: "+=" + (Math.random() * 50 - 25),
+            duration: 2 + Math.random() * 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+          });
+        });
+      };
+
+      // Remove a user from the simulation
+      const removeUser = (user) => {
+        allUsers = allUsers.filter((u) => u !== user);
+        if (user.dataset.type === "seeker") {
+          seekers = seekers.filter((u) => u !== user);
+        } else {
+          experts = experts.filter((u) => u !== user);
+        }
+        gsap.to(user, {
+          opacity: 0,
+          duration: 1,
+          onComplete: () => {
+            user.remove();
+            updateDashboard();
+          },
+        });
+      };
+
+      // Trigger question flows for all seekers randomly
+      const triggerRandomQuestions = () => {
+        seekers.forEach((seeker) => {
+          setTimeout(() => {
+            animateQuestionFlow(seeker);
+          }, Math.random() * QUESTION_INTERVAL);
+        });
+      };
+
+      // Onboard a new user and schedule removal after a random lifetime
+      const onboardNewUser = (type) => {
+        const user = createUser(type);
+        const lifetime =
+          USER_LIFETIME_MIN +
+          Math.random() * (USER_LIFETIME_MAX - USER_LIFETIME_MIN);
+        setTimeout(() => removeUser(user), lifetime);
+      };
+
+      // Initialize the simulation
+      const initSimulation = () => {
+        for (let i = 0; i < 5; i++) {
+          onboardNewUser("seeker");
+          onboardNewUser("expert");
+        }
+        moveUsersRandomly();
+        triggerRandomQuestions();
+        setInterval(() => onboardNewUser("seeker"), ONBOARD_INTERVAL_SEEKER);
+        setInterval(() => onboardNewUser("expert"), ONBOARD_INTERVAL_EXPERT);
+        setInterval(triggerRandomQuestions, QUESTION_INTERVAL);
+      };
+
+      window.addEventListener("DOMContentLoaded", initSimulation);
+    </script>
+  </body>
 </html>

@@ -1,5 +1,5 @@
-import { DashboardView } from "@/components/dashboard/dashboard-view"
-import { Header } from "@/components/header"
+import { DashboardView } from "@/components/dashboard/dashboard-view";
+import { Header } from "@/components/header";
 
 export default function DashboardPage() {
   return (
@@ -9,6 +9,5 @@ export default function DashboardPage() {
         <DashboardView />
       </div>
     </main>
-  )
+  );
 }
-

@@ -18,6 +18,7 @@ To ensure responsive user interactions and real-time messaging, we employ severa
 - **Connection Pooling:** Maintain database connection pools to reduce connection establishment overhead
 
 **Implementation Approach:**
+
 - Use Redis for caching frequently accessed data like user profiles and active queries
 - Implement client-side caching with service workers for offline capabilities
 - Use CDN for static assets with appropriate cache headers
@@ -38,6 +39,7 @@ To achieve the required 99.9% uptime and ensure system reliability, we implement
 - **Automated Recovery:** Implement self-healing mechanisms for common failure scenarios
 
 **Implementation Approach:**
+
 - Deploy services across multiple availability zones
 - Implement health check endpoints for all microservices
 - Use container orchestration (Kubernetes) for automated restarts and scaling
@@ -59,6 +61,7 @@ To support the required number of users and chat sessions, we implement:
 - **Asynchronous Communication:** Use message queues for non-time-critical operations
 
 **Implementation Approach:**
+
 - Deploy services in containers with auto-scaling capabilities
 - Use load balancers (e.g., NGINX, AWS ELB) for distributing traffic
 - Implement database sharding by user ID or institution
@@ -80,6 +83,7 @@ To ensure system security and protect user data, we implement:
 - **Token-based Authentication:** Use JWT tokens for secure authentication
 
 **Implementation Approach:**
+
 - Implement OAuth 2.0 with OpenID Connect for authentication
 - Use HTTPS/TLS for all communications
 - Store passwords using bcrypt with appropriate salt rounds
@@ -102,6 +106,7 @@ To facilitate system maintenance and evolution, we implement:
 - **Feature Toggles:** Implement mechanisms to enable/disable features without code changes
 
 **Implementation Approach:**
+
 - Use domain-driven design principles to define bounded contexts
 - Implement clean architecture with clear separation of concerns
 - Define stable API contracts between services
@@ -119,6 +124,7 @@ The following design patterns will be used in the MindChain architecture:
 The system is decomposed into small, independently deployable services organized around business capabilities. Each service has its own database and communicates with other services through well-defined APIs.
 
 **Role in Architecture:**
+
 - Enables independent development and deployment of system components
 - Allows different services to scale independently based on demand
 - Facilitates technology diversity where appropriate
@@ -126,6 +132,7 @@ The system is decomposed into small, independently deployable services organized
 
 **Implementation:**
 The MindChain system will be divided into the following microservices:
+
 - User Service: Handles user registration, authentication, and profile management
 - Query Service: Manages query submission, status tracking, and lifecycle
 - Matching Service: Implements the expert matching algorithm
@@ -141,12 +148,14 @@ The MindChain system will be divided into the following microservices:
 A server that acts as an API front-end, receiving API requests, routing them to the appropriate microservices, aggregating the results, and returning them to the requester.
 
 **Role in Architecture:**
+
 - Provides a single entry point for all client requests
 - Handles cross-cutting concerns like authentication, logging, and rate limiting
 - Simplifies client interactions by hiding the complexity of the microservices
 - Enables API composition for client-specific requirements
 
 **Implementation:**
+
 - Use an API Gateway solution (e.g., Kong, AWS API Gateway, or custom implementation)
 - Implement authentication and authorization at the gateway level
 - Configure rate limiting and request throttling
@@ -161,12 +170,14 @@ A server that acts as an API front-end, receiving API requests, routing them to 
 A software architecture pattern promoting the production, detection, consumption of, and reaction to events. Components communicate through events rather than direct method calls.
 
 **Role in Architecture:**
+
 - Enables loose coupling between components
 - Facilitates asynchronous processing
 - Improves scalability by distributing event processing
 - Supports complex event processing and reactive systems
 
 **Implementation:**
+
 - Use a message broker (e.g., RabbitMQ, Kafka) for event distribution
 - Implement the publish-subscribe pattern for event notifications
 - Define clear event schemas for interoperability
@@ -181,12 +192,14 @@ A software architecture pattern promoting the production, detection, consumption
 A pattern that separates read and write operations to different models. Commands (writes) and queries (reads) use separate interfaces and often separate data stores.
 
 **Role in Architecture:**
+
 - Optimizes read and write operations independently
 - Improves scalability by allowing separate scaling of read and write workloads
 - Enables specialized data models for different use cases
 - Facilitates eventual consistency in distributed systems
 
 **Implementation:**
+
 - Separate command and query models for complex domains
 - Use specialized read models optimized for specific query patterns
 - Implement eventual consistency between write and read models
@@ -201,12 +214,14 @@ A pattern that separates read and write operations to different models. Commands
 A design pattern used to detect failures and prevent cascading failures in distributed systems by "breaking the circuit" to failing services.
 
 **Role in Architecture:**
+
 - Prevents system overload when a service is failing
 - Enables graceful degradation of functionality
 - Allows failed services to recover without being overwhelmed
 - Provides fast failure responses instead of waiting for timeouts
 
 **Implementation:**
+
 - Use a circuit breaker library (e.g., Hystrix, Resilience4j)
 - Configure appropriate thresholds for tripping the circuit
 - Implement fallback mechanisms for when the circuit is open
@@ -221,12 +236,14 @@ A design pattern used to detect failures and prevent cascading failures in distr
 A pattern that mediates between the domain and data mapping layers, acting like an in-memory collection of domain objects.
 
 **Role in Architecture:**
+
 - Provides a clean separation between domain logic and data access
 - Centralizes data access logic and reduces duplication
 - Facilitates unit testing through abstraction
 - Enables switching between different data sources or ORMs
 
 **Implementation:**
+
 - Define repository interfaces in the domain layer
 - Implement concrete repositories in the infrastructure layer
 - Use dependency injection to provide repository implementations
@@ -241,12 +258,14 @@ A pattern that mediates between the domain and data mapping layers, acting like 
 A behavioral design pattern where an object (subject) maintains a list of dependents (observers) and notifies them of state changes.
 
 **Role in Architecture:**
+
 - Enables loose coupling between event sources and handlers
 - Facilitates the implementation of the notification system
 - Supports the event-driven architecture
 - Allows for dynamic registration of notification handlers
 
 **Implementation:**
+
 - Implement observer interfaces for different notification types
 - Use the publish-subscribe pattern for scalable notification delivery
 - Support filtering and routing of notifications based on user preferences
@@ -272,4 +291,3 @@ A behavioral design pattern where an object (subject) maintains a list of depend
 ### 3.4 Code Diagram (for Expert Matching Component)
 
 ![Code Diagram](https://via.placeholder.com/800x600?text=Code+Diagram)
-

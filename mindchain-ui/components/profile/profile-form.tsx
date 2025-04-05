@@ -1,18 +1,25 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import type { User } from "@/lib/types"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Loader2 } from "lucide-react"
+import { useState } from "react";
+import type { User } from "@/lib/types";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Loader2 } from "lucide-react";
 
 interface ProfileFormProps {
-  user: User
+  user: User;
 }
 
 export function ProfileForm({ user }: ProfileFormProps) {
@@ -23,44 +30,54 @@ export function ProfileForm({ user }: ProfileFormProps) {
     expertise: user.expertise.join(", "),
     researchInterests: user.researchInterests?.join(", ") || "",
     courses: user.courses?.join(", ") || "",
-  })
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setSuccess(false)
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    setLoading(false)
-    setSuccess(true)
+    setLoading(false);
+    setSuccess(true);
 
     // Reset success message after 3 seconds
     setTimeout(() => {
-      setSuccess(false)
-    }, 3000)
-  }
+      setSuccess(false);
+    }, 3000);
+  };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Profile Information</CardTitle>
-        <CardDescription>Update your personal information and expertise</CardDescription>
+        <CardDescription>
+          Update your personal information and expertise
+        </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
-              <Input id="name" name="name" value={formData.name} onChange={handleChange} disabled={loading} />
+              <Input
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                disabled={loading}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -87,7 +104,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="expertise">Areas of Expertise (comma separated)</Label>
+            <Label htmlFor="expertise">
+              Areas of Expertise (comma separated)
+            </Label>
             <Textarea
               id="expertise"
               name="expertise"
@@ -99,7 +118,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="researchInterests">Research Interests (comma separated)</Label>
+            <Label htmlFor="researchInterests">
+              Research Interests (comma separated)
+            </Label>
             <Textarea
               id="researchInterests"
               name="researchInterests"
@@ -133,10 +154,13 @@ export function ProfileForm({ user }: ProfileFormProps) {
               "Save Changes"
             )}
           </Button>
-          {success && <span className="ml-4 text-sm text-green-600">Profile updated successfully!</span>}
+          {success && (
+            <span className="ml-4 text-sm text-green-600">
+              Profile updated successfully!
+            </span>
+          )}
         </CardFooter>
       </form>
     </Card>
-  )
+  );
 }
-

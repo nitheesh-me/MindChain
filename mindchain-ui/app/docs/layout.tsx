@@ -1,4 +1,4 @@
-import type React from "react"
+import type React from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -10,16 +10,25 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-} from "@/components/ui/sidebar"
-import { Separator } from "@/components/ui/separator"
-import { Header } from "@/components/header"
-import Link from "next/link"
-import { Book, FileText, Layers, List, Settings, FileCode, GitPullRequest, BarChart } from "lucide-react"
+} from "@/components/ui/sidebar";
+import { Separator } from "@/components/ui/separator";
+import { Header } from "@/components/header";
+import Link from "next/link";
+import {
+  Book,
+  FileText,
+  Layers,
+  List,
+  Settings,
+  FileCode,
+  GitPullRequest,
+  BarChart,
+} from "lucide-react";
 
 export default function DocsLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <main className="min-h-screen bg-background">
@@ -36,7 +45,9 @@ export default function DocsLayout({
             </SidebarHeader>
             <SidebarContent>
               <SidebarGroup>
-                <SidebarGroupLabel>Task 1: Requirements & Subsystems</SidebarGroupLabel>
+                <SidebarGroupLabel>
+                  Task 1: Requirements & Subsystems
+                </SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
                     <SidebarMenuItem>
@@ -68,7 +79,9 @@ export default function DocsLayout({
               </SidebarGroup>
 
               <SidebarGroup>
-                <SidebarGroupLabel>Task 2: Architecture Framework</SidebarGroupLabel>
+                <SidebarGroupLabel>
+                  Task 2: Architecture Framework
+                </SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
                     <SidebarMenuItem>
@@ -92,7 +105,9 @@ export default function DocsLayout({
               </SidebarGroup>
 
               <SidebarGroup>
-                <SidebarGroupLabel>Task 3: Tactics & Patterns</SidebarGroupLabel>
+                <SidebarGroupLabel>
+                  Task 3: Tactics & Patterns
+                </SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
                     <SidebarMenuItem>
@@ -116,7 +131,9 @@ export default function DocsLayout({
               </SidebarGroup>
 
               <SidebarGroup>
-                <SidebarGroupLabel>Task 4: Implementation & Analysis</SidebarGroupLabel>
+                <SidebarGroupLabel>
+                  Task 4: Implementation & Analysis
+                </SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu>
                     <SidebarMenuItem>
@@ -140,10 +157,11 @@ export default function DocsLayout({
               </SidebarGroup>
             </SidebarContent>
           </Sidebar>
-          <div className="flex-1 pt-16 px-4 md:px-8 py-8 max-w-5xl mx-auto">{children}</div>
+          <div className="flex-1 pt-16 px-4 md:px-8 py-8 max-w-5xl mx-auto">
+            {children}
+          </div>
         </div>
       </SidebarProvider>
     </main>
-  )
+  );
 }
-

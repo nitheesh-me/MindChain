@@ -59,6 +59,7 @@ The prototype demonstrates the following key workflows:
 The prototype is implemented using the following technologies:
 
 #### 1.4.1 Frontend
+
 - **Framework:** Next.js with React
 - **UI Components:** Custom components with Tailwind CSS
 - **State Management:** React Context API and hooks
@@ -66,6 +67,7 @@ The prototype is implemented using the following technologies:
 - **Build Tools:** Webpack, Babel
 
 #### 1.4.2 Backend
+
 - **API Framework:** Node.js with Express
 - **Real-time Server:** Socket.IO
 - **Authentication:** JWT-based authentication
@@ -73,6 +75,7 @@ The prototype is implemented using the following technologies:
 - **Caching:** Redis for session management and caching
 
 #### 1.4.3 DevOps
+
 - **Containerization:** Docker
 - **CI/CD:** GitHub Actions
 - **Deployment:** Vercel for frontend, Heroku for backend services
@@ -80,16 +83,19 @@ The prototype is implemented using the following technologies:
 ### 1.5 Implementation Challenges and Solutions
 
 #### 1.5.1 Real-time Communication
+
 **Challenge:** Implementing scalable real-time communication with proper message delivery guarantees and handling reconnection scenarios.
 
-**Solution:** We implemented a WebSocket-based solution using Socket.IO, which provides automatic reconnection handling and fallback to long polling when WebSockets aren't available. For scalability, we used Redis as a pub/sub mechanism to synchronize messages across multiple server instances. We also implemented message acknowledgment and persistence to ensure delivery even when users are temporarily offline.
+**Solution:** We implemented a WebSocket-based solution using Socket.IO, which provides automatic reconnection handling and fallback to long polling when WebSockets aren&apos;t available. For scalability, we used Redis as a pub/sub mechanism to synchronize messages across multiple server instances. We also implemented message acknowledgment and persistence to ensure delivery even when users are temporarily offline.
 
 #### 1.5.2 Expert Matching Algorithm
+
 **Challenge:** Creating an efficient and accurate algorithm for matching queries to experts based on multiple factors.
 
 **Solution:** We implemented a hybrid approach combining text similarity using vector embeddings (for semantic understanding) with traditional factors like expert availability and response history. The matching algorithm uses pre-computed embeddings stored in a vector database for efficient similarity searches. We also implemented a feedback loop to improve matching quality over time based on user interactions.
 
 #### 1.5.3 Cross-Platform Consistency
+
 **Challenge:** Ensuring consistent user experience across different devices and browsers.
 
 **Solution:** We adopted a responsive design approach using Tailwind CSS and implemented progressive enhancement techniques. The application was built as a Progressive Web App (PWA) with service workers for offline capabilities. We established a comprehensive component library with consistent behavior across platforms and implemented extensive cross-browser testing.
@@ -102,16 +108,16 @@ For comparison, we evaluated our implemented microservices architecture against 
 
 #### 2.1.1 Architectural Comparison
 
-| Aspect | Implemented Microservices Architecture | Alternative Monolithic Architecture |
-|--------|----------------------------------------|-------------------------------------|
-| **Scalability** | Independent scaling of components | Entire application must scale together |
-| **Development** | Parallel development by separate teams | Simpler development workflow |
-| **Deployment** | Complex orchestration, independent deployments | Simpler deployment process |
-| **Resilience** | Isolated failures, higher overall availability | Single point of failure |
-| **Performance** | Network overhead between services | No inter-service communication overhead |
-| **Complexity** | Higher operational complexity | Lower operational complexity |
-| **Technology Diversity** | Flexible technology choices per service | Uniform technology stack |
-| **Team Organization** | Supports Conway's Law with team alignment | Requires careful coordination |
+| Aspect                   | Implemented Microservices Architecture         | Alternative Monolithic Architecture     |
+| ------------------------ | ---------------------------------------------- | --------------------------------------- |
+| **Scalability**          | Independent scaling of components              | Entire application must scale together  |
+| **Development**          | Parallel development by separate teams         | Simpler development workflow            |
+| **Deployment**           | Complex orchestration, independent deployments | Simpler deployment process              |
+| **Resilience**           | Isolated failures, higher overall availability | Single point of failure                 |
+| **Performance**          | Network overhead between services              | No inter-service communication overhead |
+| **Complexity**           | Higher operational complexity                  | Lower operational complexity            |
+| **Technology Diversity** | Flexible technology choices per service        | Uniform technology stack                |
+| **Team Organization**    | Supports Conway's Law with team alignment      | Requires careful coordination           |
 
 ### 2.2 Quantitative Analysis of Non-Functional Requirements
 
@@ -119,12 +125,12 @@ For comparison, we evaluated our implemented microservices architecture against 
 
 We measured the response time for key operations under both architectures:
 
-| Operation | Microservices Architecture | Monolithic Architecture | Requirement |
-|-----------|----------------------------|-------------------------|-------------|
-| Query Submission | 320ms (avg) | 180ms (avg) | < 1000ms |
-| Expert Matching | 1.2s (avg) | 1.8s (avg) | < 5000ms |
-| Message Delivery | 95ms (avg) | 65ms (avg) | < 500ms |
-| Dashboard Loading | 850ms (avg) | 1.2s (avg) | < 1000ms |
+| Operation         | Microservices Architecture | Monolithic Architecture | Requirement |
+| ----------------- | -------------------------- | ----------------------- | ----------- |
+| Query Submission  | 320ms (avg)                | 180ms (avg)             | < 1000ms    |
+| Expert Matching   | 1.2s (avg)                 | 1.8s (avg)              | < 5000ms    |
+| Message Delivery  | 95ms (avg)                 | 65ms (avg)              | < 500ms     |
+| Dashboard Loading | 850ms (avg)                | 1.2s (avg)              | < 1000ms    |
 
 **Analysis:** The microservices architecture shows better performance for compute-intensive operations like expert matching due to dedicated resources, while the monolithic architecture performs better for simple CRUD operations due to reduced network overhead. Both architectures meet the specified requirements, but they excel in different areas.
 
@@ -132,12 +138,12 @@ We measured the response time for key operations under both architectures:
 
 We tested the maximum throughput of both architectures under simulated load:
 
-| Metric | Microservices Architecture | Monolithic Architecture | Requirement |
-|--------|----------------------------|-------------------------|-------------|
-| Max Concurrent Users | 2,500 | 1,200 | > 1,000 |
-| Queries Processed/min | 1,800 | 1,100 | N/A |
-| Messages Processed/sec | 12,000 | 5,000 | N/A |
-| 95th Percentile Response Time at 80% Load | 780ms | 1.5s | < 1000ms |
+| Metric                                    | Microservices Architecture | Monolithic Architecture | Requirement |
+| ----------------------------------------- | -------------------------- | ----------------------- | ----------- |
+| Max Concurrent Users                      | 2,500                      | 1,200                   | > 1,000     |
+| Queries Processed/min                     | 1,800                      | 1,100                   | N/A         |
+| Messages Processed/sec                    | 12,000                     | 5,000                   | N/A         |
+| 95th Percentile Response Time at 80% Load | 780ms                      | 1.5s                    | < 1000ms    |
 
 **Analysis:** The microservices architecture demonstrates superior throughput and scalability, handling more than twice the number of concurrent users while maintaining better response times under load. This is primarily due to the ability to scale individual components independently based on demand.
 
@@ -150,6 +156,7 @@ We tested the maximum throughput of both architectures under simulated load:
 **Monolithic Trade-off:** The monolithic architecture offers simpler development with a unified codebase and direct method calls but limits operational flexibility with all-or-nothing scaling and deployment.
 
 **Decision Justification:** For MindChain, the operational flexibility of microservices outweighs the added development complexity because:
+
 1. Different components have vastly different scaling needs (e.g., chat vs. matching)
 2. The system is expected to evolve with new features and capabilities
 3. The team structure aligns with service boundaries
@@ -162,6 +169,7 @@ We tested the maximum throughput of both architectures under simulated load:
 **Monolithic Trade-off:** The monolithic architecture offers better performance for simple operations due to direct method calls but becomes increasingly difficult to maintain as the codebase grows.
 
 **Decision Justification:** For MindChain, the maintainability benefits of microservices outweigh the minor performance impact because:
+
 1. The system is expected to grow in complexity over time
 2. The performance impact is minimal for most operations and can be mitigated
 3. The clear service boundaries facilitate long-term maintenance
@@ -174,6 +182,7 @@ We tested the maximum throughput of both architectures under simulated load:
 **Monolithic Trade-off:** The monolithic architecture allows faster initial development but can lead to development bottlenecks as the system grows.
 
 **Decision Justification:** For MindChain, the long-term agility of microservices outweighs the slower initial development because:
+
 1. The platform is expected to have a long lifespan with ongoing development
 2. Different features will evolve at different rates
 3. The ability to adopt new technologies selectively is valuable
@@ -194,4 +203,3 @@ Based on our prototype implementation and analysis, the microservices architectu
 5. **Caching Strategy:** Implement a multi-level caching strategy with careful invalidation policies to improve performance while maintaining data consistency.
 
 These recommendations aim to preserve the benefits of the microservices architecture while addressing its inherent challenges, resulting in a system that better meets MindChain's functional and non-functional requirements.
-

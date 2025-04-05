@@ -1,58 +1,70 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { formatDistanceToNow } from "date-fns"
-import { Clock, BookOpen, Calendar, Award, ChevronRight, User } from "lucide-react"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { Progress } from "@/components/ui/progress"
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { formatDistanceToNow } from "date-fns";
+import {
+  Clock,
+  BookOpen,
+  Calendar,
+  Award,
+  ChevronRight,
+  User,
+} from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Progress } from "@/components/ui/progress";
 
 interface QuestionCardProps {
   question: {
-    id: string
-    title: string
-    description: string
-    category: string
-    subcategory: string
-    urgency: string
-    createdAt: string
-    matchScore: number
-    matchCriteria: string[]
-    askedBy: string
-  }
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    subcategory: string;
+    urgency: string;
+    createdAt: string;
+    matchScore: number;
+    matchCriteria: string[];
+    askedBy: string;
+  };
 }
 
 export function QuestionCard({ question }: QuestionCardProps) {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case "academic":
-        return <BookOpen className="h-4 w-4" />
+        return <BookOpen className="h-4 w-4" />;
       case "research":
-        return <Award className="h-4 w-4" />
+        return <Award className="h-4 w-4" />;
       case "event":
-        return <Calendar className="h-4 w-4" />
+        return <Calendar className="h-4 w-4" />;
       default:
-        return <BookOpen className="h-4 w-4" />
+        return <BookOpen className="h-4 w-4" />;
     }
-  }
+  };
 
   const getUrgencyColor = (urgency: string) => {
     switch (urgency) {
       case "high":
-        return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+        return "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300";
       case "medium":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
       case "low":
-        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-800/30 dark:text-gray-300"
+        return "bg-gray-100 text-gray-800 dark:bg-gray-800/30 dark:text-gray-300";
     }
-  }
+  };
 
   const getMatchScoreColor = (score: number) => {
-    if (score >= 90) return "text-green-600"
-    if (score >= 75) return "text-yellow-600"
-    return "text-orange-600"
-  }
+    if (score >= 90) return "text-green-600";
+    if (score >= 75) return "text-yellow-600";
+    return "text-orange-600";
+  };
 
   return (
     <Card className="rounded-xl hover:shadow-md transition-shadow">
@@ -66,7 +78,11 @@ export function QuestionCard({ question }: QuestionCardProps) {
                 <span>{question.askedBy}</span>
                 <span>•</span>
                 <Clock className="h-4 w-4" />
-                <span>{formatDistanceToNow(new Date(question.createdAt), { addSuffix: true })}</span>
+                <span>
+                  {formatDistanceToNow(new Date(question.createdAt), {
+                    addSuffix: true,
+                  })}
+                </span>
               </div>
             </div>
             <div className="flex flex-col items-end">
@@ -74,7 +90,9 @@ export function QuestionCard({ question }: QuestionCardProps) {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="flex items-center gap-2">
-                      <span className={`text-lg font-bold ${getMatchScoreColor(question.matchScore)}`}>
+                      <span
+                        className={`text-lg font-bold ${getMatchScoreColor(question.matchScore)}`}
+                      >
                         {question.matchScore}%
                       </span>
                       <Badge variant="outline" className="rounded-full">
@@ -111,13 +129,18 @@ export function QuestionCard({ question }: QuestionCardProps) {
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge className="flex items-center gap-1 rounded-full">
               {getCategoryIcon(question.category)}
-              {question.category.charAt(0).toUpperCase() + question.category.slice(1)}
+              {question.category.charAt(0).toUpperCase() +
+                question.category.slice(1)}
             </Badge>
             <Badge variant="outline" className="rounded-full">
               {question.subcategory}
             </Badge>
-            <Badge className={`${getUrgencyColor(question.urgency)} rounded-full`}>
-              {question.urgency.charAt(0).toUpperCase() + question.urgency.slice(1)} Urgency
+            <Badge
+              className={`${getUrgencyColor(question.urgency)} rounded-full`}
+            >
+              {question.urgency.charAt(0).toUpperCase() +
+                question.urgency.slice(1)}{" "}
+              Urgency
             </Badge>
           </div>
 
@@ -129,6 +152,5 @@ export function QuestionCard({ question }: QuestionCardProps) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
-

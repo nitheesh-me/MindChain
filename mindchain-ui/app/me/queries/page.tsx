@@ -1,5 +1,5 @@
-import { Header } from "@/components/header"
-import { QueriesView } from "@/components/queries/queries-view"
+import { Header } from "@/components/header";
+import { QueriesView } from "@/components/queries/queries-view";
 
 export default function QueriesPage() {
   return (
@@ -9,6 +9,5 @@ export default function QueriesPage() {
         <QueriesView />
       </div>
     </main>
-  )
+  );
 }
-

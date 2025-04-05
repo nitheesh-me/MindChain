@@ -1,41 +1,41 @@
 :root {
-    --background: hsl(50 100% 98%);
-    /* very light yellow */
-    --foreground: hsl(50 15% 20%);
-    /* dark olive */
-    --muted: hsl(50 100% 95%);
-    --muted-foreground: hsl(50 15% 40%);
-    --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(50 15% 20%);
-    --card: hsl(0 0% 100%);
-    --card-foreground: hsl(50 15% 20%);
-    --border: hsl(50 15% 90%);
-    --input: hsl(50 15% 90%);
-    --primary: hsl(220 70% 45%);
-    /* blue that's generally friendly for color blindness */
-    --primary-foreground: hsl(0 0% 100%);
-    --secondary: hsl(15 80% 40%);
-    /* a warm brown-orange */
-    --secondary-foreground: hsl(0 0% 100%);
-    --ring: hsl(220 70% 45%);
-    --radius: 0.75rem;
+  --background: hsl(50 100% 98%);
+  /* very light yellow */
+  --foreground: hsl(50 15% 20%);
+  /* dark olive */
+  --muted: hsl(50 100% 95%);
+  --muted-foreground: hsl(50 15% 40%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(50 15% 20%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(50 15% 20%);
+  --border: hsl(50 15% 90%);
+  --input: hsl(50 15% 90%);
+  --primary: hsl(220 70% 45%);
+  /* blue that's generally friendly for color blindness */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(15 80% 40%);
+  /* a warm brown-orange */
+  --secondary-foreground: hsl(0 0% 100%);
+  --ring: hsl(220 70% 45%);
+  --radius: 0.75rem;
 }
 
 .dark {
-    --background: hsl(50 15% 10%);
-    --foreground: hsl(50 15% 90%);
-    --muted: hsl(50 15% 12%);
-    --muted-foreground: hsl(50 15% 65%);
-    --popover: hsl(50 15% 8%);
-    --popover-foreground: hsl(50 15% 90%);
-    --card: hsl(50 15% 10%);
-    --card-foreground: hsl(50 15% 90%);
-    --border: hsl(50 15% 20%);
-    --input: hsl(50 15% 20%);
-    --primary: hsl(220 70% 50%);
-    --primary-foreground: hsl(50 15% 10%);
-    --secondary: hsl(15 80% 45%);
-    --secondary-foreground: hsl(50 15% 10%);
-    --ring: hsl(220 70% 50%);
-    --radius: 0.75rem;
+  --background: hsl(50 15% 10%);
+  --foreground: hsl(50 15% 90%);
+  --muted: hsl(50 15% 12%);
+  --muted-foreground: hsl(50 15% 65%);
+  --popover: hsl(50 15% 8%);
+  --popover-foreground: hsl(50 15% 90%);
+  --card: hsl(50 15% 10%);
+  --card-foreground: hsl(50 15% 90%);
+  --border: hsl(50 15% 20%);
+  --input: hsl(50 15% 20%);
+  --primary: hsl(220 70% 50%);
+  --primary-foreground: hsl(50 15% 10%);
+  --secondary: hsl(15 80% 45%);
+  --secondary-foreground: hsl(50 15% 10%);
+  --ring: hsl(220 70% 50%);
+  --radius: 0.75rem;
 }

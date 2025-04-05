@@ -1,92 +1,104 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { getQuery, getExpertsByQuery, getChatSessionByQuery, matchExperts, notifyExperts } from "@/lib/api"
-import type { Query, User, ChatSession } from "@/lib/types"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Skeleton } from "@/components/ui/skeleton"
-import { formatDistanceToNow } from "date-fns"
-import { ArrowLeft, MessageSquare, UserCheck } from "lucide-react"
-import Link from "next/link"
-import { ExpertList } from "./expert-list"
-import { ChatInterface } from "./chat-interface"
+import { useState, useEffect } from "react";
+import {
+  getQuery,
+  getExpertsByQuery,
+  getChatSessionByQuery,
+  matchExperts,
+  notifyExperts,
+} from "@/lib/api";
+import type { Query, User, ChatSession } from "@/lib/types";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Skeleton } from "@/components/ui/skeleton";
+import { formatDistanceToNow } from "date-fns";
+import { ArrowLeft, MessageSquare, UserCheck } from "lucide-react";
+import Link from "next/link";
+import { ExpertList } from "./expert-list";
+import { ChatInterface } from "./chat-interface";
 
 interface QueryDetailProps {
-  queryId: string
+  queryId: string;
 }
 
 export function QueryDetail({ queryId }: QueryDetailProps) {
-  const [query, setQuery] = useState<Query | null>(null)
-  const [experts, setExperts] = useState<User[]>([])
-  const [chatSession, setChatSession] = useState<ChatSession | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [matchingExperts, setMatchingExperts] = useState(false)
-  const [notifyingExperts, setNotifyingExperts] = useState(false)
-  const [activeTab, setActiveTab] = useState("details")
+  const [query, setQuery] = useState<Query | null>(null);
+  const [experts, setExperts] = useState<User[]>([]);
+  const [chatSession, setChatSession] = useState<ChatSession | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [matchingExperts, setMatchingExperts] = useState(false);
+  const [notifyingExperts, setNotifyingExperts] = useState(false);
+  const [activeTab, setActiveTab] = useState("details");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const queryData = await getQuery(queryId)
+        const queryData = await getQuery(queryId);
         if (queryData) {
-          setQuery(queryData)
+          setQuery(queryData);
 
           if (queryData.matchedExperts && queryData.matchedExperts.length > 0) {
-            const expertsData = await getExpertsByQuery(queryId)
-            setExperts(expertsData)
+            const expertsData = await getExpertsByQuery(queryId);
+            setExperts(expertsData);
           }
 
-          const chatData = await getChatSessionByQuery(queryId)
+          const chatData = await getChatSessionByQuery(queryId);
           if (chatData) {
-            setChatSession(chatData)
-            setActiveTab("chat")
+            setChatSession(chatData);
+            setActiveTab("chat");
           }
         }
       } catch (error) {
-        console.error("Failed to fetch query details:", error)
+        console.error("Failed to fetch query details:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchData()
-  }, [queryId])
+    fetchData();
+  }, [queryId]);
 
   const handleMatchExperts = async () => {
-    setMatchingExperts(true)
+    setMatchingExperts(true);
     try {
-      const matches = await matchExperts(queryId)
+      const matches = await matchExperts(queryId);
       if (matches.length > 0) {
         setQuery((prev) => {
-          if (!prev) return null
+          if (!prev) return null;
           return {
             ...prev,
             matchedExperts: matches,
             status: "matching",
-          }
-        })
+          };
+        });
 
         // Fetch the expert details
-        const expertsData = await getExpertsByQuery(queryId)
-        setExperts(expertsData)
+        const expertsData = await getExpertsByQuery(queryId);
+        setExperts(expertsData);
       }
     } catch (error) {
-      console.error("Failed to match experts:", error)
+      console.error("Failed to match experts:", error);
     } finally {
-      setMatchingExperts(false)
+      setMatchingExperts(false);
     }
-  }
+  };
 
   const handleNotifyExperts = async () => {
-    setNotifyingExperts(true)
+    setNotifyingExperts(true);
     try {
-      const success = await notifyExperts(queryId)
+      const success = await notifyExperts(queryId);
       if (success) {
         setQuery((prev) => {
-          if (!prev || !prev.matchedExperts) return prev
+          if (!prev || !prev.matchedExperts) return prev;
           return {
             ...prev,
             matchedExperts: prev.matchedExperts.map((match) => ({
@@ -94,32 +106,32 @@ export function QueryDetail({ queryId }: QueryDetailProps) {
               status: "notified",
               notifiedAt: new Date().toISOString(),
             })),
-          }
-        })
+          };
+        });
       }
     } catch (error) {
-      console.error("Failed to notify experts:", error)
+      console.error("Failed to notify experts:", error);
     } finally {
-      setNotifyingExperts(false)
+      setNotifyingExperts(false);
     }
-  }
+  };
 
   const getStatusColor = (status: Query["status"]) => {
     switch (status) {
       case "pending":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
       case "matching":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
       case "matched":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
+        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
       case "resolved":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300"
+        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
       case "closed":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"
+        return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300"
+        return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300";
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -128,7 +140,7 @@ export function QueryDetail({ queryId }: QueryDetailProps) {
         <Skeleton className="h-64 w-full" />
         <Skeleton className="h-64 w-full" />
       </div>
-    )
+    );
   }
 
   if (!query) {
@@ -141,7 +153,7 @@ export function QueryDetail({ queryId }: QueryDetailProps) {
           </Button>
         </CardContent>
       </Card>
-    )
+    );
   }
 
   return (
@@ -160,7 +172,11 @@ export function QueryDetail({ queryId }: QueryDetailProps) {
           <div className="flex justify-between items-start">
             <div>
               <CardTitle>{query.title}</CardTitle>
-              <CardDescription>{formatDistanceToNow(new Date(query.createdAt), { addSuffix: true })}</CardDescription>
+              <CardDescription>
+                {formatDistanceToNow(new Date(query.createdAt), {
+                  addSuffix: true,
+                })}
+              </CardDescription>
             </div>
             <Badge className={getStatusColor(query.status)}>
               {query.status.charAt(0).toUpperCase() + query.status.slice(1)}
@@ -171,14 +187,20 @@ export function QueryDetail({ queryId }: QueryDetailProps) {
           <p className="mb-4">{query.description}</p>
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge variant="outline">
-              Category: {query.category.charAt(0).toUpperCase() + query.category.slice(1)}
+              Category:{" "}
+              {query.category.charAt(0).toUpperCase() + query.category.slice(1)}
             </Badge>
-            <Badge variant="outline">Urgency: {query.urgency.charAt(0).toUpperCase() + query.urgency.slice(1)}</Badge>
+            <Badge variant="outline">
+              Urgency:{" "}
+              {query.urgency.charAt(0).toUpperCase() + query.urgency.slice(1)}
+            </Badge>
           </div>
 
           {query.status === "pending" && (
             <Button onClick={handleMatchExperts} disabled={matchingExperts}>
-              {matchingExperts ? "Matching Experts..." : "Find Matching Experts"}
+              {matchingExperts
+                ? "Matching Experts..."
+                : "Find Matching Experts"}
             </Button>
           )}
 
@@ -193,7 +215,9 @@ export function QueryDetail({ queryId }: QueryDetailProps) {
           {query.status === "matched" && (
             <div className="flex items-center gap-2">
               <UserCheck className="h-5 w-5 text-green-600" />
-              <span className="text-green-600">Expert matched! Check the chat tab.</span>
+              <span className="text-green-600">
+                Expert matched! Check the chat tab.
+              </span>
             </div>
           )}
         </CardContent>
@@ -223,12 +247,14 @@ export function QueryDetail({ queryId }: QueryDetailProps) {
           ) : (
             <Card>
               <CardContent className="py-10 text-center">
-                <p className="text-muted-foreground">No chat session available</p>
+                <p className="text-muted-foreground">
+                  No chat session available
+                </p>
               </CardContent>
             </Card>
           )}
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

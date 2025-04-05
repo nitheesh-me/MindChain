@@ -1,53 +1,53 @@
 :root {
-    --background: hsl(240 20% 98%);
-    /* icy near-white */
-    --foreground: hsl(240 40% 15%);
-    --muted: hsl(240 40% 90%);
-    --muted-foreground: hsl(240 20% 50%);
-    --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(240 40% 15%);
-    --card: hsl(0 0% 100%);
-    --card-foreground: hsl(240 40% 15%);
-    --border: hsl(240 20% 80%);
-    --input: hsl(240 20% 80%);
-    --primary: hsl(260 90% 70%);
-    /* electric purple */
-    --primary-foreground: hsl(0 0% 100%);
-    --secondary: hsl(200 100% 60%);
-    /* glowing blue */
-    --secondary-foreground: hsl(0 0% 100%);
-    --accent: hsl(280 100% 70%);
-    /* violet shimmer */
-    --accent-foreground: hsl(0 0% 10%);
-    --destructive: hsl(0 80% 60%);
-    --destructive-foreground: hsl(0 0% 100%);
-    --ring: hsl(260 90% 70%);
-    --radius: 1rem;
+  --background: hsl(240 20% 98%);
+  /* icy near-white */
+  --foreground: hsl(240 40% 15%);
+  --muted: hsl(240 40% 90%);
+  --muted-foreground: hsl(240 20% 50%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(240 40% 15%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(240 40% 15%);
+  --border: hsl(240 20% 80%);
+  --input: hsl(240 20% 80%);
+  --primary: hsl(260 90% 70%);
+  /* electric purple */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(200 100% 60%);
+  /* glowing blue */
+  --secondary-foreground: hsl(0 0% 100%);
+  --accent: hsl(280 100% 70%);
+  /* violet shimmer */
+  --accent-foreground: hsl(0 0% 10%);
+  --destructive: hsl(0 80% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --ring: hsl(260 90% 70%);
+  --radius: 1rem;
 }
 
 .dark {
-    --background: hsl(240 30% 5%);
-    /* dark galaxy purple */
-    --foreground: hsl(240 20% 90%);
-    --muted: hsl(240 30% 15%);
-    --muted-foreground: hsl(240 20% 70%);
-    --popover: hsl(240 30% 8%);
-    --popover-foreground: hsl(240 20% 90%);
-    --card: hsl(240 30% 10%);
-    --card-foreground: hsl(240 20% 90%);
-    --border: hsl(240 20% 20%);
-    --input: hsl(240 20% 20%);
-    --primary: hsl(260 100% 75%);
-    /* electric purple glow */
-    --primary-foreground: hsl(240 30% 5%);
-    --secondary: hsl(200 100% 65%);
-    /* bright blue glow */
-    --secondary-foreground: hsl(240 30% 5%);
-    --accent: hsl(280 100% 75%);
-    /* purple-pink shimmer */
-    --accent-foreground: hsl(240 30% 5%);
-    --destructive: hsl(0 80% 65%);
-    --destructive-foreground: hsl(240 30% 5%);
-    --ring: hsl(260 100% 75%);
-    --radius: 1rem;
+  --background: hsl(240 30% 5%);
+  /* dark galaxy purple */
+  --foreground: hsl(240 20% 90%);
+  --muted: hsl(240 30% 15%);
+  --muted-foreground: hsl(240 20% 70%);
+  --popover: hsl(240 30% 8%);
+  --popover-foreground: hsl(240 20% 90%);
+  --card: hsl(240 30% 10%);
+  --card-foreground: hsl(240 20% 90%);
+  --border: hsl(240 20% 20%);
+  --input: hsl(240 20% 20%);
+  --primary: hsl(260 100% 75%);
+  /* electric purple glow */
+  --primary-foreground: hsl(240 30% 5%);
+  --secondary: hsl(200 100% 65%);
+  /* bright blue glow */
+  --secondary-foreground: hsl(240 30% 5%);
+  --accent: hsl(280 100% 75%);
+  /* purple-pink shimmer */
+  --accent-foreground: hsl(240 30% 5%);
+  --destructive: hsl(0 80% 65%);
+  --destructive-foreground: hsl(240 30% 5%);
+  --ring: hsl(260 100% 75%);
+  --radius: 1rem;
 }

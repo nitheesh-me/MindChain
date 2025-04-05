@@ -1,33 +1,33 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { AvailableQuestionsList } from "./available-questions-list"
-import { MyQuestionsPanel } from "./my-questions-panel"
-import { ExpertStatsPanel } from "./expert-stats-panel"
-import { getCurrentUser } from "@/lib/api"
-import type { User } from "@/lib/types"
-import { Skeleton } from "@/components/ui/skeleton"
+import { useState, useEffect } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AvailableQuestionsList } from "./available-questions-list";
+import { MyQuestionsPanel } from "./my-questions-panel";
+import { ExpertStatsPanel } from "./expert-stats-panel";
+import { getCurrentUser } from "@/lib/api";
+import type { User } from "@/lib/types";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function ExpertDashboard() {
-  const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState("available")
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("available");
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userData = await getCurrentUser()
-        setUser(userData)
+        const userData = await getCurrentUser();
+        setUser(userData);
       } catch (error) {
-        console.error("Failed to fetch user data:", error)
+        console.error("Failed to fetch user data:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchUser()
-  }, [])
+    fetchUser();
+  }, [user]);
 
   if (loading) {
     return (
@@ -40,14 +40,16 @@ export function ExpertDashboard() {
         </div>
         <Skeleton className="h-64 rounded-2xl" />
       </div>
-    )
+    );
   }
 
   return (
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold">Expert Dashboard</h1>
-        <p className="text-foreground/70">Help students by answering their queries in your area of expertise.</p>
+        <p className="text-foreground/70">
+          Help students by answering their queries in your area of expertise.
+        </p>
       </div>
 
       <ExpertStatsPanel />
@@ -69,6 +71,5 @@ export function ExpertDashboard() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
-

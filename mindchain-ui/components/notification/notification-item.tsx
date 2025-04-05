@@ -1,28 +1,31 @@
-"use client"
+"use client";
 
-import type { Notification } from "@/lib/types"
-import { formatDistanceToNow } from "date-fns"
-import { Bell, MessageSquare, User } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import type { Notification } from "@/lib/types";
+import { formatDistanceToNow } from "date-fns";
+import { Bell, MessageSquare, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface NotificationItemProps {
-  notification: Notification
-  onMarkAsRead: (id: string) => void
+  notification: Notification;
+  onMarkAsRead: (id: string) => void;
 }
 
-export function NotificationItem({ notification, onMarkAsRead }: NotificationItemProps) {
+export function NotificationItem({
+  notification,
+  onMarkAsRead,
+}: NotificationItemProps) {
   const getIcon = () => {
     switch (notification.type) {
       case "query_match":
-        return <User className="h-5 w-5 text-primary" />
+        return <User className="h-5 w-5 text-primary" />;
       case "expert_response":
-        return <User className="h-5 w-5 text-secondary" />
+        return <User className="h-5 w-5 text-secondary" />;
       case "chat_message":
-        return <MessageSquare className="h-5 w-5 text-secondary" />
+        return <MessageSquare className="h-5 w-5 text-secondary" />;
       default:
-        return <Bell className="h-5 w-5 text-muted-foreground" />
+        return <Bell className="h-5 w-5 text-muted-foreground" />;
     }
-  }
+  };
 
   return (
     <div
@@ -34,10 +37,14 @@ export function NotificationItem({ notification, onMarkAsRead }: NotificationIte
         </div>
         <div className="flex-1">
           <h4 className="text-sm font-medium">{notification.title}</h4>
-          <p className="text-xs text-muted-foreground">{notification.message}</p>
+          <p className="text-xs text-muted-foreground">
+            {notification.message}
+          </p>
           <div className="flex items-center justify-between mt-2">
             <span className="text-xs text-muted-foreground">
-              {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
+              {formatDistanceToNow(new Date(notification.createdAt), {
+                addSuffix: true,
+              })}
             </span>
             {!notification.read && (
               <Button
@@ -53,6 +60,5 @@ export function NotificationItem({ notification, onMarkAsRead }: NotificationIte
         </div>
       </div>
     </div>
-  )
+  );
 }
-

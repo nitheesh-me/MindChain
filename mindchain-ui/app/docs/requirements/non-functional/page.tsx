@@ -1,9 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function NonFunctionalRequirementsPage() {
   return (
@@ -19,7 +19,8 @@ export default function NonFunctionalRequirementsPage() {
       <div>
         <h1 className="text-3xl font-bold mb-2">Non-Functional Requirements</h1>
         <p className="text-lg text-muted-foreground mb-4">
-          Quality attributes and constraints that define how the MindChain system should operate.
+          Quality attributes and constraints that define how the MindChain
+          system should operate.
         </p>
         <Separator className="my-4" />
       </div>
@@ -36,14 +37,30 @@ export default function NonFunctionalRequirementsPage() {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p>The system must respond to user interactions within 1 second under normal load conditions.</p>
+              <p>
+                The system must respond to user interactions within 1 second
+                under normal load conditions.
+              </p>
               <div>
-                <h4 className="font-semibold mb-2">Architectural Significance:</h4>
+                <h4 className="font-semibold mb-2">
+                  Architectural Significance:
+                </h4>
                 <ul className="list-disc pl-5 space-y-1">
-                  <li>Impacts the choice of database technology and query optimization</li>
-                  <li>Requires efficient client-server communication protocols</li>
-                  <li>May necessitate caching strategies for frequently accessed data</li>
-                  <li>Influences the overall system architecture and component distribution</li>
+                  <li>
+                    Impacts the choice of database technology and query
+                    optimization
+                  </li>
+                  <li>
+                    Requires efficient client-server communication protocols
+                  </li>
+                  <li>
+                    May necessitate caching strategies for frequently accessed
+                    data
+                  </li>
+                  <li>
+                    Influences the overall system architecture and component
+                    distribution
+                  </li>
                 </ul>
               </div>
             </CardContent>
@@ -58,15 +75,25 @@ export default function NonFunctionalRequirementsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must support at least 5,000 concurrent users and scale horizontally to accommodate growth.
+                The system must support at least 5,000 concurrent users and
+                scale horizontally to accommodate growth.
               </p>
               <div>
-                <h4 className="font-semibold mb-2">Architectural Significance:</h4>
+                <h4 className="font-semibold mb-2">
+                  Architectural Significance:
+                </h4>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>Requires stateless design for horizontal scaling</li>
-                  <li>Influences database sharding and partitioning strategies</li>
-                  <li>Necessitates load balancing and distributed processing</li>
-                  <li>Impacts the choice of cloud infrastructure and deployment model</li>
+                  <li>
+                    Influences database sharding and partitioning strategies
+                  </li>
+                  <li>
+                    Necessitates load balancing and distributed processing
+                  </li>
+                  <li>
+                    Impacts the choice of cloud infrastructure and deployment
+                    model
+                  </li>
                 </ul>
               </div>
             </CardContent>
@@ -82,15 +109,23 @@ export default function NonFunctionalRequirementsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must maintain 99.9% uptime during academic hours (8 AM to 8 PM) and 99% uptime during
-                non-academic hours.
+                The system must maintain 99.9% uptime during academic hours (8
+                AM to 8 PM) and 99% uptime during non-academic hours.
               </p>
               <div>
                 <h4 className="font-semibold mb-2">Details:</h4>
                 <ul className="list-disc pl-5 space-y-1">
-                  <li>Maximum allowed downtime of 43.8 minutes per month during academic hours</li>
-                  <li>Scheduled maintenance should be performed during non-academic hours</li>
-                  <li>System must implement redundancy for critical components</li>
+                  <li>
+                    Maximum allowed downtime of 43.8 minutes per month during
+                    academic hours
+                  </li>
+                  <li>
+                    Scheduled maintenance should be performed during
+                    non-academic hours
+                  </li>
+                  <li>
+                    System must implement redundancy for critical components
+                  </li>
                 </ul>
               </div>
             </CardContent>
@@ -102,8 +137,8 @@ export default function NonFunctionalRequirementsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must ensure no data loss for completed transactions and maintain chat history for at least
-                one academic year.
+                The system must ensure no data loss for completed transactions
+                and maintain chat history for at least one academic year.
               </p>
               <div>
                 <h4 className="font-semibold mb-2">Details:</h4>
@@ -129,16 +164,26 @@ export default function NonFunctionalRequirementsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must protect user data according to institutional privacy policies and applicable
-                regulations.
+                The system must protect user data according to institutional
+                privacy policies and applicable regulations.
               </p>
               <div>
-                <h4 className="font-semibold mb-2">Architectural Significance:</h4>
+                <h4 className="font-semibold mb-2">
+                  Architectural Significance:
+                </h4>
                 <ul className="list-disc pl-5 space-y-1">
-                  <li>Requires end-to-end encryption for sensitive communications</li>
-                  <li>Necessitates secure data storage with appropriate access controls</li>
+                  <li>
+                    Requires end-to-end encryption for sensitive communications
+                  </li>
+                  <li>
+                    Necessitates secure data storage with appropriate access
+                    controls
+                  </li>
                   <li>Impacts authentication and authorization mechanisms</li>
-                  <li>Requires careful handling of personal and academic information</li>
+                  <li>
+                    Requires careful handling of personal and academic
+                    information
+                  </li>
                 </ul>
               </div>
             </CardContent>
@@ -146,17 +191,21 @@ export default function NonFunctionalRequirementsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-xl">NFR6: Authentication and Authorization</CardTitle>
+              <CardTitle className="text-xl">
+                NFR6: Authentication and Authorization
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must implement secure authentication and role-based authorization with institutional SSO
-                integration.
+                The system must implement secure authentication and role-based
+                authorization with institutional SSO integration.
               </p>
               <div>
                 <h4 className="font-semibold mb-2">Details:</h4>
                 <ul className="list-disc pl-5 space-y-1">
-                  <li>Support for IIIT Hyderabad's authentication system</li>
+                  <li>
+                    Support for IIIT Hyderabad&apos;s authentication system
+                  </li>
                   <li>Multi-factor authentication for administrative access</li>
                   <li>Fine-grained permission system based on user roles</li>
                   <li>Secure session management with appropriate timeouts</li>
@@ -175,7 +224,8 @@ export default function NonFunctionalRequirementsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must comply with WCAG 2.1 AA standards to ensure accessibility for users with disabilities.
+                The system must comply with WCAG 2.1 AA standards to ensure
+                accessibility for users with disabilities.
               </p>
               <div>
                 <h4 className="font-semibold mb-2">Details:</h4>
@@ -198,16 +248,29 @@ export default function NonFunctionalRequirementsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must provide an intuitive, responsive interface that minimizes cognitive load and supports
-                efficient task completion.
+                The system must provide an intuitive, responsive interface that
+                minimizes cognitive load and supports efficient task completion.
               </p>
               <div>
-                <h4 className="font-semibold mb-2">Architectural Significance:</h4>
+                <h4 className="font-semibold mb-2">
+                  Architectural Significance:
+                </h4>
                 <ul className="list-disc pl-5 space-y-1">
-                  <li>Requires responsive design and component-based UI architecture</li>
-                  <li>Impacts the choice of frontend framework and state management</li>
-                  <li>Necessitates efficient client-side rendering and data fetching</li>
-                  <li>Influences the design of notification and chat systems</li>
+                  <li>
+                    Requires responsive design and component-based UI
+                    architecture
+                  </li>
+                  <li>
+                    Impacts the choice of frontend framework and state
+                    management
+                  </li>
+                  <li>
+                    Necessitates efficient client-side rendering and data
+                    fetching
+                  </li>
+                  <li>
+                    Influences the design of notification and chat systems
+                  </li>
                 </ul>
               </div>
             </CardContent>
@@ -223,8 +286,8 @@ export default function NonFunctionalRequirementsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must be designed to easily incorporate new features and integrate with additional
-                institutional systems.
+                The system must be designed to easily incorporate new features
+                and integrate with additional institutional systems.
               </p>
               <div>
                 <h4 className="font-semibold mb-2">Details:</h4>
@@ -244,7 +307,8 @@ export default function NonFunctionalRequirementsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                The system must be designed to facilitate automated testing at unit, integration, and system levels.
+                The system must be designed to facilitate automated testing at
+                unit, integration, and system levels.
               </p>
               <div>
                 <h4 className="font-semibold mb-2">Details:</h4>
@@ -273,6 +337,5 @@ export default function NonFunctionalRequirementsPage() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
-

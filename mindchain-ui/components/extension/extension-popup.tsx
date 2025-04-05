@@ -1,46 +1,61 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Loader2, Send } from "lucide-react"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Loader2, Send } from "lucide-react";
 
 export function ExtensionPopup() {
-  const [query, setQuery] = useState("")
-  const [category, setCategory] = useState<string>("academic")
-  const [loading, setLoading] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<string>("academic");
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!query.trim()) return
+    e.preventDefault();
+    if (!query.trim()) return;
 
-    setLoading(true)
+    setLoading(true);
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    setLoading(false)
-    setSubmitted(true)
+    setLoading(false);
+    setSubmitted(true);
 
     // Reset form after 3 seconds
     setTimeout(() => {
-      setQuery("")
-      setCategory("academic")
-      setSubmitted(false)
-    }, 3000)
-  }
+      setQuery("");
+      setCategory("academic");
+      setSubmitted(false);
+    }, 3000);
+  };
 
   return (
     <Card className="w-[350px] shadow-lg">
       <CardHeader className="bg-primary text-white">
         <CardTitle className="text-lg">MindChain</CardTitle>
-        <CardDescription className="text-white/80">Quick Query Submission</CardDescription>
+        <CardDescription className="text-white/80">
+          Quick Query Submission
+        </CardDescription>
       </CardHeader>
       {submitted ? (
         <CardContent className="pt-6">
@@ -50,7 +65,8 @@ export function ExtensionPopup() {
             </div>
             <h3 className="text-lg font-medium">Query Submitted!</h3>
             <p className="text-sm text-muted-foreground text-center mt-1">
-              Your query has been submitted successfully. You will be notified when an expert responds.
+              Your query has been submitted successfully. You will be notified
+              when an expert responds.
             </p>
           </div>
         </CardContent>
@@ -59,7 +75,11 @@ export function ExtensionPopup() {
           <CardContent className="pt-6 space-y-4">
             <div className="space-y-2">
               <Label htmlFor="category">Category</Label>
-              <Select value={category} onValueChange={setCategory} disabled={loading}>
+              <Select
+                value={category}
+                onValueChange={setCategory}
+                disabled={loading}
+              >
                 <SelectTrigger id="category">
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
@@ -86,7 +106,11 @@ export function ExtensionPopup() {
             </div>
           </CardContent>
           <CardFooter>
-            <Button type="submit" className="w-full" disabled={loading || !query.trim()}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={loading || !query.trim()}
+            >
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -100,5 +124,5 @@ export function ExtensionPopup() {
         </form>
       )}
     </Card>
-  )
+  );
 }

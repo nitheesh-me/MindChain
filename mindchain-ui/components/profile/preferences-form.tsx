@@ -1,14 +1,27 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Loader2 } from "lucide-react"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Loader2 } from "lucide-react";
 
 export function PreferencesForm() {
   const [preferences, setPreferences] = useState({
@@ -16,40 +29,45 @@ export function PreferencesForm() {
     browserNotifications: true,
     notificationFrequency: "immediate",
     availabilityStatus: "available",
-  })
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSwitchChange = (field: string) => {
-    setPreferences((prev) => ({ ...prev, [field]: !prev[field as keyof typeof prev] }))
-  }
+    setPreferences((prev) => ({
+      ...prev,
+      [field]: !prev[field as keyof typeof prev],
+    }));
+  };
 
   const handleSelectChange = (field: string, value: string) => {
-    setPreferences((prev) => ({ ...prev, [field]: value }))
-  }
+    setPreferences((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setSuccess(false)
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    setLoading(false)
-    setSuccess(true)
+    setLoading(false);
+    setSuccess(true);
 
     // Reset success message after 3 seconds
     setTimeout(() => {
-      setSuccess(false)
-    }, 3000)
-  }
+      setSuccess(false);
+    }, 3000);
+  };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Notification Preferences</CardTitle>
-        <CardDescription>Manage how and when you receive notifications</CardDescription>
+        <CardDescription>
+          Manage how and when you receive notifications
+        </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-6">
@@ -58,7 +76,9 @@ export function PreferencesForm() {
             <div className="flex items-center justify-between">
               <Label htmlFor="emailNotifications" className="flex-1">
                 Email Notifications
-                <p className="text-sm text-muted-foreground">Receive notifications via email</p>
+                <p className="text-sm text-muted-foreground">
+                  Receive notifications via email
+                </p>
               </Label>
               <Switch
                 id="emailNotifications"
@@ -70,12 +90,16 @@ export function PreferencesForm() {
             <div className="flex items-center justify-between">
               <Label htmlFor="browserNotifications" className="flex-1">
                 Browser Notifications
-                <p className="text-sm text-muted-foreground">Receive notifications in your browser</p>
+                <p className="text-sm text-muted-foreground">
+                  Receive notifications in your browser
+                </p>
               </Label>
               <Switch
                 id="browserNotifications"
                 checked={preferences.browserNotifications}
-                onCheckedChange={() => handleSwitchChange("browserNotifications")}
+                onCheckedChange={() =>
+                  handleSwitchChange("browserNotifications")
+                }
                 disabled={loading}
               />
             </div>
@@ -84,10 +108,14 @@ export function PreferencesForm() {
           <div className="space-y-4">
             <h3 className="text-lg font-medium">Notification Settings</h3>
             <div className="space-y-2">
-              <Label htmlFor="notificationFrequency">Notification Frequency</Label>
+              <Label htmlFor="notificationFrequency">
+                Notification Frequency
+              </Label>
               <Select
                 value={preferences.notificationFrequency}
-                onValueChange={(value) => handleSelectChange("notificationFrequency", value)}
+                onValueChange={(value) =>
+                  handleSelectChange("notificationFrequency", value)
+                }
                 disabled={loading}
               >
                 <SelectTrigger id="notificationFrequency">
@@ -108,7 +136,9 @@ export function PreferencesForm() {
               <Label htmlFor="availabilityStatus">Availability Status</Label>
               <Select
                 value={preferences.availabilityStatus}
-                onValueChange={(value) => handleSelectChange("availabilityStatus", value)}
+                onValueChange={(value) =>
+                  handleSelectChange("availabilityStatus", value)
+                }
                 disabled={loading}
               >
                 <SelectTrigger id="availabilityStatus">
@@ -138,10 +168,13 @@ export function PreferencesForm() {
               "Save Preferences"
             )}
           </Button>
-          {success && <span className="ml-4 text-sm text-green-600">Preferences updated successfully!</span>}
+          {success && (
+            <span className="ml-4 text-sm text-green-600">
+              Preferences updated successfully!
+            </span>
+          )}
         </CardFooter>
       </form>
     </Card>
-  )
+  );
 }
-

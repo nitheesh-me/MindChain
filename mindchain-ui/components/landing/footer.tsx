@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Github, Twitter, Linkedin, Mail } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Github, Twitter, Linkedin, Mail } from "lucide-react";
 
 export function Footer() {
   return (
@@ -16,7 +16,9 @@ export function Footer() {
               <span className="text-xl font-bold font-inter">MindChain</span>
             </Link>
 
-            <p className="text-foreground/70 mb-4">A context-aware communication platform for IIIT Hyderabad.</p>
+            <p className="text-foreground/70 mb-4">
+              A context-aware communication platform for IIIT Hyderabad.
+            </p>
 
             <div className="flex gap-4">
               <Button variant="ghost" size="icon" asChild aria-label="GitHub">
@@ -49,22 +51,34 @@ export function Footer() {
             <h4 className="text-lg font-bold mb-4">Platform</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/me" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="/me"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link href="/me/queries" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="/me/queries"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   My Queries
                 </Link>
               </li>
               <li>
-                <Link href="/me/profile" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="/me/profile"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Profile
                 </Link>
               </li>
               <li>
-                <Link href="/extension" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="/extension"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Browser Extension
                 </Link>
               </li>
@@ -75,22 +89,34 @@ export function Footer() {
             <h4 className="text-lg font-bold mb-4">Resources</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="#"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Documentation
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="#"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   API Reference
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="#"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="#"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Support
                 </Link>
               </li>
@@ -101,22 +127,34 @@ export function Footer() {
             <h4 className="text-lg font-bold mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="#"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="#"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="#"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Cookie Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link
+                  href="#"
+                  className="text-foreground/70 hover:text-primary transition-colors"
+                >
                   Accessibility
                 </Link>
               </li>
@@ -126,10 +164,11 @@ export function Footer() {
 
         <div className="border-t border-border mt-12 pt-8 text-center">
           <p className="text-foreground/70">
-            &copy; {new Date().getFullYear()} MindChain. All rights reserved. A project of IIIT Hyderabad.
+            &copy; {new Date().getFullYear()} MindChain. All rights reserved. A
+            project of IIIT Hyderabad.
           </p>
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,35 +1,41 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { getCurrentUser, getQueries } from "@/lib/api"
-import type { User, Query } from "@/lib/types"
-import { QueryList } from "@/components/dashboard/query-list"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent } from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
+import { useState, useEffect } from "react";
+import { getCurrentUser, getQueries } from "@/lib/api";
+import type { User, Query } from "@/lib/types";
+import { QueryList } from "@/components/dashboard/query-list";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function QueriesView() {
-  const [user, setUser] = useState<User | null>(null)
-  const [queries, setQueries] = useState<Query[]>([])
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState<User | null>(null);
+  const [queries, setQueries] = useState<Query[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userData = await getCurrentUser()
-        setUser(userData)
+        const userData = await getCurrentUser();
+        setUser(userData);
 
-        const queriesData = await getQueries(userData.id)
-        setQueries(queriesData)
+        if (user === null) {
+          console.error("TODO: redirect to login");
+          // Redirect to login or show a message
+          setLoading(false);
+          return;
+        }
+        const queriesData = await getQueries(user.id);
+        setQueries(queriesData);
       } catch (error) {
-        console.error("Failed to fetch queries:", error)
+        console.error("Failed to fetch queries:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, [user]);
 
   if (loading) {
     return (
@@ -37,11 +43,15 @@ export function QueriesView() {
         <Skeleton className="h-12 w-32" />
         <Skeleton className="h-64 w-full" />
       </div>
-    )
+    );
   }
 
-  const activeQueries = queries.filter((q) => q.status !== "resolved" && q.status !== "closed")
-  const resolvedQueries = queries.filter((q) => q.status === "resolved" || q.status === "closed")
+  const activeQueries = queries.filter(
+    (q) => q.status !== "resolved" && q.status !== "closed",
+  );
+  const resolvedQueries = queries.filter(
+    (q) => q.status === "resolved" || q.status === "closed",
+  );
 
   return (
     <div className="space-y-6">
@@ -49,8 +59,12 @@ export function QueriesView() {
 
       <Tabs defaultValue="active">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="active">Active Queries ({activeQueries.length})</TabsTrigger>
-          <TabsTrigger value="resolved">Resolved Queries ({resolvedQueries.length})</TabsTrigger>
+          <TabsTrigger value="active">
+            Active Queries ({activeQueries.length})
+          </TabsTrigger>
+          <TabsTrigger value="resolved">
+            Resolved Queries ({resolvedQueries.length})
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="active" className="mt-4">
           {activeQueries.length > 0 ? (
@@ -76,6 +90,5 @@ export function QueriesView() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
-

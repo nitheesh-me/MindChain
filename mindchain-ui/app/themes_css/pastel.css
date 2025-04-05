@@ -1,63 +1,63 @@
 :root {
-    /* Background and Text */
-    --background: hsl(210, 50%, 96%);
-    /* soft pastel sky blue */
-    --foreground: hsl(210, 20%, 20%);
-    /* deep, gentle slate for text */
+  /* Background and Text */
+  --background: hsl(210, 50%, 96%);
+  /* soft pastel sky blue */
+  --foreground: hsl(210, 20%, 20%);
+  /* deep, gentle slate for text */
 
-    /* Muted Elements */
-    --muted: hsl(210, 40%, 92%);
-    /* very light pastel variant */
-    --muted-foreground: hsl(210, 15%, 40%);
-    /* subdued text for muted areas */
+  /* Muted Elements */
+  --muted: hsl(210, 40%, 92%);
+  /* very light pastel variant */
+  --muted-foreground: hsl(210, 15%, 40%);
+  /* subdued text for muted areas */
 
-    /* Panels and Cards */
-    --popover: hsl(0, 0%, 100%);
-    /* clean white popover */
-    --popover-foreground: var(--foreground);
-    --card: hsl(0, 0%, 100%);
-    /* crisp card background */
-    --card-foreground: var(--foreground);
+  /* Panels and Cards */
+  --popover: hsl(0, 0%, 100%);
+  /* clean white popover */
+  --popover-foreground: var(--foreground);
+  --card: hsl(0, 0%, 100%);
+  /* crisp card background */
+  --card-foreground: var(--foreground);
 
-    /* Borders and Inputs */
-    --border: hsl(30, 20%, 80%);
-    /* soft warm neutral, like a subtle frame */
-    --input: hsl(30, 20%, 80%);
+  /* Borders and Inputs */
+  --border: hsl(30, 20%, 80%);
+  /* soft warm neutral, like a subtle frame */
+  --input: hsl(30, 20%, 80%);
 
-    /* Primary, Secondary, and Accent Colors */
-    --primary: hsl(340, 70%, 80%);
-    /* pastel pink for a gentle focal point */
-    --primary-foreground: hsl(0, 0%, 100%);
-    --secondary: hsl(60, 70%, 80%);
-    /* pastel yellow for a warm touch */
-    --secondary-foreground: hsl(0, 0%, 100%);
-    --accent: hsl(180, 70%, 80%);
-    /* pastel cyan for a cool accent */
-    --accent-foreground: hsl(0, 0%, 100%);
+  /* Primary, Secondary, and Accent Colors */
+  --primary: hsl(340, 70%, 80%);
+  /* pastel pink for a gentle focal point */
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(60, 70%, 80%);
+  /* pastel yellow for a warm touch */
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --accent: hsl(180, 70%, 80%);
+  /* pastel cyan for a cool accent */
+  --accent-foreground: hsl(0, 0%, 100%);
 
-    /* Ring (focus outlines) and Radius (rounded corners) */
-    --ring: hsl(210, 50%, 96%);
-    --radius: 1rem;
+  /* Ring (focus outlines) and Radius (rounded corners) */
+  --ring: hsl(210, 50%, 96%);
+  --radius: 1rem;
 }
 
 /* Optional Dark Mode: a more moody pastel interpretation */
 .dark {
-    --background: hsl(210, 30%, 12%);
-    --foreground: hsl(210, 30%, 90%);
-    --muted: hsl(210, 20%, 15%);
-    --muted-foreground: hsl(210, 20%, 65%);
-    --popover: hsl(210, 30%, 10%);
-    --popover-foreground: var(--foreground);
-    --card: hsl(210, 30%, 12%);
-    --card-foreground: var(--foreground);
-    --border: hsl(30, 20%, 25%);
-    --input: hsl(30, 20%, 25%);
-    --primary: hsl(340, 70%, 60%);
-    --primary-foreground: hsl(210, 30%, 12%);
-    --secondary: hsl(60, 70%, 60%);
-    --secondary-foreground: hsl(210, 30%, 12%);
-    --accent: hsl(180, 70%, 60%);
-    --accent-foreground: hsl(210, 30%, 12%);
-    --ring: hsl(210, 30%, 12%);
-    --radius: 1rem;
+  --background: hsl(210, 30%, 12%);
+  --foreground: hsl(210, 30%, 90%);
+  --muted: hsl(210, 20%, 15%);
+  --muted-foreground: hsl(210, 20%, 65%);
+  --popover: hsl(210, 30%, 10%);
+  --popover-foreground: var(--foreground);
+  --card: hsl(210, 30%, 12%);
+  --card-foreground: var(--foreground);
+  --border: hsl(30, 20%, 25%);
+  --input: hsl(30, 20%, 25%);
+  --primary: hsl(340, 70%, 60%);
+  --primary-foreground: hsl(210, 30%, 12%);
+  --secondary: hsl(60, 70%, 60%);
+  --secondary-foreground: hsl(210, 30%, 12%);
+  --accent: hsl(180, 70%, 60%);
+  --accent-foreground: hsl(210, 30%, 12%);
+  --ring: hsl(210, 30%, 12%);
+  --radius: 1rem;
 }

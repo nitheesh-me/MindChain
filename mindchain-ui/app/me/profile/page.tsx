@@ -1,5 +1,5 @@
-import { Header } from "@/components/header"
-import { ProfileView } from "@/components/profile/profile-view"
+import { Header } from "@/components/header";
+import { ProfileView } from "@/components/profile/profile-view";
 
 export default function ProfilePage() {
   return (
@@ -9,6 +9,5 @@ export default function ProfilePage() {
         <ProfileView />
       </div>
     </main>
-  )
+  );
 }
-

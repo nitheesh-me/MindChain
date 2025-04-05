@@ -1,41 +1,49 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { submitQuery } from "@/lib/api"
-import type { Query } from "@/lib/types"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Label } from "@/components/ui/label"
-import { Loader2, Send } from "lucide-react"
+import { useState } from "react";
+import { submitQuery } from "@/lib/api";
+import type { Query } from "@/lib/types";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Loader2, Send } from "lucide-react";
 
 interface QueryFormProps {
-  userId: string
-  onSubmit: (query: Query) => void
+  userId: string;
+  onSubmit: (query: Query) => void;
 }
 
 export function QueryForm({ userId, onSubmit }: QueryFormProps) {
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [category, setCategory] = useState<"academic" | "research" | "event" | "other">("academic")
-  const [urgency, setUrgency] = useState<"low" | "medium" | "high">("medium")
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState<
+    "academic" | "research" | "event" | "other"
+  >("academic");
+  const [urgency, setUrgency] = useState<"low" | "medium" | "high">("medium");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
+    e.preventDefault();
+    setError(null);
 
     if (!title.trim() || !description.trim()) {
-      setError("Please fill in all required fields")
-      return
+      setError("Please fill in all required fields");
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
 
     try {
       const newQuery = await submitQuery({
@@ -44,22 +52,22 @@ export function QueryForm({ userId, onSubmit }: QueryFormProps) {
         description,
         category,
         urgency,
-      })
+      });
 
-      onSubmit(newQuery)
+      onSubmit(newQuery);
 
       // Reset form
-      setTitle("")
-      setDescription("")
-      setCategory("academic")
-      setUrgency("medium")
+      setTitle("");
+      setDescription("");
+      setCategory("academic");
+      setUrgency("medium");
     } catch (error) {
-      console.error("Failed to submit query:", error)
-      setError("Failed to submit query. Please try again.")
+      console.error("Failed to submit query:", error);
+      setError("Failed to submit query. Please try again.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -103,7 +111,13 @@ export function QueryForm({ userId, onSubmit }: QueryFormProps) {
           <Label htmlFor="category" className="text-base font-medium">
             Category
           </Label>
-          <Select value={category} onValueChange={(value) => setCategory(value as any)} disabled={loading}>
+          <Select
+            value={category}
+            onValueChange={(value) =>
+              setCategory(value as "academic" | "research" | "event" | "other")
+            }
+            disabled={loading}
+          >
             <SelectTrigger id="category" className="mt-2 rounded-xl">
               <SelectValue placeholder="Select category" />
             </SelectTrigger>
@@ -120,7 +134,9 @@ export function QueryForm({ userId, onSubmit }: QueryFormProps) {
           <Label className="text-base font-medium">Urgency</Label>
           <RadioGroup
             value={urgency}
-            onValueChange={(value) => setUrgency(value as any)}
+            onValueChange={(value) =>
+              setUrgency(value as "low" | "medium" | "high")
+            }
             className="flex space-x-4 mt-2"
             disabled={loading}
           >
@@ -162,5 +178,5 @@ export function QueryForm({ userId, onSubmit }: QueryFormProps) {
         )}
       </Button>
     </form>
-  )
+  );
 }

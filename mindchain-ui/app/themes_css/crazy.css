@@ -1,101 +1,101 @@
 :root {
-    /* Background: because who needs subtlety? */
-    --background: hsl(320, 90%, 95%);
-    /* Blinding pink-ish glow */
-    --foreground: hsl(220, 80%, 15%);
-    /* Midnight blue mystery */
+  /* Background: because who needs subtlety? */
+  --background: hsl(320, 90%, 95%);
+  /* Blinding pink-ish glow */
+  --foreground: hsl(220, 80%, 15%);
+  /* Midnight blue mystery */
 
-    /* The 'muted' values? More like "meh" colors that barely matter */
-    --muted: hsl(60, 90%, 85%);
-    /* Dazzling yellow - kinda in your face */
-    --muted-foreground: hsl(120, 70%, 30%);
-    /* Bizarre green of questionable origin */
+  /* The 'muted' values? More like "meh" colors that barely matter */
+  --muted: hsl(60, 90%, 85%);
+  /* Dazzling yellow - kinda in your face */
+  --muted-foreground: hsl(120, 70%, 30%);
+  /* Bizarre green of questionable origin */
 
-    /* Popovers and Cards because even chaos needs structure */
-    --popover: hsl(180, 90%, 95%);
-    /* Aquatic dream, or nightmare? */
-    --popover-foreground: hsl(180, 90%, 15%);
-    /* Deep-sea dive blue */
+  /* Popovers and Cards because even chaos needs structure */
+  --popover: hsl(180, 90%, 95%);
+  /* Aquatic dream, or nightmare? */
+  --popover-foreground: hsl(180, 90%, 15%);
+  /* Deep-sea dive blue */
 
-    --card: hsl(290, 100%, 98%);
-    /* Almost invisible purple haze */
-    --card-foreground: hsl(290, 100%, 20%);
-    /* Intense violet to cut through the madness */
+  --card: hsl(290, 100%, 98%);
+  /* Almost invisible purple haze */
+  --card-foreground: hsl(290, 100%, 20%);
+  /* Intense violet to cut through the madness */
 
-    /* Borders and Inputs - a splash of random brilliance */
-    --border: hsl(30, 100%, 50%);
-    /* Fiery orange, burn it all! */
-    --input: hsl(330, 90%, 50%);
-    /* Magenta madness */
+  /* Borders and Inputs - a splash of random brilliance */
+  --border: hsl(30, 100%, 50%);
+  /* Fiery orange, burn it all! */
+  --input: hsl(330, 90%, 50%);
+  /* Magenta madness */
 
-    /* Primary buttons: scream for attention */
-    --primary: hsl(10, 100%, 50%);
-    /* Blood red, as if it's got a story to tell */
-    --primary-foreground: hsl(0, 0%, 100%);
-    /* Stark white for that bitter contrast */
+  /* Primary buttons: scream for attention */
+  --primary: hsl(10, 100%, 50%);
+  /* Blood red, as if it's got a story to tell */
+  --primary-foreground: hsl(0, 0%, 100%);
+  /* Stark white for that bitter contrast */
 
-    /* Secondary, because why not mix it up? */
-    --secondary: hsl(200, 100%, 50%);
-    /* Electric blue – shock factor! */
-    --secondary-foreground: hsl(0, 0%, 100%);
-    /* White, because white goes with everything */
+  /* Secondary, because why not mix it up? */
+  --secondary: hsl(200, 100%, 50%);
+  /* Electric blue – shock factor! */
+  --secondary-foreground: hsl(0, 0%, 100%);
+  /* White, because white goes with everything */
 
-    /* Accent: a splash of the surreal */
-    --accent: hsl(80, 100%, 40%);
-    /* Acid green - out of this world */
-    --accent-foreground: hsl(0, 0%, 100%);
-    /* White for clarity amidst the chaos */
+  /* Accent: a splash of the surreal */
+  --accent: hsl(80, 100%, 40%);
+  /* Acid green - out of this world */
+  --accent-foreground: hsl(0, 0%, 100%);
+  /* White for clarity amidst the chaos */
 
-    /* Let’s not forget the magical ring effect */
-    --ring: hsl(270, 100%, 50%);
-    /* Royal purple, like the crown of madness */
-    --radius: 1.5rem;
-    /* Extra round because we're all about that comfort */
+  /* Let’s not forget the magical ring effect */
+  --ring: hsl(270, 100%, 50%);
+  /* Royal purple, like the crown of madness */
+  --radius: 1.5rem;
+  /* Extra round because we're all about that comfort */
 }
 
 .dark {
-    /* When the night falls and the party gets even crazier */
-    --background: hsl(320, 90%, 10%);
-    /* Dark pink abyss */
-    --foreground: hsl(220, 80%, 90%);
-    /* Neon blue to survive the darkness */
+  /* When the night falls and the party gets even crazier */
+  --background: hsl(320, 90%, 10%);
+  /* Dark pink abyss */
+  --foreground: hsl(220, 80%, 90%);
+  /* Neon blue to survive the darkness */
 
-    --muted: hsl(60, 90%, 15%);
-    /* Shadowy yellow... surreal? */
-    --muted-foreground: hsl(120, 70%, 80%);
-    /* Light green ghost */
+  --muted: hsl(60, 90%, 15%);
+  /* Shadowy yellow... surreal? */
+  --muted-foreground: hsl(120, 70%, 80%);
+  /* Light green ghost */
 
-    --popover: hsl(180, 90%, 10%);
-    /* Deep ocean blue - where did we go? */
-    --popover-foreground: hsl(180, 90%, 90%);
-    /* Glowing aqua in the dark */
+  --popover: hsl(180, 90%, 10%);
+  /* Deep ocean blue - where did we go? */
+  --popover-foreground: hsl(180, 90%, 90%);
+  /* Glowing aqua in the dark */
 
-    --card: hsl(290, 100%, 12%);
-    /* Murky purple haze */
-    --card-foreground: hsl(290, 100%, 90%);
-    /* Vibrant violet glow */
+  --card: hsl(290, 100%, 12%);
+  /* Murky purple haze */
+  --card-foreground: hsl(290, 100%, 90%);
+  /* Vibrant violet glow */
 
-    --border: hsl(30, 100%, 20%);
-    /* Smoldering orange ember */
-    --input: hsl(330, 90%, 20%);
-    /* Dark magenta splash */
+  --border: hsl(30, 100%, 20%);
+  /* Smoldering orange ember */
+  --input: hsl(330, 90%, 20%);
+  /* Dark magenta splash */
 
-    --primary: hsl(10, 100%, 60%);
-    /* Crimson, but slightly tipsy */
-    --primary-foreground: hsl(0, 0%, 10%);
-    /* Almost black - a sober contrast */
+  --primary: hsl(10, 100%, 60%);
+  /* Crimson, but slightly tipsy */
+  --primary-foreground: hsl(0, 0%, 10%);
+  /* Almost black - a sober contrast */
 
-    --secondary: hsl(200, 100%, 60%);
-    /* Icy blue with a kick */
-    --secondary-foreground: hsl(0, 0%, 10%);
-    /* Dark as midnight */
+  --secondary: hsl(200, 100%, 60%);
+  /* Icy blue with a kick */
+  --secondary-foreground: hsl(0, 0%, 10%);
+  /* Dark as midnight */
 
-    --accent: hsl(80, 100%, 55%);
-    /* Acid green with extra zing */
-    --accent-foreground: hsl(0, 0%, 10%);
-    /* Intense dark background */
+  --accent: hsl(80, 100%, 55%);
+  /* Acid green with extra zing */
+  --accent-foreground: hsl(0, 0%, 10%);
+  /* Intense dark background */
 
-    --ring: hsl(270, 100%, 60%);
-    /* Hypnotic purple aura */
-    --radius: 1.5rem;
+  --ring: hsl(270, 100%, 60%);
+  /* Hypnotic purple aura */
+  --radius: 1.5rem;
 }

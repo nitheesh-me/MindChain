@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/mode-toggle"
-import { Bell, Menu, X, User } from "lucide-react"
-import { NotificationPanel } from "@/components/notification/notification-panel"
-import { useMobile } from "@/hooks/use-mobile"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Bell, Menu, X, User } from "lucide-react";
+import { NotificationPanel } from "@/components/notification/notification-panel";
+import { useMobile } from "@/hooks/use-mobile";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,28 +14,30 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function Header() {
-  const isMobile = useMobile()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const isMobile = useMobile();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
+      setScrolled(window.scrollY > 10);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : "bg-background"
+        scrolled
+          ? "bg-background/80 backdrop-blur-md shadow-sm"
+          : "bg-background"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -49,7 +51,11 @@ export function Header() {
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 className="rounded-full"
               >
-                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {isMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
               </Button>
             )}
             <Link href="/" className="flex items-center gap-2">
@@ -69,7 +75,9 @@ export function Header() {
                   : "flex items-center gap-6"
               }`}
             >
-              <ul className={`${isMobile ? "flex flex-col gap-4" : "flex items-center gap-6"}`}>
+              <ul
+                className={`${isMobile ? "flex flex-col gap-4" : "flex items-center gap-6"}`}
+              >
                 <li>
                   <Link
                     href="/me"
@@ -107,7 +115,11 @@ export function Header() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-                aria-label={isNotificationsOpen ? "Close notifications" : "Open notifications"}
+                aria-label={
+                  isNotificationsOpen
+                    ? "Close notifications"
+                    : "Open notifications"
+                }
                 className="rounded-full"
               >
                 <Bell className="h-5 w-5" />
@@ -115,14 +127,21 @@ export function Header() {
                   2
                 </span>
               </Button>
-              {isNotificationsOpen && <NotificationPanel onClose={() => setIsNotificationsOpen(false)} />}
+              {isNotificationsOpen && (
+                <NotificationPanel
+                  onClose={() => setIsNotificationsOpen(false)}
+                />
+              )}
             </div>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="rounded-full">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
+                    <AvatarImage
+                      src="/placeholder.svg?height=32&width=32"
+                      alt="User"
+                    />
                     <AvatarFallback>RK</AvatarFallback>
                   </Avatar>
                 </Button>
@@ -152,5 +171,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

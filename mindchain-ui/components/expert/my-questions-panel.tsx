@@ -1,21 +1,22 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Skeleton } from "@/components/ui/skeleton"
-import { formatDistanceToNow } from "date-fns"
-import { MessageSquare, CheckCircle, Clock } from "lucide-react"
-import Link from "next/link"
+import { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Skeleton } from "@/components/ui/skeleton";
+import { formatDistanceToNow } from "date-fns";
+import { MessageSquare, CheckCircle, Clock } from "lucide-react";
+import Link from "next/link";
 
 // Mock data for questions the expert has accepted
 const mockMyQuestions = [
   {
     id: "q5",
     title: "Help with Deep Learning project",
-    description: "I'm implementing a CNN for image classification and need help with the architecture.",
+    description:
+      "I'm implementing a CNN for image classification and need help with the architecture.",
     category: "academic",
     status: "active",
     createdAt: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
@@ -26,7 +27,8 @@ const mockMyQuestions = [
   {
     id: "q6",
     title: "Research methodology for NLP paper",
-    description: "Need guidance on the research methodology for my paper on sentiment analysis.",
+    description:
+      "Need guidance on the research methodology for my paper on sentiment analysis.",
     category: "research",
     status: "active",
     createdAt: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
@@ -37,7 +39,8 @@ const mockMyQuestions = [
   {
     id: "q7",
     title: "Database design for web application",
-    description: "Need help with designing a database schema for my web application project.",
+    description:
+      "Need help with designing a database schema for my web application project.",
     category: "academic",
     status: "resolved",
     createdAt: new Date(Date.now() - 604800000).toISOString(), // 7 days ago
@@ -45,22 +48,25 @@ const mockMyQuestions = [
     student: "Ananya Gupta",
     unreadMessages: 0,
   },
-]
+];
 
 export function MyQuestionsPanel() {
-  const [questions, setQuestions] = useState(mockMyQuestions)
-  const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState("active")
+  const [questions, setQuestions] = useState(mockMyQuestions);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("active");
 
   useEffect(() => {
     // Simulate API call
     setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [])
+      setLoading(false);
+    }, 1000);
 
-  const activeQuestions = questions.filter((q) => q.status === "active")
-  const resolvedQuestions = questions.filter((q) => q.status === "resolved")
+    // set questions
+    setQuestions(mockMyQuestions);
+  }, []);
+
+  const activeQuestions = questions.filter((q) => q.status === "active");
+  const resolvedQuestions = questions.filter((q) => q.status === "resolved");
 
   if (loading) {
     return (
@@ -69,7 +75,7 @@ export function MyQuestionsPanel() {
         <Skeleton className="h-64 w-full" />
         <Skeleton className="h-64 w-full" />
       </div>
-    )
+    );
   }
 
   return (
@@ -88,7 +94,9 @@ export function MyQuestionsPanel() {
           {activeQuestions.length === 0 ? (
             <Card className="rounded-xl">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">You don't have any active questions.</p>
+                <p className="text-muted-foreground">
+                  You don&apos;t have any active questions.
+                </p>
                 <Button variant="link" asChild>
                   <Link href="#available">Browse available questions</Link>
                 </Button>
@@ -97,30 +105,46 @@ export function MyQuestionsPanel() {
           ) : (
             <div className="space-y-4">
               {activeQuestions.map((question) => (
-                <Card key={question.id} className="rounded-xl hover:shadow-md transition-shadow">
+                <Card
+                  key={question.id}
+                  className="rounded-xl hover:shadow-md transition-shadow"
+                >
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-xl font-bold mb-1">{question.title}</h3>
+                        <h3 className="text-xl font-bold mb-1">
+                          {question.title}
+                        </h3>
                         <p className="text-sm text-muted-foreground">
                           From: {question.student} • Started{" "}
-                          {formatDistanceToNow(new Date(question.createdAt), { addSuffix: true })}
+                          {formatDistanceToNow(new Date(question.createdAt), {
+                            addSuffix: true,
+                          })}
                         </p>
                       </div>
                       {question.unreadMessages > 0 && (
                         <Badge className="bg-primary">
-                          {question.unreadMessages} new {question.unreadMessages === 1 ? "message" : "messages"}
+                          {question.unreadMessages} new{" "}
+                          {question.unreadMessages === 1
+                            ? "message"
+                            : "messages"}
                         </Badge>
                       )}
                     </div>
 
-                    <p className="text-sm mb-4 line-clamp-2">{question.description}</p>
+                    <p className="text-sm mb-4 line-clamp-2">
+                      {question.description}
+                    </p>
 
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Clock className="h-4 w-4" />
                         <span>
-                          Last activity {formatDistanceToNow(new Date(question.lastActivity), { addSuffix: true })}
+                          Last activity{" "}
+                          {formatDistanceToNow(
+                            new Date(question.lastActivity),
+                            { addSuffix: true },
+                          )}
                         </span>
                       </div>
 
@@ -142,29 +166,44 @@ export function MyQuestionsPanel() {
           {resolvedQuestions.length === 0 ? (
             <Card className="rounded-xl">
               <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground">You don't have any resolved questions yet.</p>
+                <p className="text-muted-foreground">
+                  You don&apos;t have any resolved questions yet.
+                </p>
               </CardContent>
             </Card>
           ) : (
             <div className="space-y-4">
               {resolvedQuestions.map((question) => (
-                <Card key={question.id} className="rounded-xl hover:shadow-md transition-shadow">
+                <Card
+                  key={question.id}
+                  className="rounded-xl hover:shadow-md transition-shadow"
+                >
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-xl font-bold mb-1">{question.title}</h3>
+                        <h3 className="text-xl font-bold mb-1">
+                          {question.title}
+                        </h3>
                         <p className="text-sm text-muted-foreground">
                           From: {question.student} • Resolved{" "}
-                          {formatDistanceToNow(new Date(question.lastActivity), { addSuffix: true })}
+                          {formatDistanceToNow(
+                            new Date(question.lastActivity),
+                            { addSuffix: true },
+                          )}
                         </p>
                       </div>
-                      <Badge variant="outline" className="flex items-center gap-1">
+                      <Badge
+                        variant="outline"
+                        className="flex items-center gap-1"
+                      >
                         <CheckCircle className="h-3 w-3" />
                         Resolved
                       </Badge>
                     </div>
 
-                    <p className="text-sm mb-4 line-clamp-2">{question.description}</p>
+                    <p className="text-sm mb-4 line-clamp-2">
+                      {question.description}
+                    </p>
 
                     <div className="flex justify-end">
                       <Button variant="outline" asChild>
@@ -179,5 +218,5 @@ export function MyQuestionsPanel() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

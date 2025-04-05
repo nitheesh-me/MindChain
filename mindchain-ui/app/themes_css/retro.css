@@ -1,46 +1,46 @@
 :root {
-    --background: hsl(0 0% 10%);
-    /* deep, dark backdrop */
-    --foreground: hsl(0 0% 90%);
-    /* light text for contrast */
-    --muted: hsl(0 0% 20%);
-    --muted-foreground: hsl(0 0% 70%);
-    --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(0 0% 10%);
-    --card: hsl(0 0% 100%);
-    --card-foreground: hsl(0 0% 10%);
-    --border: hsl(0 0% 30%);
-    --input: hsl(0 0% 30%);
-    --primary: hsl(340 100% 50%);
-    /* neon pink */
-    --primary-foreground: hsl(0 0% 100%);
-    --secondary: hsl(200 100% 50%);
-    /* neon blue */
-    --secondary-foreground: hsl(0 0% 100%);
-    --accent: hsl(120 100% 50%);
-    /* neon green */
-    --accent-foreground: hsl(0 0% 100%);
-    --ring: hsl(340 100% 50%);
-    --radius: 0.5rem;
+  --background: hsl(0 0% 10%);
+  /* deep, dark backdrop */
+  --foreground: hsl(0 0% 90%);
+  /* light text for contrast */
+  --muted: hsl(0 0% 20%);
+  --muted-foreground: hsl(0 0% 70%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(0 0% 10%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(0 0% 10%);
+  --border: hsl(0 0% 30%);
+  --input: hsl(0 0% 30%);
+  --primary: hsl(340 100% 50%);
+  /* neon pink */
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(200 100% 50%);
+  /* neon blue */
+  --secondary-foreground: hsl(0 0% 100%);
+  --accent: hsl(120 100% 50%);
+  /* neon green */
+  --accent-foreground: hsl(0 0% 100%);
+  --ring: hsl(340 100% 50%);
+  --radius: 0.5rem;
 }
 
 .dark {
-    --background: hsl(0 0% 5%);
-    --foreground: hsl(0 0% 95%);
-    --muted: hsl(0 0% 15%);
-    --muted-foreground: hsl(0 0% 80%);
-    --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(0 0% 5%);
-    --card: hsl(0 0% 100%);
-    --card-foreground: hsl(0 0% 5%);
-    --border: hsl(0 0% 20%);
-    --input: hsl(0 0% 20%);
-    --primary: hsl(340 100% 55%);
-    --primary-foreground: hsl(0 0% 5%);
-    --secondary: hsl(200 100% 55%);
-    --secondary-foreground: hsl(0 0% 5%);
-    --accent: hsl(120 100% 55%);
-    --accent-foreground: hsl(0 0% 5%);
-    --ring: hsl(340 100% 55%);
-    --radius: 0.5rem;
+  --background: hsl(0 0% 5%);
+  --foreground: hsl(0 0% 95%);
+  --muted: hsl(0 0% 15%);
+  --muted-foreground: hsl(0 0% 80%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(0 0% 5%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(0 0% 5%);
+  --border: hsl(0 0% 20%);
+  --input: hsl(0 0% 20%);
+  --primary: hsl(340 100% 55%);
+  --primary-foreground: hsl(0 0% 5%);
+  --secondary: hsl(200 100% 55%);
+  --secondary-foreground: hsl(0 0% 5%);
+  --accent: hsl(120 100% 55%);
+  --accent-foreground: hsl(0 0% 5%);
+  --ring: hsl(340 100% 55%);
+  --radius: 0.5rem;
 }

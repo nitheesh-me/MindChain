@@ -1,5 +1,5 @@
-import { Header } from "@/components/header"
-import { ExpertDashboard } from "@/components/expert/expert-dashboard"
+import { Header } from "@/components/header";
+import { ExpertDashboard } from "@/components/expert/expert-dashboard";
 
 export default function ExpertDashboardPage() {
   return (
@@ -9,6 +9,5 @@ export default function ExpertDashboardPage() {
         <ExpertDashboard />
       </div>
     </main>
-  )
+  );
 }
-

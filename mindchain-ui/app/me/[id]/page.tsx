@@ -1,7 +1,11 @@
-import { QueryDetail } from "@/components/query/query-detail"
-import { Header } from "@/components/header"
+import { QueryDetail } from "@/components/query/query-detail";
+import { Header } from "@/components/header";
 
-export default function QueryDetailPage({ params }: { params: { id: string } }) {
+export default function QueryDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   return (
     <main className="min-h-screen bg-background">
       <Header />
@@ -9,6 +13,5 @@ export default function QueryDetailPage({ params }: { params: { id: string } }) 
         <QueryDetail queryId={params.id} />
       </div>
     </main>
-  )
+  );
 }
-

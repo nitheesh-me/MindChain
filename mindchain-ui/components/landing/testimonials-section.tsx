@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { useRef, useState } from "react"
-import { motion, useInView } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Testimonial {
-  id: number
-  name: string
-  role: string
-  avatar: string
-  content: string
+  id: number;
+  name: string;
+  role: string;
+  avatar: string;
+  content: string;
 }
 
 const testimonials: Testimonial[] = [
@@ -30,7 +30,7 @@ const testimonials: Testimonial[] = [
     role: "Faculty, Electronics Department",
     avatar: "/placeholder.svg?height=80&width=80",
     content:
-      "As a faculty member, MindChain helps me efficiently assist students with their queries. The platform's intelligent matching ensures I only receive questions relevant to my expertise, saving time for everyone involved.",
+      "As a faculty member, MindChain helps me efficiently assist students with their queries. The platform&apos;s intelligent matching ensures I only receive questions relevant to my expertise, saving time for everyone involved.",
   },
   {
     id: 3,
@@ -46,22 +46,26 @@ const testimonials: Testimonial[] = [
     role: "Faculty, Computer Science",
     avatar: "/placeholder.svg?height=80&width=80",
     content:
-      "MindChain streamlines academic support in a way that respects everyone's time. The incremental notification system ensures I'm not overwhelmed with queries, while still being able to help students when they need it most.",
+      "MindChain streamlines academic support in a way that respects everyone&apos;s time. The incremental notification system ensures I'm not overwhelmed with queries, while still being able to help students when they need it most.",
   },
-]
+];
 
 export function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px 0px" })
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px 0px" });
 
   const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1))
-  }
+    setCurrentIndex((prevIndex) =>
+      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1,
+    );
+  };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1))
-  }
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1,
+    );
+  };
 
   return (
     <section id="testimonials" className="py-20 bg-muted/50">
@@ -73,9 +77,12 @@ export function TestimonialsSection() {
           transition={{ duration: 0.5 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Users Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            What Our Users Say
+          </h2>
           <p className="text-lg text-foreground/70">
-            Hear from students, faculty, and staff who have experienced the benefits of MindChain.
+            Hear from students, faculty, and staff who have experienced the
+            benefits of MindChain.
           </p>
         </motion.div>
 
@@ -87,23 +94,37 @@ export function TestimonialsSection() {
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
               >
                 {testimonials.map((testimonial) => (
-                  <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+                  <div
+                    key={testimonial.id}
+                    className="w-full flex-shrink-0 px-4"
+                  >
                     <Card className="rounded-2xl border shadow-lg overflow-hidden">
                       <CardContent className="p-8">
                         <div className="flex flex-col md:flex-row gap-6 items-start">
                           <div className="flex-shrink-0">
                             <Avatar className="h-20 w-20 border-4 border-primary/20">
-                              <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                              <AvatarFallback>{testimonial.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+                              <AvatarImage
+                                src={testimonial.avatar}
+                                alt={testimonial.name}
+                              />
+                              <AvatarFallback>
+                                {testimonial.name.substring(0, 2).toUpperCase()}
+                              </AvatarFallback>
                             </Avatar>
                           </div>
 
                           <div className="flex-1">
                             <Quote className="h-8 w-8 text-primary/30 mb-4" />
-                            <p className="text-lg mb-6 italic">{testimonial.content}</p>
+                            <p className="text-lg mb-6 italic">
+                              {testimonial.content}
+                            </p>
                             <div>
-                              <h4 className="text-xl font-bold">{testimonial.name}</h4>
-                              <p className="text-foreground/70">{testimonial.role}</p>
+                              <h4 className="text-xl font-bold">
+                                {testimonial.name}
+                              </h4>
+                              <p className="text-foreground/70">
+                                {testimonial.role}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -152,5 +173,5 @@ export function TestimonialsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
