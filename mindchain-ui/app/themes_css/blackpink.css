@@ -1,0 +1,53 @@
+:root {
+    --background: hsl(0 0% 100%);
+    /* white backdrop */
+    --foreground: hsl(330 20% 20%);
+    /* soft black */
+    --muted: hsl(330 60% 95%);
+    --muted-foreground: hsl(330 20% 50%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(330 20% 20%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(330 20% 20%);
+    --border: hsl(330 40% 90%);
+    --input: hsl(330 40% 90%);
+    --primary: hsl(330 85% 70%);
+    /* light pink */
+    --primary-foreground: hsl(0 0% 10%);
+    --secondary: hsl(0 0% 10%);
+    /* chic black */
+    --secondary-foreground: hsl(0 0% 100%);
+    --accent: hsl(320 100% 75%);
+    /* bubblegum pink */
+    --accent-foreground: hsl(0 0% 10%);
+    --destructive: hsl(0 85% 60%);
+    --destructive-foreground: hsl(0 0% 100%);
+    --ring: hsl(330 85% 70%);
+    --radius: 1rem;
+}
+
+.dark {
+    --background: hsl(0 0% 5%);
+    /* deep black */
+    --foreground: hsl(330 40% 90%);
+    --muted: hsl(330 20% 10%);
+    --muted-foreground: hsl(330 20% 60%);
+    --popover: hsl(330 20% 10%);
+    --popover-foreground: hsl(330 40% 90%);
+    --card: hsl(0 0% 8%);
+    --card-foreground: hsl(330 40% 90%);
+    --border: hsl(330 20% 20%);
+    --input: hsl(330 20% 20%);
+    --primary: hsl(330 85% 75%);
+    /* neon pink */
+    --primary-foreground: hsl(0 0% 5%);
+    --secondary: hsl(0 0% 100%);
+    /* white accent */
+    --secondary-foreground: hsl(0 0% 10%);
+    --accent: hsl(320 100% 80%);
+    --accent-foreground: hsl(0 0% 10%);
+    --destructive: hsl(0 85% 65%);
+    --destructive-foreground: hsl(0 0% 100%);
+    --ring: hsl(330 85% 75%);
+    --radius: 1rem;
+}

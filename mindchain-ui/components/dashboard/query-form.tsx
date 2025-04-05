@@ -74,6 +74,10 @@ export function QueryForm({ userId, onSubmit }: QueryFormProps) {
           placeholder="Enter a brief title for your query"
           disabled={loading}
           required
+          autoFocus
+          autoComplete="off"
+          autoCorrect="on"
+          autoCapitalize="sentences"
           className="mt-2 rounded-xl"
         />
       </div>
@@ -160,4 +164,3 @@ export function QueryForm({ userId, onSubmit }: QueryFormProps) {
     </form>
   )
 }
-

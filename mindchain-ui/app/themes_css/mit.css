@@ -1,0 +1,107 @@
+:root {
+    --background: hsl(0 0% 98%);
+    --foreground: hsl(0 0% 10%);
+    --muted: hsl(0 0% 93%);
+    --muted-foreground: hsl(210 1% 45%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(0 0% 10%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(0 0% 10%);
+    --border: hsl(0 0% 85%);
+    --input: hsl(0 0% 90%);
+
+    --primary: hsl(350 70% 38%);
+    /* MIT Crimson */
+    --primary-foreground: hsl(0 0% 100%);
+
+    --secondary: hsl(210 1% 55%);
+    /* MIT Gray */
+    --secondary-foreground: hsl(0 0% 100%);
+
+    --accent: hsl(210 10% 70%);
+    /* lighter gray accent */
+    --accent-foreground: hsl(0 0% 10%);
+
+    --destructive: hsl(0 80% 58%);
+    --destructive-foreground: hsl(0 0% 100%);
+
+    --ring: hsl(350 70% 38%);
+    --radius: 0.5rem;
+}
+
+.dark {
+    --background: hsl(0 0% 10%);
+    --foreground: hsl(0 0% 95%);
+    --muted: hsl(0 0% 15%);
+    --muted-foreground: hsl(210 1% 70%);
+    --popover: hsl(0 0% 12%);
+    --popover-foreground: hsl(0 0% 95%);
+    --card: hsl(0 0% 12%);
+    --card-foreground: hsl(0 0% 95%);
+    --border: hsl(0 0% 20%);
+    --input: hsl(0 0% 25%);
+
+    --primary: hsl(350 70% 50%);
+    --primary-foreground: hsl(0 0% 10%);
+
+    --secondary: hsl(210 1% 65%);
+    --secondary-foreground: hsl(0 0% 10%);
+
+    --accent: hsl(210 10% 50%);
+    --accent-foreground: hsl(0 0% 95%);
+
+    --destructive: hsl(0 80% 65%);
+    --destructive-foreground: hsl(0 0% 10%);
+
+    --ring: hsl(350 70% 50%);
+    --radius: 0.5rem;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button,
+input,
+textarea,
+select {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    background-color: var(--input);
+    color: var(--foreground);
+    font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--foreground);
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
+code {
+    background: var(--muted);
+    color: var(--primary);
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    font-family: 'Source Code Pro', monospace;
+}
+
+.article-content {
+    border-left: 4px solid var(--primary);
+    padding-left: 1rem;
+}

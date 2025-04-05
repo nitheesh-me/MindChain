@@ -1,13 +1,14 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Brain, MessageCircle, Users } from "lucide-react"
+import { ArrowRight, Brain, Check, MessageCircle, Users } from "lucide-react"
 import { motion } from "framer-motion"
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [viewMode, setViewMode] = useState<"seeker" | "expert">("seeker")
 
   useEffect(() => {
     if (!canvasRef.current) return
@@ -113,6 +114,58 @@ export function HeroSection() {
     }
   }, [])
 
+  // Chat messages for both views
+  const seekerMessages = [
+    {
+      id: 1,
+      sender: "student",
+      name: "Rahul",
+      content: "I need help with my Machine Learning project. I'm having issues with model accuracy.",
+      time: "10:30 AM",
+    },
+    {
+      id: 2,
+      sender: "expert",
+      name: "Dr. Sharma",
+      content: "I'd be happy to help! Let's look at your dataset first. Are you using proper validation techniques?",
+      time: "10:32 AM",
+    },
+    {
+      id: 3,
+      sender: "student",
+      name: "Rahul",
+      content: "I'm using k-fold cross-validation, but I think I might be overfitting.",
+      time: "10:33 AM",
+    },
+  ]
+
+  const expertMessages = [
+    {
+      id: 1,
+      sender: "student",
+      name: "Priya",
+      content:
+        "Hello Dr. Sharma, I'm working on a research paper about NLP and need some guidance on transformer models.",
+      time: "9:45 AM",
+    },
+    {
+      id: 2,
+      sender: "expert",
+      name: "Dr. Sharma",
+      content: "Hi Priya, I'd be glad to help. What specific aspect of transformer models are you struggling with?",
+      time: "9:47 AM",
+    },
+    {
+      id: 3,
+      sender: "student",
+      name: "Priya",
+      content: "I'm trying to understand attention mechanisms and how they improve performance over RNNs.",
+      time: "9:48 AM",
+    },
+  ]
+
+  const messages = viewMode === "seeker" ? seekerMessages : expertMessages
+
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <canvas
@@ -129,17 +182,17 @@ export function HeroSection() {
             transition={{ duration: 0.8 }}
             className="flex flex-col gap-6"
           >
-            <div className="inline-flex items-center gap-2 bg-indigo-500/10 text-indigo-500 px-4 py-2 rounded-full text-sm font-medium">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
               <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
               </span>
               IIIT Hyderabad's Smart Support Platform
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
               Connect with the{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
                 right experts
               </span>{" "}
               for your queries
@@ -190,55 +243,70 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-[2.5rem] blur-3xl -z-10 transform rotate-6"></div>
               <div className="bg-card rounded-[2rem] border shadow-xl overflow-hidden">
                 <div className="bg-gradient-to-r from-primary to-secondary p-4">
-                  <div className="flex items-center gap-2 text-white">
-                    <div className="w-3 h-3 rounded-full bg-white/30"></div>
-                    <div className="w-3 h-3 rounded-full bg-white/30"></div>
-                    <div className="w-3 h-3 rounded-full bg-white/30"></div>
-                    <span className="text-sm ml-2">MindChain Interface</span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-white">
+                      <div className="w-3 h-3 rounded-full bg-white/30"></div>
+                      <div className="w-3 h-3 rounded-full bg-white/30"></div>
+                      <div className="w-3 h-3 rounded-full bg-white/30"></div>
+                      <span className="text-sm ml-2">MindChain Interface</span>
+                    </div>
+                    <div className="flex items-center bg-white/20 rounded-full p-1">
+                      <button
+                        onClick={() => setViewMode("seeker")}
+                        className={`px-3 py-1 text-xs rounded-full transition-all ${viewMode === "seeker"
+                            ? "bg-white text-primary font-medium"
+                            : "text-white/80 hover:text-white"
+                          }`}
+                      >
+                        Seeker View
+                      </button>
+                      <button
+                        onClick={() => setViewMode("expert")}
+                        className={`px-3 py-1 text-xs rounded-full transition-all ${viewMode === "expert"
+                            ? "bg-white text-primary font-medium"
+                            : "text-white/80 hover:text-white"
+                          }`}
+                      >
+                        Expert View
+                      </button>
+                    </div>
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary font-bold">S</span>
-                      </div>
-                      <div className="flex-1 bg-muted p-3 rounded-2xl rounded-tl-none">
-                        <p className="text-sm">
-                          I need help with my Machine Learning project. I'm having issues with model accuracy.
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4 flex-row-reverse">
-                      <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
-                        <span className="text-secondary font-bold">E</span>
-                      </div>
-                      <div className="flex-1 bg-secondary/10 p-3 rounded-2xl rounded-tr-none">
-                        <p className="text-sm">
-                          I'd be happy to help! Let's look at your dataset first. Are you using proper validation
-                          techniques?
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                        <span className="text-primary font-bold">S</span>
-                      </div>
-                      <div className="flex-1 bg-muted p-3 rounded-2xl rounded-tl-none">
-                        <p className="text-sm">
-                          I'm using k-fold cross-validation, but I think I might be overfitting.
-                        </p>
-                      </div>
-                    </div>
+                  <div className="bg-card p-4 h-[320px] overflow-y-scroll shadow-inset inset-shadow-sidebar-accent-foreground">
+                      {messages.map((message) => (
+                        <div
+                          key={message.id}
+                          className={`flex items-start mb-4 ${message.sender === (viewMode === "seeker" ? "student" : "expert") ? "justify-end" : "justify-start"}`}
+                        >
+                          <div
+                            className={`max-w-[80%] rounded-lg p-3 border-2 ${message.sender === "student"
+                                ? "bg-gradient-to-r from-primary/95 to-primary/70 text-primary-foreground rounded-tl-none dark:from-primary/70 dark:to-primary/50 dark:text-primary-foreground/80"
+                                : "bg-gradient-to-r from-secondary/95 to-secondary/70 text-secondary-foreground rounded-tr-none dark:from-secondary/70 dark:to-secondary/50 dark:text-secondary-foreground/80"
+                              }`}
+                          >
+                            <div className={`font-bold scale-x-100 text-ellipsis text-foreground  ${
+                              message.sender === "student"
+                                ? "bg-primary/50 dark:bg-primary/70"
+                                : "bg-secondary/50 dark:bg-secondary/70"
+                            } rounded-2xl pl-0.5 text-xs mb-1`}>{message.name}</div>
+                            <p className="text-sm text-foreground">{message.content}</p>
+                            <div className="text-right mt-1">
+                              <span className="text-xs opacity-70">{message.time}</span>
+                              {message.sender === (viewMode === "seeker" ? "student" : "expert") && (
+                                <Check className="inline-block ml-1 h-3 w-3" />
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                   </div>
 
                   <div className="mt-6 relative">
                     <input
                       type="text"
-                      placeholder="Type your message..."
+                      placeholder={viewMode === "seeker" ? "Type your question..." : "Type your response..."}
                       className="w-full p-3 pr-12 rounded-full border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                     <button className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
@@ -257,4 +325,3 @@ export function HeroSection() {
     </section>
   )
 }
-

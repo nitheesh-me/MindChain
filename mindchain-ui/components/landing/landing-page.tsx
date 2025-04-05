@@ -21,7 +21,7 @@ export function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground">
       <LandingHeader />
       <main>
         <HeroSection />
@@ -34,4 +34,3 @@ export function LandingPage() {
     </div>
   )
 }
-

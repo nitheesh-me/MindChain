@@ -1,0 +1,46 @@
+:root {
+    --background: hsl(0, 0%, 98%);
+    /* clean, off-white base */
+    --foreground: hsl(0, 0%, 10%);
+    /* deep charcoal for text */
+    --muted: hsl(0, 0%, 95%);
+    --muted-foreground: hsl(0, 0%, 40%);
+    --popover: hsl(0, 0%, 100%);
+    --popover-foreground: hsl(0, 0%, 10%);
+    --card: hsl(0, 0%, 100%);
+    --card-foreground: hsl(0, 0%, 10%);
+    --border: hsl(0, 0%, 85%);
+    --input: hsl(0, 0%, 85%);
+    --primary: hsl(0, 80%, 50%);
+    /* bold, energetic red */
+    --primary-foreground: hsl(0, 0%, 100%);
+    --secondary: hsl(210, 10%, 20%);
+    /* inky, deep blue-black */
+    --secondary-foreground: hsl(0, 0%, 100%);
+    --accent: hsl(330, 80%, 60%);
+    /* playful pinkish accent */
+    --accent-foreground: hsl(0, 0%, 100%);
+    --ring: hsl(0, 80%, 50%);
+    --radius: 0.75rem;
+}
+
+.dark {
+    --background: hsl(0, 0%, 10%);
+    --foreground: hsl(0, 0%, 90%);
+    --muted: hsl(0, 0%, 15%);
+    --muted-foreground: hsl(0, 0%, 70%);
+    --popover: hsl(0, 0%, 12%);
+    --popover-foreground: hsl(0, 0%, 90%);
+    --card: hsl(0, 0%, 10%);
+    --card-foreground: hsl(0, 0%, 90%);
+    --border: hsl(0, 0%, 25%);
+    --input: hsl(0, 0%, 25%);
+    --primary: hsl(0, 80%, 55%);
+    --primary-foreground: hsl(0, 0%, 10%);
+    --secondary: hsl(210, 10%, 30%);
+    --secondary-foreground: hsl(0, 0%, 100%);
+    --accent: hsl(330, 80%, 65%);
+    --accent-foreground: hsl(0, 0%, 10%);
+    --ring: hsl(0, 80%, 55%);
+    --radius: 0.75rem;
+}

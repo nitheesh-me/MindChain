@@ -1,3 +1,29 @@
+@import "./themes_css/default.css";
+
+/* @import "/themes_css/a11y_cb.css"; */
+/* @import "./themes_css/a11y_hc.css"; */
+/* @import "./themes_css/artistic.css"; */
+/* @import "./themes_css/corporate.css"; */
+/* @import "./themes_css/retail.css"; */
+/* @import "./themes_css/tech.css"; */
+/* @import "./themes_css/retro.css"; */
+/* @import "./themes_css/cyberpunk.css"; */
+/* @import "./themes_css/fantacy.css"; */
+/* @import "./themes_css/hostile_a.css"; */
+/* @import "./themes_css/hostile_b.css"; */
+/* @import "./themes_css/crazy.css"; */
+/* @import "./themes_css/batman.css"; */
+/* @import "./themes_css/joker.css"; */
+/* @import "./themes_css/harely.css"; */
+/* @import "./themes_css/doctor.css"; */
+/* @import "./themes_css/pastel.css"; */
+/* @import "./themes_css/barbi.css"; */
+/* @import "./themes_css/oppenheimer.css"; */
+/* @import "./themes_css/blackpink.css"; */
+/* @import "./themes_css/kda.css"; */
+/* @import "./themes_css/iiit.css"; */
+/* @import "./themes_css/mit.css"; */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -22,77 +48,17 @@
   --font-fira-code: "Fira Code", monospace;
   --font-roboto: "Roboto", sans-serif;
   --font-merriweather: "Merriweather", serif;
-  --background: hsl(210 40% 98.0%);
-  --foreground: hsl(222.2 47.4% 11.2%);
-
-  --muted: hsl(210 40% 96.1%);
-  --muted-foreground: hsl(215.4 16.3% 46.9%);
-
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222.2 47.4% 11.2%);
-
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222.2 47.4% 11.2%);
-
-  --border: hsl(214.3 31.8% 91.4%);
-  --input: hsl(214.3 31.8% 91.4%);
-
-  --primary: hsl(246 80% 60%);
-  --primary-foreground: hsl(210 40% 98%);
-
-  --secondary: hsl(271 91% 56%);
-  --secondary-foreground: hsl(210 40% 98%);
-
-  --accent: hsl(270, 100%, 97%);
-  --accent-foreground: hsl(271 91% 65%);
-  --destructive: hsl(0 60% 50%);
-  --destructive-foreground: hsl(210 40% 98%);
-  --ring: hsl(246 80% 60%);
-  --radius: 0.4rem;
 }
-
-.dark {
-  --background: hsl(224 71% 6%);
-  --foreground: hsl(213 31% 91%);
-
-  --muted: hsl(223 47% 11%);
-  --muted-foreground: hsl(215.4 16.3% 56.9%);
-
-  --popover: hsl(224 71% 6%);
-  --popover-foreground: hsl(215 20.2% 65.1%);
-
-  --card: hsl(224 71% 9%);
-  --card-foreground: hsl(213 31% 91%);
-
-  --border: hsl(216 34% 17%);
-  --input: hsl(216 34% 17%);
-
-  --primary: hsl(245 58% 67%);
-  --primary-foreground: hsl( 210 40% 98%);
-
-  --secondary: hsl(271 91% 65%);
-  --secondary-foreground: hsl( 210 40% 98%);
-
-  --accent: hsl(270, 100%, 13%);
-  --accent-foreground: hsl( 210 40% 98%);
-
-  --destructive: hsl(0 63% 31%);
-  --destructive-foreground: hsl( 210 40% 98%);
-
-  --ring: hsl(245 58% 67%);
-  --chart-1: var(--chart-5);
-  --chart-2: var(--chart-4);
-  --chart-3: var(--chart-3);
-  --chart-4: var(--chart-2);
-  --chart-5: var(--chart-1);
-  --sidebar: var(--sidebar-foreground);
-  --sidebar-foreground: var(--sidebar);
-  --sidebar-primary: var(--sidebar-primary-foreground);
-  --sidebar-primary-foreground: var(--sidebar-primary);
-  --sidebar-accent: var(--sidebar-accent-foreground);
-  --sidebar-accent-foreground: var(--sidebar-accent);
-  --sidebar-border: var(--sidebar-ring);
-  --sidebar-ring: var(--sidebar-border);
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--color-border)/20;
+  border-radius: 10px;
 }
 
 @theme inline {
@@ -135,7 +101,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-
 @layer base {
   @font-face {
     font-family: "Inter";
@@ -144,6 +109,7 @@
     font-style: normal;
     font-weight: 400;
   }
+
   @font-face {
     font-family: "Fira Code";
     src: url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap");
@@ -151,6 +117,7 @@
     font-style: normal;
     font-weight: 400;
   }
+
   @font-face {
     font-family: "Roboto";
     src: url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
@@ -158,6 +125,7 @@
     font-style: normal;
     font-weight: 400;
   }
+
   @font-face {
     font-family: "Merriweather";
     src: url('https://fonts.googleapis.com/css2?family=Merriweather:opsz,wght@18..144,300..900&display=swap');
@@ -165,10 +133,32 @@
     font-style: normal;
     font-weight: 400;
   }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+.dark {
+  --sidebar: hsl(240 5.9% 10%);
+  --sidebar-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-primary: hsl(224.3 76.3% 48%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(240 3.7% 15.9%);
+  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-border: hsl(240 3.7% 15.9%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+@layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
   }
 }

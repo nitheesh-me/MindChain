@@ -232,4 +232,3 @@ export function QueryDetail({ queryId }: QueryDetailProps) {
     </div>
   )
 }
-

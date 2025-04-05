@@ -1,0 +1,46 @@
+:root {
+    --background: hsl(280, 30%, 95%);
+    /* soft lavender backdrop */
+    --foreground: hsl(280, 40%, 20%);
+    /* deep, moody purple for text */
+    --muted: hsl(280, 30%, 90%);
+    --muted-foreground: hsl(280, 30%, 40%);
+    --popover: hsl(0, 0%, 100%);
+    --popover-foreground: hsl(280, 40%, 20%);
+    --card: hsl(0, 0%, 100%);
+    --card-foreground: hsl(280, 40%, 20%);
+    --border: hsl(280, 30%, 80%);
+    --input: hsl(280, 30%, 80%);
+    --primary: hsl(110, 80%, 40%);
+    /* Joker’s signature neon green */
+    --primary-foreground: hsl(0, 0%, 100%);
+    --secondary: hsl(350, 80%, 50%);
+    /* bold red accents */
+    --secondary-foreground: hsl(0, 0%, 100%);
+    --accent: hsl(280, 80%, 50%);
+    /* vibrant purple details */
+    --accent-foreground: hsl(0, 0%, 100%);
+    --ring: hsl(110, 80%, 40%);
+    --radius: 1rem;
+}
+
+.dark {
+    --background: hsl(280, 30%, 15%);
+    --foreground: hsl(280, 40%, 85%);
+    --muted: hsl(280, 30%, 20%);
+    --muted-foreground: hsl(280, 30%, 65%);
+    --popover: hsl(280, 30%, 12%);
+    --popover-foreground: hsl(280, 40%, 85%);
+    --card: hsl(280, 30%, 10%);
+    --card-foreground: hsl(280, 40%, 85%);
+    --border: hsl(280, 30%, 25%);
+    --input: hsl(280, 30%, 25%);
+    --primary: hsl(110, 80%, 45%);
+    --primary-foreground: hsl(280, 30%, 10%);
+    --secondary: hsl(350, 80%, 55%);
+    --secondary-foreground: hsl(280, 30%, 10%);
+    --accent: hsl(280, 80%, 55%);
+    --accent-foreground: hsl(280, 30%, 10%);
+    --ring: hsl(110, 80%, 45%);
+    --radius: 1rem;
+}

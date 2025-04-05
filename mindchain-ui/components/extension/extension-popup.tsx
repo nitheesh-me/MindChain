@@ -38,7 +38,7 @@ export function ExtensionPopup() {
 
   return (
     <Card className="w-[350px] shadow-lg">
-      <CardHeader className="bg-indigo-500 text-white">
+      <CardHeader className="bg-primary text-white">
         <CardTitle className="text-lg">MindChain</CardTitle>
         <CardDescription className="text-white/80">Quick Query Submission</CardDescription>
       </CardHeader>
@@ -102,4 +102,3 @@ export function ExtensionPopup() {
     </Card>
   )
 }
-

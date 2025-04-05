@@ -17,7 +17,6 @@ export function DashboardView() {
   const [queries, setQueries] = useState<Query[]>([])
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState("overview")
-  const [showQueryForm, setShowQueryForm] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,12 +38,11 @@ export function DashboardView() {
 
   const handleQuerySubmit = (newQuery: Query) => {
     setQueries((prev) => [newQuery, ...prev])
-    setShowQueryForm(false)
   }
 
   if (loading) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 bg-background/10">
         <Skeleton className="h-12 w-64" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Skeleton className="h-32 rounded-2xl" />
@@ -64,8 +62,9 @@ export function DashboardView() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
+      <div className="flex flex-col md:flex-row justify-between items-start gap-4">
+      {/* <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4"> */}
+        {/* <div>
           <h1 className="text-3xl font-bold">Welcome back, {user?.name.split(" ")[0]}</h1>
           <p className="text-foreground/70">Here's what's happening with your queries today.</p>
         </div>
@@ -79,10 +78,44 @@ export function DashboardView() {
               New Query
             </>
           )}
-        </Button>
+        </Button> */}
+        <Card className="w-full md:w-1/3">
+          <CardHeader>
+            <CardTitle>Welcome, {user?.name.split(" ")[0]}</CardTitle>
+            <CardDescription>
+              {user ? `${user.role.charAt(0).toUpperCase() + user.role.slice(1)} at ${user.department}` : "No details regarding your role"}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <p className="text-sm">
+                <span className="font-medium">Email:</span> {user?.email}
+              </p>
+              <p className="text-sm">
+                <span className="font-medium">Expertise:</span> {user?.expertise.join(", ")}
+              </p>
+              {user?.researchInterests && (
+                <p className="text-sm">
+                  <span className="font-medium">Research Interests:</span> {user.researchInterests.join(", ")}
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="w-full md:w-2/3">
+          <CardHeader>
+            <CardTitle>Submit a New Query</CardTitle>
+            <CardDescription>Get connected with the right expert for your question</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <QueryForm onSubmit={handleQuerySubmit} userId={user?.id || ""} />
+          </CardContent>
+        </Card>
       </div>
 
-      {showQueryForm ? (
+
+      {/* {showQueryForm ? (
         <Card className="rounded-2xl border shadow-lg overflow-hidden">
           <CardHeader className="bg-muted">
             <CardTitle>Submit a New Query</CardTitle>
@@ -211,8 +244,96 @@ export function DashboardView() {
             </TabsContent>
           </Tabs>
         </>
-      )}
+      )} */}
+
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="recent">Recent Queries</TabsTrigger>
+        </TabsList>
+        <TabsContent value="overview" className="mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="rounded-2xl border shadow-md card-hover">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-foreground/70 text-sm mb-1">Pending</p>
+                    <h3 className="text-3xl font-bold">{pendingQueries.length}</h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
+                    <Clock className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                    View all pending queries
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-2xl border shadow-md card-hover">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-foreground/70 text-sm mb-1">Matching</p>
+                    <h3 className="text-3xl font-bold">{matchingQueries.length}</h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                    <HelpCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                    View matching queries
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-2xl border shadow-md card-hover">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-foreground/70 text-sm mb-1">Active Chats</p>
+                    <h3 className="text-3xl font-bold">{matchedQueries.length}</h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+                    <MessageSquare className="h-5 w-5 text-green-600 dark:text-green-400" />
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                    View active chats
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-2xl border shadow-md card-hover">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <p className="text-foreground/70 text-sm mb-1">Resolved</p>
+                    <h3 className="text-3xl font-bold">{resolvedQueries.length}</h3>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
+                    <CheckCircle className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                    View resolved queries
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+        <TabsContent value="recent" className="mt-4">
+          <QueryList queries={queries} />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
-

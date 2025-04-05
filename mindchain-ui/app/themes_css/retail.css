@@ -1,0 +1,46 @@
+:root {
+    --background: hsl(40 100% 98%);
+    /* light, creamy yellow */
+    --foreground: hsl(40 30% 20%);
+    /* dark warm brown */
+    --muted: hsl(40 100% 95%);
+    --muted-foreground: hsl(40 30% 40%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(40 30% 20%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(40 30% 20%);
+    --border: hsl(40 30% 90%);
+    --input: hsl(40 30% 90%);
+    --primary: hsl(15 90% 55%);
+    /* energetic red-orange */
+    --primary-foreground: hsl(0 0% 100%);
+    --secondary: hsl(45 90% 60%);
+    /* golden yellow */
+    --secondary-foreground: hsl(0 0% 100%);
+    --accent: hsl(200 80% 50%);
+    /* contrasting cool blue */
+    --accent-foreground: hsl(0 0% 100%);
+    --ring: hsl(15 90% 55%);
+    --radius: 0.75rem;
+}
+
+.dark {
+    --background: hsl(40 30% 10%);
+    --foreground: hsl(40 30% 90%);
+    --muted: hsl(40 30% 12%);
+    --muted-foreground: hsl(40 30% 65%);
+    --popover: hsl(40 30% 8%);
+    --popover-foreground: hsl(40 30% 90%);
+    --card: hsl(40 30% 10%);
+    --card-foreground: hsl(40 30% 90%);
+    --border: hsl(40 30% 20%);
+    --input: hsl(40 30% 20%);
+    --primary: hsl(15 90% 60%);
+    --primary-foreground: hsl(40 30% 10%);
+    --secondary: hsl(45 90% 65%);
+    --secondary-foreground: hsl(40 30% 10%);
+    --accent: hsl(200 80% 55%);
+    --accent-foreground: hsl(40 30% 10%);
+    --ring: hsl(15 90% 60%);
+    --radius: 0.75rem;
+}

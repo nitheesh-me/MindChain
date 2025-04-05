@@ -1,0 +1,47 @@
+:root {
+    --background: hsl(210 30% 10%);
+    /* nearly black blue */
+    --foreground: hsl(210 30% 90%);
+    /* very light blue */
+    --muted: hsl(210 20% 15%);
+    --muted-foreground: hsl(210 20% 60%);
+    --popover: hsl(210 30% 12%);
+    --popover-foreground: hsl(210 30% 90%);
+    --card: hsl(210 30% 14%);
+    --card-foreground: hsl(210 30% 90%);
+    --border: hsl(210 20% 25%);
+    --input: hsl(210 20% 25%);
+    --primary: hsl(150 80% 40%);
+    /* neon green */
+    --primary-foreground: hsl(0 0% 100%);
+    --secondary: hsl(300 80% 40%);
+    /* neon purple */
+    --secondary-foreground: hsl(0 0% 100%);
+    --accent: hsl(50 90% 55%);
+    /* vibrant amber */
+    --accent-foreground: hsl(0 0% 100%);
+    --ring: hsl(150 80% 40%);
+    --radius: 0.5rem;
+}
+
+.dark {
+    /* In tech themes, the dark mode can be even more extreme */
+    --background: hsl(210 30% 5%);
+    --foreground: hsl(210 30% 95%);
+    --muted: hsl(210 20% 10%);
+    --muted-foreground: hsl(210 20% 65%);
+    --popover: hsl(210 30% 8%);
+    --popover-foreground: hsl(210 30% 95%);
+    --card: hsl(210 30% 10%);
+    --card-foreground: hsl(210 30% 95%);
+    --border: hsl(210 20% 20%);
+    --input: hsl(210 20% 20%);
+    --primary: hsl(150 80% 45%);
+    --primary-foreground: hsl(210 30% 5%);
+    --secondary: hsl(300 80% 45%);
+    --secondary-foreground: hsl(210 30% 5%);
+    --accent: hsl(50 90% 60%);
+    --accent-foreground: hsl(210 30% 5%);
+    --ring: hsl(150 80% 45%);
+    --radius: 0.5rem;
+}

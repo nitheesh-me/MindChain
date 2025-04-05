@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { formatDistanceToNow } from "date-fns"
 import Link from "next/link"
-import { MessageSquare, Clock, HelpCircle, CheckCircle } from "lucide-react"
+import { MessageSquare, Clock, HelpCircle, CheckCircle, AlertOctagon } from "lucide-react"
 
 interface QueryListProps {
   queries: Query[]
@@ -85,11 +85,12 @@ export function QueryList({ queries }: QueryListProps) {
                   </p>
                 </div>
                 <div className="flex gap-2">
-                  <Badge className={getStatusColor(query.status)} className="flex items-center gap-1 rounded-full px-3">
+                  <Badge className={"flex items-center gap-1 rounded-full px-3" + " " + getStatusColor(query.status)}>
                     {getStatusIcon(query.status)}
                     {query.status.charAt(0).toUpperCase() + query.status.slice(1)}
                   </Badge>
-                  <Badge className={getUrgencyColor(query.urgency)} className="rounded-full px-3">
+                  <Badge className={"flex items-center gap-1 rounded-full px-3" + " " + getUrgencyColor(query.urgency)}>
+                    <AlertOctagon className="h-4 w-4" />
                     {query.urgency.charAt(0).toUpperCase() + query.urgency.slice(1)}
                   </Badge>
                 </div>
@@ -110,4 +111,3 @@ export function QueryList({ queries }: QueryListProps) {
     </div>
   )
 }
-

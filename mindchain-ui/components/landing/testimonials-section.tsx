@@ -92,14 +92,14 @@ export function TestimonialsSection() {
                       <CardContent className="p-8">
                         <div className="flex flex-col md:flex-row gap-6 items-start">
                           <div className="flex-shrink-0">
-                            <Avatar className="h-20 w-20 border-4 border-indigo-500/20">
+                            <Avatar className="h-20 w-20 border-4 border-primary/20">
                               <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
                               <AvatarFallback>{testimonial.name.substring(0, 2).toUpperCase()}</AvatarFallback>
                             </Avatar>
                           </div>
 
                           <div className="flex-1">
-                            <Quote className="h-8 w-8 text-indigo-500/30 mb-4" />
+                            <Quote className="h-8 w-8 text-primary/30 mb-4" />
                             <p className="text-lg mb-6 italic">{testimonial.content}</p>
                             <div>
                               <h4 className="text-xl font-bold">{testimonial.name}</h4>
@@ -130,7 +130,7 @@ export function TestimonialsSection() {
                   <button
                     key={index}
                     className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentIndex ? "bg-indigo-500" : "bg-indigo-500/30"
+                      index === currentIndex ? "bg-primary" : "bg-primary/30"
                     }`}
                     onClick={() => setCurrentIndex(index)}
                     aria-label={`Go to testimonial ${index + 1}`}
@@ -154,4 +154,3 @@ export function TestimonialsSection() {
     </section>
   )
 }
-

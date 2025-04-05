@@ -20,7 +20,7 @@ export function CtaSection() {
           transition={{ duration: 0.5 }}
           className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-90"></div>
 
           <div className="relative z-10 p-12 md:p-16 text-white">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -91,4 +91,3 @@ export function CtaSection() {
     </section>
   )
 }
-

@@ -53,9 +53,9 @@ export function Header() {
               </Button>
             )}
             <Link href="/" className="flex items-center gap-2">
-              <div className="relative w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center">
+              <div className="relative w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
                 <span className="text-white font-bold text-sm">M</span>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-background rounded-full border-2 border-indigo-500"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-background rounded-full border-2 border-primary"></div>
               </div>
               <span className="text-xl font-bold font-inter">MindChain</span>
             </Link>
@@ -111,7 +111,7 @@ export function Header() {
                 className="rounded-full"
               >
                 <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-purple-500 text-[10px] font-bold text-white">
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-secondary text-[10px] font-bold text-white">
                   2
                 </span>
               </Button>
@@ -154,4 +154,3 @@ export function Header() {
     </header>
   )
 }
-

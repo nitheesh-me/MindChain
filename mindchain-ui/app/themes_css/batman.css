@@ -1,0 +1,50 @@
+:root {
+    /* Deep, shadowy backdrop inspired by Gotham’s night sky */
+    --background: hsl(0 0% 10%);
+    --foreground: hsl(0 0% 90%);
+    /* Crisp, light text for readability */
+    --muted: hsl(0 0% 20%);
+    --muted-foreground: hsl(0 0% 70%);
+    --popover: hsl(0 0% 12%);
+    --popover-foreground: hsl(0 0% 90%);
+    --card: hsl(0 0% 15%);
+    --card-foreground: hsl(0 0% 90%);
+    --border: hsl(0 0% 30%);
+    --input: hsl(0 0% 30%);
+
+    /* Primary accent uses the iconic bat signal yellow */
+    --primary: hsl(50 100% 50%);
+    --primary-foreground: hsl(0 0% 10%);
+
+    /* Secondary hue evokes dark blue-gray tones reminiscent of Batman's cowl */
+    --secondary: hsl(220 20% 30%);
+    --secondary-foreground: hsl(0 0% 90%);
+
+    /* A subtle red accent hint for tension – like a warning light in the dark */
+    --accent: hsl(0 80% 50%);
+    --accent-foreground: hsl(0 0% 100%);
+
+    --ring: hsl(50 100% 50%);
+    --radius: 0.5rem;
+}
+
+.dark {
+    --background: hsl(0 0% 5%);
+    --foreground: hsl(0 0% 95%);
+    --muted: hsl(0 0% 15%);
+    --muted-foreground: hsl(0 0% 80%);
+    --popover: hsl(0 0% 8%);
+    --popover-foreground: hsl(0 0% 95%);
+    --card: hsl(0 0% 10%);
+    --card-foreground: hsl(0 0% 95%);
+    --border: hsl(0 0% 20%);
+    --input: hsl(0 0% 20%);
+    --primary: hsl(50 100% 55%);
+    --primary-foreground: hsl(0 0% 5%);
+    --secondary: hsl(220 20% 35%);
+    --secondary-foreground: hsl(0 0% 95%);
+    --accent: hsl(0 80% 55%);
+    --accent-foreground: hsl(0 0% 5%);
+    --ring: hsl(50 100% 55%);
+    --radius: 0.5rem;
+}

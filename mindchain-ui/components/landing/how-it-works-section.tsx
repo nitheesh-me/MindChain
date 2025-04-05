@@ -26,12 +26,12 @@ function Step({ number, icon, title, description, delay }: StepProps) {
       transition={{ duration: 0.6, delay }}
       className="flex items-start gap-6"
     >
-      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-xl">
+      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl">
         {number}
       </div>
 
       <div>
-        <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center mb-4">{icon}</div>
+        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">{icon}</div>
         <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="text-foreground/70">{description}</p>
       </div>
@@ -62,7 +62,7 @@ export function HowItWorksSection() {
         <div className="max-w-3xl mx-auto space-y-16">
           <Step
             number={1}
-            icon={<Search className="h-6 w-6 text-indigo-500" />}
+            icon={<Search className="h-6 w-6 text-primary" />}
             title="Submit Your Query"
             description="Describe your question or problem through our web interface or browser extension. Add details about the category and urgency."
             delay={0.1}
@@ -70,7 +70,7 @@ export function HowItWorksSection() {
 
           <Step
             number={2}
-            icon={<Users className="h-6 w-6 text-indigo-500" />}
+            icon={<Users className="h-6 w-6 text-primary" />}
             title="AI-Powered Matching"
             description="Our intelligent algorithm analyzes your query and matches it with the most relevant experts based on their expertise, research interests, and availability."
             delay={0.2}
@@ -78,7 +78,7 @@ export function HowItWorksSection() {
 
           <Step
             number={3}
-            icon={<Bell className="h-6 w-6 text-indigo-500" />}
+            icon={<Bell className="h-6 w-6 text-primary" />}
             title="Expert Notification"
             description="Selected experts receive incremental notifications about your query, ensuring that someone with the right knowledge will respond promptly."
             delay={0.3}
@@ -86,7 +86,7 @@ export function HowItWorksSection() {
 
           <Step
             number={4}
-            icon={<MessageCircle className="h-6 w-6 text-indigo-500" />}
+            icon={<MessageCircle className="h-6 w-6 text-primary" />}
             title="Real-Time Communication"
             description="Once an expert accepts your query, you'll be connected through our real-time chat interface for immediate assistance and problem-solving."
             delay={0.4}
@@ -94,7 +94,7 @@ export function HowItWorksSection() {
 
           <Step
             number={5}
-            icon={<CheckCircle className="h-6 w-6 text-indigo-500" />}
+            icon={<CheckCircle className="h-6 w-6 text-primary" />}
             title="Resolution & Feedback"
             description="After your query is resolved, you can provide feedback to help improve the system and build a knowledge base for future reference."
             delay={0.5}
@@ -104,4 +104,3 @@ export function HowItWorksSection() {
     </section>
   )
 }
-

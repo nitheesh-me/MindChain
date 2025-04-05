@@ -1,0 +1,190 @@
+// Color Palette Light Mode: Primary:
+// #4F46E5 (Indigo 600) Secondary:
+// #9333EA (Purple 600) Background:
+// #F9FAFB (Gray 50) Card:
+// #FFFFFF (White) Text (Primary):
+// #1F2937 (Gray 800) Text (Secondary):
+// #4B5563 (Gray 600) Border:
+// #E5E7EB (Gray 200)
+
+// Dark Mode: Primary:
+// #6366F1 (Indigo 500) Secondary:
+// #A855F7 (Purple 500) Background:
+// #111827 (Gray 900) Card:
+// #1F2937 (Gray 800) Text (Primary):
+// #F3F4F6 (Gray 100) Text (Secondary):
+// #D1D5DB (Gray 300) Border:
+// #374151 (Gray 700)
+
+// Typography Fonts: Heading Font: 'Inter', sans-serif Body Font: 'Roboto', sans-serif Monospace: 'Fira Code', monospace Sizes (Tailwind classes): Headings: text-4xl for H1 text-3xl for H2 text-2xl for H3 text-xl for H4 Body: text-base Small Text: text-sm
+
+// Font Weights: Headings: font-bold Body: font-normal Emphasis: font-medium
+
+// Spacing & Sizing Padding: Card Padding: p-6
+
+// Section Padding: py-12 px-8
+
+// Margins: Between Cards: mb-8 Sections: mt-12
+
+// Border Radius: Buttons and Cards: rounded-2xl
+
+// Shadow: Light Mode: shadow-lg Dark Mode: shadow-md shadow-gray-900
+
+// Responsive Breakpoints Tailwind Breakpoints: Mobile (Small): sm: (min-width: 640px) Tablet: md: (min-width: 768px) Desktop: lg: (min-width: 1024px) Large Desktop: xl: (min-width: 1280px)
+
+// Make any other stylistic choices required for better animations and all, make a slick looking site, can also use shadcn, three.js/babylon.js for better components make it accessable with focus states focus:outline-none focus:ring-2 and ARIA lables, try to follow semantic web best practices, Try to make a unique looking UI, not a generic one!!
+
+import type { Config } from "tailwindcss";
+// import { fontFamily } from "tailwindcss/defaultTheme";
+
+const config = {
+  darkMode: "class",
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
+    colors: {
+      white: '#FFFFFF',
+      black: '#000000',
+      transparent: "transparent",
+      current: "currentColor",
+      // Custom colors
+      purple: '#9333EA', // Purple 600
+      midnight: '#121063', // Midnight Blue
+      metal: '#565584', // Metal
+      'tahiti-teal': '#3AB7BF', // Tahiti Teal
+      'cool-white': '#ECEBFF', // Cool White
+      'bubble-gum': '#FF77E9', // Bubble Gum
+      'coper-rust': '#78DCCA', // Coper Rust
+    },
+    boxShadow: {
+      sm: "0 2px 4px 0 rgba(11, 10, 55, 0.15)",
+      lg: "0 8px 20px 0 rgba(18, 16, 99, 0.06)",
+    },
+    fontSize: {
+      xs: ["14px", { lineHeight: "24px", letterSpacing: "-0.03em" }],
+      sm: ["16px", { lineHeight: "28px", letterSpacing: "-0.03em" }],
+      lg: ["18px", { lineHeight: "28px", letterSpacing: "-0.03em" }],
+      xl: ["24px", { lineHeight: "36px", letterSpacing: "-0.03em" }],
+      "2xl": ["36px", { lineHeight: "48px", letterSpacing: "-0.032em" }],
+      "3xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.032em" }],
+      "4xl": ["56px", { lineHeight: "64px", letterSpacing: "-0.032em" }],
+      "5xl": ["80px", { lineHeight: "80px", letterSpacing: "-0.032em" }],
+    },
+    fontFamily: {
+      sans: ["Inter", "sans-serif"],
+      serif: ["Merriweather", "serif"],
+      mono: ["Fira Code", "monospace"],
+    }, 
+
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
+    extend: {
+    //   fontFamily: {
+    //     inter: ["'Inter'", "sans-serif"],
+    //     roboto: ["'Roboto'", "sans-serif"],
+    //     fira: ["'Fira Code'", "monospace"],
+    //   },
+    //   colors: {
+    //     // Light Mode Colors
+    //     primary: {
+    //       DEFAULT: "#4F46E5", // Indigo 600
+    //       dark: "#6366F1", // Indigo 500 for dark mode
+    //     },
+    //     secondary: {
+    //       DEFAULT: "#9333EA", // Purple 600
+    //       dark: "#A855F7", // Purple 500 for dark mode
+    //     },
+    //     background: {
+    //       DEFAULT: "#F9FAFB", // Gray 50
+    //       dark: "#111827", // Gray 900
+    //     },
+    //     card: {
+    //       DEFAULT: "#FFFFFF", // White
+    //       dark: "#1F2937", // Gray 800
+    //     },
+    //     text: {
+    //       primary: {
+    //         DEFAULT: "#1F2937", // Gray 800
+    //         dark: "#F3F4F6", // Gray 100
+    //       },
+    //       secondary: {
+    //         DEFAULT: "#4B5563", // Gray 600
+    //         dark: "#D1D5DB", // Gray 300
+    //       },
+    //     },
+    //     border: {
+    //       DEFAULT: "#E5E7EB", // Gray 200
+    //       dark: "#374151", // Gray 700
+    //     },
+    //     ring: {
+    //       DEFAULT: "#6366F1", // Indigo 500
+    //     },
+    //   },
+    //   borderRadius: {
+    //     lg: "1rem", // rounded-2xl
+    //     md: "0.75rem",
+    //     sm: "0.5rem",
+    //   },
+    //   boxShadow: {
+    //     light: "0 4px 6px rgba(0, 0, 0, 0.1)", // shadow-lg
+    //     dark: "0 4px 6px rgba(0, 0, 0, 0.5)", // shadow-md shadow-gray-900
+    //   },
+    //   spacing: {
+    //     card: "1.5rem", // p-6
+    //     sectionY: "3rem", // py-12
+    //     sectionX: "2rem", // px-8
+    //     betweenCards: "2rem", // mb-8
+    //     betweenSections: "3rem", // mt-12
+    //   },
+    //   fontSize: {
+    //     h1: ["2.25rem", { lineHeight: "2.5rem", fontWeight: "700" }], // text-4xl, font-bold
+    //     h2: ["1.875rem", { lineHeight: "2.25rem", fontWeight: "700" }], // text-3xl, font-bold
+    //     h3: ["1.5rem", { lineHeight: "2rem", fontWeight: "700" }], // text-2xl, font-bold
+    //     h4: ["1.25rem", { lineHeight: "1.75rem", fontWeight: "700" }], // text-xl, font-bold
+    //     body: ["1rem", { lineHeight: "1.5rem", fontWeight: "400" }], // text-base, font-normal
+    //     small: ["0.875rem", { lineHeight: "1.25rem", fontWeight: "400" }], // text-sm, font-normal
+    //   },
+    //   keyframes: {
+    //     float: {
+    //       "0%, 100%": { transform: "translateY(0)" },
+    //       "50%": { transform: "translateY(-10px)" },
+    //     },
+    //     "pulse-glow": {
+    //       "0%, 100%": { opacity: "1", filter: "brightness(1)" },
+    //       "50%": { opacity: "0.8", filter: "brightness(1.2)" },
+    //     },
+    //   },
+    //   animation: {
+    //     float: "float 3s ease-in-out infinite",
+    //     "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+    //   },
+    },
+  },
+  plugins: [
+    // require('postcss-import'),
+    // require("tailwindcss-animate"),
+    // require("@tailwindcss/forms"),
+    // require("@tailwindcss/typography"),
+    // require("@tailwindcss/aspect-ratio"),
+  ],
+} satisfies Config;
+
+export default config;

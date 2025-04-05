@@ -9,9 +9,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="relative w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center">
+              <div className="relative w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
                 <span className="text-white font-bold text-sm">M</span>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-background rounded-full border-2 border-indigo-500"></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-background rounded-full border-2 border-primary"></div>
               </div>
               <span className="text-xl font-bold font-inter">MindChain</span>
             </Link>
@@ -49,22 +49,22 @@ export function Footer() {
             <h4 className="text-lg font-bold mb-4">Platform</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/dashboard" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="/dashboard" className="text-foreground/70 hover:text-primary transition-colors">
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link href="/queries" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="/queries" className="text-foreground/70 hover:text-primary transition-colors">
                   My Queries
                 </Link>
               </li>
               <li>
-                <Link href="/profile" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="/profile" className="text-foreground/70 hover:text-primary transition-colors">
                   Profile
                 </Link>
               </li>
               <li>
-                <Link href="/extension" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="/extension" className="text-foreground/70 hover:text-primary transition-colors">
                   Browser Extension
                 </Link>
               </li>
@@ -75,22 +75,22 @@ export function Footer() {
             <h4 className="text-lg font-bold mb-4">Resources</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
                   Documentation
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
                   API Reference
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
                   FAQs
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
                   Support
                 </Link>
               </li>
@@ -101,22 +101,22 @@ export function Footer() {
             <h4 className="text-lg font-bold mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
                   Cookie Policy
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-foreground/70 hover:text-indigo-500 transition-colors">
+                <Link href="#" className="text-foreground/70 hover:text-primary transition-colors">
                   Accessibility
                 </Link>
               </li>
@@ -133,4 +133,3 @@ export function Footer() {
     </footer>
   )
 }
-

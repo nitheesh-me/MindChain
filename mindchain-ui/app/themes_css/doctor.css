@@ -1,0 +1,74 @@
+:root {
+    /* Base Background and Foreground */
+    --background: hsl(210 100% 98%);
+    /* very light blue for a clean, clinical feel */
+    --foreground: hsl(210 15% 15%);
+    /* deep, dark blue-gray for strong readability */
+
+    /* Muted Elements */
+    --muted: hsl(210 20% 95%);
+    /* soft blue-gray background for secondary elements */
+    --muted-foreground: hsl(210 20% 40%);
+    /* subtle, slightly darker text for muted content */
+
+    /* Popovers and Cards */
+    --popover: hsl(0 0% 100%);
+    /* crisp white popover background */
+    --popover-foreground: var(--foreground);
+    --card: hsl(0 0% 100%);
+    /* white card background */
+    --card-foreground: var(--foreground);
+
+    /* Borders and Inputs */
+    --border: hsl(210 20% 90%);
+    /* light blue-gray border for soft separations */
+    --input: hsl(210 20% 90%);
+    /* matching input field background */
+
+    /* Accents for Calls-to-Action and Highlights */
+    --primary: hsl(210 90% 45%);
+    /* a clear blue accent that signifies trust and professionalism */
+    --primary-foreground: hsl(0 0% 100%);
+    /* white text on primary buttons */
+    --secondary: hsl(140 60% 40%);
+    /* a fresh, healing green for secondary actions */
+    --secondary-foreground: hsl(0 0% 100%);
+    --accent: hsl(45 100% 50%);
+    /* a gentle, inviting amber for subtle highlights */
+    --accent-foreground: hsl(0 0% 100%);
+
+    /* Focus Ring and Border Radius */
+    --ring: var(--primary);
+    --radius: 0.5rem;
+}
+
+.dark {
+    /* Dark Mode: maintain readability with inverted tones */
+    --background: hsl(210 15% 10%);
+    /* deep, dark blue-gray background */
+    --foreground: hsl(210 20% 85%);
+    /* light, contrasting text */
+
+    --muted: hsl(210 15% 15%);
+    /* darkened muted background */
+    --muted-foreground: hsl(210 15% 65%);
+    /* lighter text for muted elements */
+
+    --popover: hsl(210 15% 12%);
+    --popover-foreground: var(--foreground);
+    --card: hsl(210 15% 12%);
+    --card-foreground: var(--foreground);
+
+    --border: hsl(210 15% 25%);
+    --input: hsl(210 15% 25%);
+
+    --primary: hsl(210 90% 55%);
+    --primary-foreground: hsl(210 15% 10%);
+    --secondary: hsl(140 60% 50%);
+    --secondary-foreground: hsl(210 15% 10%);
+    --accent: hsl(45 100% 60%);
+    --accent-foreground: hsl(210 15% 10%);
+
+    --ring: var(--primary);
+    --radius: 0.5rem;
+}
