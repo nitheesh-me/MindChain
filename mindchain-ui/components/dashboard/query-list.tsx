@@ -64,7 +64,7 @@ export function QueryList({ queries }: QueryListProps) {
         <CardContent className="flex flex-col items-center justify-center py-12">
           <p className="text-muted-foreground mb-4">No queries found</p>
           <Button asChild className="rounded-xl">
-            <Link href="/dashboard">Submit a Query</Link>
+            <Link href="/me">Submit a Query</Link>
           </Button>
         </CardContent>
       </Card>
@@ -101,7 +101,7 @@ export function QueryList({ queries }: QueryListProps) {
                   {query.category.charAt(0).toUpperCase() + query.category.slice(1)}
                 </Badge>
                 <Button asChild size="sm" className="rounded-full">
-                  <Link href={`/query/${query.id}`}>View Details</Link>
+                  <Link href={`/me/query/${query.id}`}>View Details</Link>
                 </Button>
               </div>
             </div>

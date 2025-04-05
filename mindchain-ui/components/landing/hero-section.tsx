@@ -170,7 +170,7 @@ export function HeroSection() {
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full -z-10 opacity-40 dark:opacity-20"
+        className="absolute inset-0 w-full h-full z-[1] opacity-100 dark:opacity-100 pointer-events-none"
         aria-hidden="true"
       />
 
@@ -190,12 +190,15 @@ export function HeroSection() {
               IIIT Hyderabad's Smart Support Platform
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Connect with the{" "}
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight">
+              Get {" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
                 right experts
               </span>{" "}
-              for your queries
+              answers to your queries{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                right away
+              </span>
             </h1>
 
             <p className="text-lg text-foreground/80 max-w-xl">
@@ -205,7 +208,7 @@ export function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-4 mt-4">
               <Button asChild size="lg" className="rounded-full">
-                <Link href="/dashboard">
+                <Link href="/me">
                   Get Started <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -237,7 +240,8 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            className="relative z-10"
+            aria-hidden="true"
           >
             <div className="relative mx-auto w-full max-w-md">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-[2.5rem] blur-3xl -z-10 transform rotate-6"></div>

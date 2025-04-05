@@ -37,7 +37,7 @@ export function CtaSection() {
                   variant="secondary"
                   className="rounded-full bg-white text-primary hover:bg-white/90"
                 >
-                  <Link href="/dashboard">
+                  <Link href="/me">
                     Get Started Now <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

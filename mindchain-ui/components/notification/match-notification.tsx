@@ -76,7 +76,7 @@ export function MatchNotification({ match, onAccept, onDecline }: MatchNotificat
           exit={{ opacity: 0, y: 20 }}
           className="fixed bottom-24 right-6 z-50 max-w-md"
         >
-          <Card className="rounded-xl shadow-lg border-2 border-indigo-500/20">
+          <Card className="rounded-xl shadow-lg border-2 border-primary/20">
             <CardContent className="p-4">
               <div className="flex justify-between items-start mb-3">
                 <div>
@@ -140,4 +140,3 @@ export function MatchNotification({ match, onAccept, onDecline }: MatchNotificat
     </AnimatePresence>
   )
 }
-

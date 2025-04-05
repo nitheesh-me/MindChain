@@ -72,7 +72,7 @@ export function Header() {
               <ul className={`${isMobile ? "flex flex-col gap-4" : "flex items-center gap-6"}`}>
                 <li>
                   <Link
-                    href="/dashboard"
+                    href="/me"
                     className="text-sm font-medium transition-colors hover:text-primary"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -81,7 +81,7 @@ export function Header() {
                 </li>
                 <li>
                   <Link
-                    href="/queries"
+                    href="/me/queries"
                     className="text-sm font-medium transition-colors hover:text-primary"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -137,7 +137,7 @@ export function Header() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/queries">My Queries</Link>
+                  <Link href="/me/queries">My Queries</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/settings">Settings</Link>

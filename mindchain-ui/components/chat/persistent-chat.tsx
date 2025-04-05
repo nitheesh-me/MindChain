@@ -227,10 +227,10 @@ export function PersistentChat() {
             transition={{ duration: 0.2 }}
             className="fixed bottom-24 right-6 z-40 shadow-xl"
           >
-            <Card className="w-full h-full flex flex-col rounded-xl overflow-hidden">
+            <Card className="w-full h-full flex flex-col rounded-xl overflow-auto">
               {isMinimized ? (
                 <div
-                  className="bg-indigo-500 text-white p-4 cursor-pointer flex justify-between items-center"
+                  className="bg-primary text-white p-4 cursor-pointer flex justify-between items-center"
                   onClick={() => setIsMinimized(false)}
                 >
                   <div className="font-medium">Chats ({chats.length})</div>
@@ -238,7 +238,7 @@ export function PersistentChat() {
                 </div>
               ) : (
                 <>
-                  <CardHeader className="bg-indigo-500 text-white p-4 flex flex-row justify-between items-center">
+                  <CardHeader className="bg-primary text-white p-4 flex flex-row justify-between items-center">
                     <div className="font-medium">
                       {activeChat ? chats.find((c) => c.id === activeChat)?.name || "Chat" : `Chats (${chats.length})`}
                     </div>
@@ -247,7 +247,7 @@ export function PersistentChat() {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="h-6 w-6 text-white hover:text-white hover:bg-indigo-600"
+                          className="h-6 w-6 text-white hover:text-white hover:bg-primary"
                           onClick={() => setActiveChat(null)}
                         >
                           <ChevronDown className="h-4 w-4" />
@@ -256,7 +256,7 @@ export function PersistentChat() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-6 w-6 text-white hover:text-white hover:bg-indigo-600"
+                        className="h-6 w-6 text-white hover:text-white hover:bg-primary"
                         onClick={minimizeChat}
                       >
                         <Minimize2 className="h-4 w-4" />
@@ -264,7 +264,7 @@ export function PersistentChat() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-6 w-6 text-white hover:text-white hover:bg-indigo-600"
+                        className="h-6 w-6 text-white hover:text-white hover:bg-primary"
                         onClick={() => setIsOpen(false)}
                       >
                         <X className="h-4 w-4" />
@@ -272,15 +272,15 @@ export function PersistentChat() {
                     </div>
                   </CardHeader>
 
-                  <CardContent className="flex-1 p-0 overflow-hidden">
+                  <CardContent className="flex-1 p-0 overflow-auto">
                     {!activeChat ? (
                       <Tabs defaultValue="active" className="h-full flex flex-col">
                         <TabsList className="grid w-full grid-cols-2">
                           <TabsTrigger value="active">Active</TabsTrigger>
                           <TabsTrigger value="archived">Archived</TabsTrigger>
                         </TabsList>
-                        <TabsContent value="active" className="flex-1 overflow-hidden">
-                          <ScrollArea className="h-[380px]">
+                        <TabsContent value="active" className="flex-1 overflow-auto">
+                          <ScrollArea className="h-[380px] overflow-y-auto">
                             {chats.map((chat) => (
                               <div
                                 key={chat.id}
@@ -300,7 +300,7 @@ export function PersistentChat() {
                                   </div>
                                   <p className="text-xs text-muted-foreground truncate">{chat.lastMessage}</p>
                                 </div>
-                                {chat.unread > 0 && <Badge className="bg-indigo-500 text-white">{chat.unread}</Badge>}
+                                {chat.unread > 0 && <Badge className="bg-primary text-white">{chat.unread}</Badge>}
                               </div>
                             ))}
                           </ScrollArea>
@@ -332,7 +332,7 @@ export function PersistentChat() {
                                       <div
                                         className={`rounded-lg p-3 ${
                                           isExpert
-                                            ? "bg-indigo-500 text-white rounded-tr-none"
+                                            ? "bg-primary text-white rounded-tr-none"
                                             : "bg-muted rounded-tl-none"
                                         }`}
                                       >
@@ -384,4 +384,3 @@ export function PersistentChat() {
     </>
   )
 }
-

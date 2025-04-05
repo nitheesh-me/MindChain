@@ -82,7 +82,7 @@ export function LandingHeader() {
 
             <div className="hidden md:block">
               <Button asChild variant="default" size="sm" className="rounded-full">
-                <Link href="/dashboard">Get Started</Link>
+                <Link href="/me">Get Started</Link>
               </Button>
             </div>
 

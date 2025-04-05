@@ -49,17 +49,17 @@ export function Footer() {
             <h4 className="text-lg font-bold mb-4">Platform</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/dashboard" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link href="/me" className="text-foreground/70 hover:text-primary transition-colors">
                   Dashboard
                 </Link>
               </li>
               <li>
-                <Link href="/queries" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link href="/me/queries" className="text-foreground/70 hover:text-primary transition-colors">
                   My Queries
                 </Link>
               </li>
               <li>
-                <Link href="/profile" className="text-foreground/70 hover:text-primary transition-colors">
+                <Link href="/me/profile" className="text-foreground/70 hover:text-primary transition-colors">
                   Profile
                 </Link>
               </li>

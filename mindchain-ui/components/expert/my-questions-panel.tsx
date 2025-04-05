@@ -108,7 +108,7 @@ export function MyQuestionsPanel() {
                         </p>
                       </div>
                       {question.unreadMessages > 0 && (
-                        <Badge className="bg-indigo-500">
+                        <Badge className="bg-primary">
                           {question.unreadMessages} new {question.unreadMessages === 1 ? "message" : "messages"}
                         </Badge>
                       )}
@@ -181,4 +181,3 @@ export function MyQuestionsPanel() {
     </div>
   )
 }
-

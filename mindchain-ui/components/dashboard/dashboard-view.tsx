@@ -140,7 +140,7 @@ export function DashboardView() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                  <Link href="/me/queries" className="text-sm text-primary hover:underline">
                     View all pending queries
                   </Link>
                 </div>
@@ -159,7 +159,7 @@ export function DashboardView() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                  <Link href="/me/queries" className="text-sm text-primary hover:underline">
                     View matching queries
                   </Link>
                 </div>
@@ -178,7 +178,7 @@ export function DashboardView() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                  <Link href="/me/queries" className="text-sm text-primary hover:underline">
                     View active chats
                   </Link>
                 </div>
@@ -197,7 +197,7 @@ export function DashboardView() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                  <Link href="/me/queries" className="text-sm text-primary hover:underline">
                     View resolved queries
                   </Link>
                 </div>
@@ -265,7 +265,7 @@ export function DashboardView() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                  <Link href="/me/queries" className="text-sm text-primary hover:underline">
                     View all pending queries
                   </Link>
                 </div>
@@ -284,7 +284,7 @@ export function DashboardView() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                  <Link href="/me/queries" className="text-sm text-primary hover:underline">
                     View matching queries
                   </Link>
                 </div>
@@ -303,7 +303,7 @@ export function DashboardView() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                  <Link href="/me/queries" className="text-sm text-primary hover:underline">
                     View active chats
                   </Link>
                 </div>
@@ -322,7 +322,7 @@ export function DashboardView() {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <Link href="/queries" className="text-sm text-primary hover:underline">
+                  <Link href="/me/queries" className="text-sm text-primary hover:underline">
                     View resolved queries
                   </Link>
                 </div>
