@@ -14,6 +14,7 @@ import {
   Cpu,
   BarChart3,
   ArrowRight,
+  Code,
 } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
@@ -28,6 +29,30 @@ export default function DocsPage() {
           communication platform.
         </p>
       </div>
+
+      {/* Highlight: Explore API Details */}
+      <div className="bg-primary/10 dark:bg-primary/20 p-6 rounded-xl shadow-md">
+        <div className="flex items-center gap-4">
+          <div className="bg-primary/20 p-3 rounded-full">
+            <Code className="h-8 w-8 text-primary" />
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold">Explore API Details</h2>
+            <p className="text-muted-foreground">
+              Dive into the comprehensive API documentation, including the OpenAPI specification, to integrate and extend MindChain's functionality.
+            </p>
+          </div>
+        </div>
+        <div className="mt-4">
+          <Button asChild variant="link" size="lg">
+            <Link href="/docs/api">
+              View API Documentation <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+
+      <Separator />
 
       {/* Table of Contents */}
       <div className="bg-muted/50 p-6 rounded-xl">

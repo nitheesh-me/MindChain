@@ -22,6 +22,15 @@ export function HeroSection() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
+
+    // Update mouse position on movement
+    // Mouse object to track position and interaction radius
+    const mouse = { x: undefined, y: undefined, radius: 150 };
+    const handleMouseMove = (event: MouseEvent) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    };
+
     setCanvasDimensions();
     window.addEventListener("resize", setCanvasDimensions);
 
@@ -37,7 +46,7 @@ export function HeroSection() {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
+        this.size = Math.random() * 5 + 1;
         this.speedX = Math.random() * 0.5 - 0.25;
         this.speedY = Math.random() * 0.5 - 0.25;
         this.color = `rgba(${Math.floor(Math.random() * 100 + 100)}, ${Math.floor(Math.random() * 100 + 100)}, ${Math.floor(Math.random() * 255)}, ${Math.random() * 0.5 + 0.1})`;
@@ -65,7 +74,7 @@ export function HeroSection() {
     // Create particles
     const particlesArray: Particle[] = [];
     const numberOfParticles = Math.min(
-      100,
+      1000,
       Math.floor((window.innerWidth * window.innerHeight) / 10000),
     );
 
@@ -100,10 +109,24 @@ export function HeroSection() {
 
           if (distance < 100) {
             ctx.strokeStyle = `rgba(100, 100, 255, ${0.2 - distance / 500})`;
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
             ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+        if (mouse.x && mouse.y) {
+          const dx = particlesArray[a].x - mouse.x;
+          const dy = particlesArray[a].y - mouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < mouse.radius) {
+            ctx.strokeStyle = `rgba(255, 0, 0, ${1 - distance / mouse.radius})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
           }
         }
@@ -114,6 +137,7 @@ export function HeroSection() {
 
     return () => {
       window.removeEventListener("resize", setCanvasDimensions);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 

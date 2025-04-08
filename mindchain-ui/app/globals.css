@@ -1,4 +1,4 @@
-@import "./themes_css/default.css";
+/* @import "./themes_css/default.css"; */
 
 /* @import "/themes_css/a11y_cb.css"; */
 /* @import "./themes_css/a11y_hc.css"; */
@@ -21,7 +21,7 @@
 /* @import "./themes_css/oppenheimer.css"; */
 /* @import "./themes_css/blackpink.css"; */
 /* @import "./themes_css/kda.css"; */
-/* @import "./themes_css/iiit.css"; */
+@import "./themes_css/iiit.css";
 /* @import "./themes_css/mit.css"; */
 
 @import "tailwindcss";

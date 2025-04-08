@@ -98,7 +98,7 @@ export function Header() {
                 </li>
                 <li>
                   <Link
-                    href="/profile"
+                    href="/me/profile"
                     className="text-sm font-medium transition-colors hover:text-primary"
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -150,7 +150,7 @@ export function Header() {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="/profile">
+                  <Link href="/me/profile">
                     <User className="mr-2 h-4 w-4" />
                     Profile
                   </Link>

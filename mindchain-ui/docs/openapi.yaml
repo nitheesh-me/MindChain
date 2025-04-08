@@ -1,0 +1,1921 @@
+openapi: 3.0.3
+info:
+  title: MindChain API
+  description: |
+    # MindChain API Documentation
+    
+    This API provides access to the MindChain platform, a context-aware communication platform designed to streamline internal support at IIIT Hyderabad. It connects students, faculty, and staff by matching queries to the most relevant experts.
+    
+    ## Features
+    
+    - User and profile management
+    - Query submission and tracking
+    - Expert matching and recommendation
+    - Real-time messaging
+    - Notification management
+    - Analytics and reporting
+  version: 1.0.0
+  contact:
+    name: MindChain Support
+    email: support@mindchain.iiit.ac.in
+    url: https://mindchain.iiit.ac.in/support
+  license:
+    name: Proprietary
+    url: https://mindchain.iiit.ac.in/license
+
+servers:
+  - url: https://api.mindchain.iiit.ac.in/v1
+    description: Production server
+  - url: https://staging-api.mindchain.iiit.ac.in/v1
+    description: Staging server
+  - url: https://dev-api.mindchain.iiit.ac.in/v1
+    description: Development server
+
+tags:
+  - name: Authentication
+    description: User authentication and authorization
+  - name: Users
+    description: User management and profiles
+  - name: Queries
+    description: Query submission and management
+  - name: Experts
+    description: Expert matching and management
+  - name: Messages
+    description: Real-time and asynchronous messaging
+  - name: Notifications
+    description: User notifications
+  - name: Analytics
+    description: Usage statistics and reporting
+
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: User login
+      description: Authenticate a user and receive an access token
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              email: user@iiit.ac.in
+              password: securePassword123
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+              example:
+                accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                user:
+                  id: 123e4567-e89b-12d3-a456-426614174000
+                  email: user@iiit.ac.in
+                  name: John Doe
+                  role: STUDENT
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: User registration
+      description: Register a new user account
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            example:
+              email: newuser@iiit.ac.in
+              password: securePassword123
+              name: Jane Smith
+              role: STUDENT
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+              example:
+                accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                user:
+                  id: 123e4567-e89b-12d3-a456-426614174001
+                  email: newuser@iiit.ac.in
+                  name: Jane Smith
+                  role: STUDENT
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: Email already in use
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: EMAIL_IN_USE
+                message: Email address is already registered
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /auth/refresh:
+    post:
+      tags:
+        - Authentication
+      summary: Refresh access token
+      description: Get a new access token using a refresh token
+      operationId: refreshToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - refreshToken
+              properties:
+                refreshToken:
+                  type: string
+                  description: Valid refresh token
+            example:
+              refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+      responses:
+        '200':
+          description: Token successfully refreshed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: New JWT access token
+              example:
+                accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: User logout
+      description: Invalidate the current refresh token
+      operationId: logoutUser
+      security:
+        - BearerAuth: []
+      responses:
+        '204':
+          description: Successfully logged out
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /users/me:
+    get:
+      tags:
+        - Users
+      summary: Get current user profile
+      description: Retrieve the profile of the currently authenticated user
+      operationId: getCurrentUser
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              example:
+                id: 123e4567-e89b-12d3-a456-426614174000
+                email: user@iiit.ac.in
+                name: John Doe
+                role: STUDENT
+                department: Computer Science
+                expertise: ["Machine Learning", "Web Development"]
+                bio: "CS student with interest in AI and web technologies"
+                joinedAt: "2023-01-15T08:30:00Z"
+                profilePictureUrl: "https://storage.mindchain.iiit.ac.in/profiles/123e4567-e89b-12d3-a456-426614174000.jpg"
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - Users
+      summary: Update current user profile
+      description: Update the profile of the currently authenticated user
+      operationId: updateCurrentUser
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfileUpdate'
+            example:
+              name: John Doe
+              department: Computer Science
+              expertise: ["Machine Learning", "Web Development", "Natural Language Processing"]
+              bio: "CS student with interest in AI and web technologies. Currently working on NLP projects."
+      responses:
+        '200':
+          description: User profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /users/{userId}:
+    get:
+      tags:
+        - Users
+      summary: Get user by ID
+      description: Retrieve a user profile by their ID
+      operationId: getUserById
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          description: ID of the user to retrieve
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: User profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /users/experts:
+    get:
+      tags:
+        - Users
+        - Experts
+      summary: Get all experts
+      description: Retrieve a list of all users with expert status
+      operationId: getAllExperts
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: department
+          in: query
+          description: Filter experts by department
+          required: false
+          schema:
+            type: string
+        - name: expertise
+          in: query
+          description: Filter experts by area of expertise
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of experts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExpertProfile'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+              example:
+                data:
+                  - id: 123e4567-e89b-12d3-a456-426614174002
+                    name: Dr. Jane Smith
+                    role: FACULTY
+                    department: Computer Science
+                    expertise: ["Machine Learning", "Artificial Intelligence"]
+                    bio: "Associate Professor specializing in AI and ML"
+                    rating: 4.8
+                    responseRate: 95
+                    averageResponseTime: 120
+                    totalQueriesAnswered: 156
+                    profilePictureUrl: "https://storage.mindchain.iiit.ac.in/profiles/123e4567-e89b-12d3-a456-426614174002.jpg"
+                pagination:
+                  total: 45
+                  page: 1
+                  limit: 10
+                  pages: 5
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /queries:
+    post:
+      tags:
+        - Queries
+      summary: Create a new query
+      description: Submit a new query to be matched with experts
+      operationId: createQuery
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryCreate'
+            example:
+              title: "Help with Deep Learning Project"
+              description: "I'm working on a CNN for image classification and facing issues with overfitting. Need guidance on regularization techniques."
+              category: "ACADEMIC"
+              tags: ["Deep Learning", "CNN", "Image Classification"]
+              priority: "MEDIUM"
+              attachments: [
+                {
+                  "name": "error_log.txt",
+                  "url": "https://storage.mindchain.iiit.ac.in/attachments/error_log.txt",
+                  "type": "text/plain"
+                }
+              ]
+      responses:
+        '201':
+          description: Query created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Query'
+              example:
+                id: 123e4567-e89b-12d3-a456-426614174010
+                title: "Help with Deep Learning Project"
+                description: "I'm working on a CNN for image classification and facing issues with overfitting. Need guidance on regularization techniques."
+                category: "ACADEMIC"
+                tags: ["Deep Learning", "CNN", "Image Classification"]
+                priority: "MEDIUM"
+                status: "PENDING"
+                createdAt: "2023-06-15T14:30:00Z"
+                updatedAt: "2023-06-15T14:30:00Z"
+                userId: 123e4567-e89b-12d3-a456-426614174000
+                attachments: [
+                  {
+                    "id": "att-123",
+                    "name": "error_log.txt",
+                    "url": "https://storage.mindchain.iiit.ac.in/attachments/error_log.txt",
+                    "type": "text/plain"
+                  }
+                ]
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    get:
+      tags:
+        - Queries
+      summary: Get all queries
+      description: Retrieve a list of queries with optional filtering
+      operationId: getAllQueries
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: status
+          in: query
+          description: Filter queries by status
+          required: false
+          schema:
+            type: string
+            enum: [PENDING, ASSIGNED, IN_PROGRESS, RESOLVED, CLOSED]
+        - name: category
+          in: query
+          description: Filter queries by category
+          required: false
+          schema:
+            type: string
+            enum: [ACADEMIC, ADMINISTRATIVE, TECHNICAL, EVENT, OTHER]
+        - name: priority
+          in: query
+          description: Filter queries by priority
+          required: false
+          schema:
+            type: string
+            enum: [LOW, MEDIUM, HIGH, URGENT]
+      responses:
+        '200':
+          description: List of queries retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QuerySummary'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+              example:
+                data:
+                  - id: 123e4567-e89b-12d3-a456-426614174010
+                    title: "Help with Deep Learning Project"
+                    category: "ACADEMIC"
+                    priority: "MEDIUM"
+                    status: "PENDING"
+                    createdAt: "2023-06-15T14:30:00Z"
+                    updatedAt: "2023-06-15T14:30:00Z"
+                    tags: ["Deep Learning", "CNN"]
+                pagination:
+                  total: 25
+                  page: 1
+                  limit: 10
+                  pages: 3
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /queries/my:
+    get:
+      tags:
+        - Queries
+      summary: Get current user's queries
+      description: Retrieve a list of queries created by the current user
+      operationId: getCurrentUserQueries
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: status
+          in: query
+          description: Filter queries by status
+          required: false
+          schema:
+            type: string
+            enum: [PENDING, ASSIGNED, IN_PROGRESS, RESOLVED, CLOSED]
+      responses:
+        '200':
+          description: List of user's queries retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QuerySummary'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /queries/{queryId}:
+    get:
+      tags:
+        - Queries
+      summary: Get query by ID
+      description: Retrieve detailed information about a specific query
+      operationId: getQueryById
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          description: ID of the query to retrieve
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Query retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Query'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - Queries
+      summary: Update query
+      description: Update an existing query
+      operationId: updateQuery
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          description: ID of the query to update
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryUpdate'
+            example:
+              title: "Updated: Help with Deep Learning Project"
+              description: "I'm working on a CNN for image classification and facing issues with overfitting. Need guidance specifically on dropout and L2 regularization."
+              priority: "HIGH"
+              tags: ["Deep Learning", "CNN", "Image Classification", "Regularization"]
+      responses:
+        '200':
+          description: Query updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Query'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    delete:
+      tags:
+        - Queries
+      summary: Delete query
+      description: Delete an existing query
+      operationId: deleteQuery
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          description: ID of the query to delete
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Query deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /queries/{queryId}/status:
+    put:
+      tags:
+        - Queries
+      summary: Update query status
+      description: Update the status of an existing query
+      operationId: updateQueryStatus
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          description: ID of the query to update
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  enum: [PENDING, ASSIGNED, IN_PROGRESS, RESOLVED, CLOSED]
+                  description: New status for the query
+                statusNote:
+                  type: string
+                  description: Optional note about the status change
+            example:
+              status: "RESOLVED"
+              statusNote: "Solution implemented successfully"
+      responses:
+        '200':
+          description: Query status updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Query'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /queries/{queryId}/experts:
+    get:
+      tags:
+        - Queries
+        - Experts
+      summary: Get matched experts for query
+      description: Retrieve a list of experts matched to a specific query
+      operationId: getMatchedExperts
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          description: ID of the query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: List of matched experts retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExpertMatch'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+              example:
+                data:
+                  - expert:
+                      id: 123e4567-e89b-12d3-a456-426614174002
+                      name: "Dr. Jane Smith"
+                      department: "Computer Science"
+                      expertise: ["Machine Learning", "Deep Learning", "Computer Vision"]
+                      profilePictureUrl: "https://storage.mindchain.iiit.ac.in/profiles/123e4567-e89b-12d3-a456-426614174002.jpg"
+                    matchScore: 0.92
+                    matchReason: "Expert in Deep Learning and Computer Vision with experience in CNN architectures"
+                    status: "PENDING"
+                pagination:
+                  total: 5
+                  page: 1
+                  limit: 10
+                  pages: 1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /queries/{queryId}/assign/{expertId}:
+    post:
+      tags:
+        - Queries
+        - Experts
+      summary: Assign query to expert
+      description: Assign a query to a specific expert
+      operationId: assignQueryToExpert
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          description: ID of the query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: expertId
+          in: path
+          description: ID of the expert
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Query assigned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Query'
+              example:
+                id: 123e4567-e89b-12d3-a456-426614174010
+                title: "Help with Deep Learning Project"
+                status: "ASSIGNED"
+                assignedExpertId: 123e4567-e89b-12d3-a456-426614174002
+                assignedAt: "2023-06-15T15:45:00Z"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /experts/me/queries:
+    get:
+      tags:
+        - Experts
+        - Queries
+      summary: Get queries assigned to current expert
+      description: Retrieve a list of queries assigned to the currently authenticated expert
+      operationId: getQueriesAssignedToCurrentExpert
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: status
+          in: query
+          description: Filter queries by status
+          required: false
+          schema:
+            type: string
+            enum: [ASSIGNED, IN_PROGRESS, RESOLVED, CLOSED]
+      responses:
+        '200':
+          description: List of assigned queries retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QuerySummary'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /experts/me/available-queries:
+    get:
+      tags:
+        - Experts
+        - Queries
+      summary: Get available queries for current expert
+      description: Retrieve a list of queries that match the current expert's expertise but are not yet assigned
+      operationId: getAvailableQueriesForCurrentExpert
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: minMatchScore
+          in: query
+          description: Minimum match score (0.0 to 1.0)
+          required: false
+          schema:
+            type: number
+            format: float
+            minimum: 0
+            maximum: 1
+      responses:
+        '200':
+          description: List of available queries retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: '#/components/schemas/QuerySummary'
+                        - type: object
+                          properties:
+                            matchScore:
+                              type: number
+                              format: float
+                              description: Match score between the query and the expert's expertise
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /messages/{queryId}:
+    get:
+      tags:
+        - Messages
+      summary: Get messages for a query
+      description: Retrieve all messages in a conversation for a specific query
+      operationId: getMessagesForQuery
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          description: ID of the query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: before
+          in: query
+          description: Get messages before this timestamp (ISO format)
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Messages retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+              example:
+                data:
+                  - id: 123e4567-e89b-12d3-a456-426614174020
+                    queryId: 123e4567-e89b-12d3-a456-426614174010
+                    senderId: 123e4567-e89b-12d3-a456-426614174000
+                    content: "Hi, I'm having issues with my CNN model overfitting. Can you help?"
+                    createdAt: "2023-06-15T16:00:00Z"
+                    attachments: []
+                  - id: 123e4567-e89b-12d3-a456-426614174021
+                    queryId: 123e4567-e89b-12d3-a456-426614174010
+                    senderId: 123e4567-e89b-12d3-a456-426614174002
+                    content: "Sure, I'd be happy to help. Can you share more details about your model architecture and the dataset you're using?"
+                    createdAt: "2023-06-15T16:05:00Z"
+                    attachments: []
+                pagination:
+                  total: 10
+                  page: 1
+                  limit: 50
+                  pages: 1
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    post:
+      tags:
+        - Messages
+      summary: Send a message
+      description: Send a new message in a conversation for a specific query
+      operationId: sendMessage
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: queryId
+          in: path
+          description: ID of the query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageCreate'
+            example:
+              content: "Here's my model architecture and a sample of the training data."
+              attachments: [
+                {
+                  "name": "model_architecture.py",
+                  "url": "https://storage.mindchain.iiit.ac.in/attachments/model_architecture.py",
+                  "type": "text/x-python"
+                },
+                {
+                  "name": "training_data_sample.csv",
+                  "url": "https://storage.mindchain.iiit.ac.in/attachments/training_data_sample.csv",
+                  "type": "text/csv"
+                }
+              ]
+      responses:
+        '201':
+          description: Message sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+              example:
+                id: 123e4567-e89b-12d3-a456-426614174022
+                queryId: 123e4567-e89b-12d3-a456-426614174010
+                senderId: 123e4567-e89b-12d3-a456-426614174000
+                content: "Here's my model architecture and a sample of the training data."
+                createdAt: "2023-06-15T16:15:00Z"
+                attachments: [
+                  {
+                    "id": "att-456",
+                    "name": "model_architecture.py",
+                    "url": "https://storage.mindchain.iiit.ac.in/attachments/model_architecture.py",
+                    "type": "text/x-python"
+                  },
+                  {
+                    "id": "att-457",
+                    "name": "training_data_sample.csv",
+                    "url": "https://storage.mindchain.iiit.ac.in/attachments/training_data_sample.csv",
+                    "type": "text/csv"
+                  }
+                ]
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /notifications:
+    get:
+      tags:
+        - Notifications
+      summary: Get user notifications
+      description: Retrieve notifications for the currently authenticated user
+      operationId: getUserNotifications
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+        - name: read
+          in: query
+          description: Filter by read status
+          required: false
+          schema:
+            type: boolean
+        - name: type
+          in: query
+          description: Filter by notification type
+          required: false
+          schema:
+            type: string
+            enum: [QUERY_MATCH, QUERY_ASSIGNED, MESSAGE_RECEIVED, QUERY_STATUS_CHANGED, SYSTEM]
+      responses:
+        '200':
+          description: Notifications retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notification'
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+              example:
+                data:
+                  - id: 123e4567-e89b-12d3-a456-426614174030
+                    type: "MESSAGE_RECEIVED"
+                    title: "New message in 'Help with Deep Learning Project'"
+                    content: "Dr. Jane Smith: Sure, I'd be happy to help. Can you share more details about your model architecture and the dataset you're using?"
+                    read: false
+                    createdAt: "2023-06-15T16:05:00Z"
+                    data: {
+                      "queryId": "123e4567-e89b-12d3-a456-426614174010",
+                      "messageId": "123e4567-e89b-12d3-a456-426614174021",
+                      "senderId": "123e4567-e89b-12d3-a456-426614174002"
+                    }
+                pagination:
+                  total: 15
+                  page: 1
+                  limit: 10
+                  pages: 2
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /notifications/count:
+    get:
+      tags:
+        - Notifications
+      summary: Get unread notification count
+      description: Get the count of unread notifications for the currently authenticated user
+      operationId: getUnreadNotificationCount
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Unread notification count retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Number of unread notifications
+              example:
+                count: 5
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /notifications/{notificationId}/read:
+    put:
+      tags:
+        - Notifications
+      summary: Mark notification as read
+      description: Mark a specific notification as read
+      operationId: markNotificationAsRead
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: notificationId
+          in: path
+          description: ID of the notification
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Notification marked as read successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /notifications/read-all:
+    put:
+      tags:
+        - Notifications
+      summary: Mark all notifications as read
+      description: Mark all notifications for the currently authenticated user as read
+      operationId: markAllNotificationsAsRead
+      security:
+        - BearerAuth: []
+      responses:
+        '204':
+          description: All notifications marked as read successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /analytics/user:
+    get:
+      tags:
+        - Analytics
+      summary: Get user analytics
+      description: Retrieve analytics data for the currently authenticated user
+      operationId: getUserAnalytics
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: startDate
+          in: query
+          description: Start date for analytics (ISO format)
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: End date for analytics (ISO format)
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: User analytics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAnalytics'
+              example:
+                queriesSubmitted: 12
+                queriesResolved: 10
+                averageResolutionTime: 86400
+                expertInteractions: 8
+                topCategories: [
+                  { "category": "ACADEMIC", "count": 7 },
+                  { "category": "TECHNICAL", "count": 3 },
+                  { "category": "ADMINISTRATIVE", "count": 2 }
+                ]
+                responseRateByDay: [
+                  { "date": "2023-06-01", "submitted": 1, "resolved": 1 },
+                  { "date": "2023-06-02", "submitted": 2, "resolved": 1 },
+                  { "date": "2023-06-03", "submitted": 0, "resolved": 1 }
+                ]
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /analytics/expert:
+    get:
+      tags:
+        - Analytics
+      summary: Get expert analytics
+      description: Retrieve analytics data for the currently authenticated expert
+      operationId: getExpertAnalytics
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: startDate
+          in: query
+          description: Start date for analytics (ISO format)
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: End date for analytics (ISO format)
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Expert analytics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpertAnalytics'
+              example:
+                queriesAssigned: 15
+                queriesResolved: 12
+                averageResolutionTime: 72000
+                responseRate: 95
+                averageRating: 4.8
+                topCategories: [
+                  { "category": "ACADEMIC", "count": 10 },
+                  { "category": "TECHNICAL", "count": 5 }
+                ]
+                resolutionsByDay: [
+                  { "date": "2023-06-01", "assigned": 2, "resolved": 1 },
+                  { "date": "2023-06-02", "assigned": 1, "resolved": 2 },
+                  { "date": "2023-06-03", "assigned": 3, "resolved": 2 }
+                ]
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from the /auth/login or /auth/register endpoints
+
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      description: Page number (1-based)
+      required: false
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+    
+    LimitParam:
+      name: limit
+      in: query
+      description: Number of items per page
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 100
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: VALIDATION_ERROR
+            message: Invalid request parameters
+            details: {
+              "field": "email",
+              "error": "Must be a valid email address"
+            }
+    
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: UNAUTHORIZED
+            message: Authentication required
+    
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: FORBIDDEN
+            message: You do not have permission to access this resource
+    
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: NOT_FOUND
+            message: The requested resource was not found
+    
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: INTERNAL_ERROR
+            message: An unexpected error occurred
+
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: User's email address
+        password:
+          type: string
+          format: password
+          description: User's password
+
+    RegisterRequest:
+      type: object
+      required:
+        - email
+        - password
+        - name
+        - role
+      properties:
+        email:
+          type: string
+          format: email
+          description: User's email address
+        password:
+          type: string
+          format: password
+          description: User's password
+        name:
+          type: string
+          description: User's full name
+        role:
+          type: string
+          enum: [STUDENT, FACULTY, STAFF, ADMIN]
+          description: User's role in the institution
+
+    AuthResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: JWT access token
+        refreshToken:
+          type: string
+          description: JWT refresh token
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: User's unique identifier
+            email:
+              type: string
+              format: email
+              description: User's email address
+            name:
+              type: string
+              description: User's full name
+            role:
+              type: string
+              enum: [STUDENT, FACULTY, STAFF, ADMIN]
+              description: User's role in the institution
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: User's unique identifier
+        email:
+          type: string
+          format: email
+          description: User's email address
+        name:
+          type: string
+          description: User's full name
+        role:
+          type: string
+          enum: [STUDENT, FACULTY, STAFF, ADMIN]
+          description: User's role in the institution
+        department:
+          type: string
+          description: User's department or area of study
+        expertise:
+          type: array
+          items:
+            type: string
+          description: User's areas of expertise
+        bio:
+          type: string
+          description: User's biographical information
+        joinedAt:
+          type: string
+          format: date-time
+          description: When the user joined the platform
+        profilePictureUrl:
+          type: string
+          format: uri
+          description: URL to the user's profile picture
+
+    UserProfileUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: User's full name
+        department:
+          type: string
+          description: User's department or area of study
+        expertise:
+          type: array
+          items:
+            type: string
+          description: User's areas of expertise
+        bio:
+          type: string
+          description: User's biographical information
+        profilePicture:
+          type: string
+          format: binary
+          description: User's profile picture (base64 encoded)
+
+    ExpertProfile:
+      allOf:
+        - $ref: '#/components/schemas/UserProfile'
+        - type: object
+          properties:
+            rating:
+              type: number
+              format: float
+              minimum: 0
+              maximum: 5
+              description: Expert's average rating
+            responseRate:
+              type: number
+              format: float
+              minimum: 0
+              maximum: 100
+              description: Expert's response rate (percentage)
+            averageResponseTime:
+              type: integer
+              description: Expert's average response time in minutes
+            totalQueriesAnswered:
+              type: integer
+              description: Total number of queries answered by the expert
+
+    QueryCreate:
+      type: object
+      required:
+        - title
+        - description
+        - category
+      properties:
+        title:
+          type: string
+          description: Brief title of the query
+        description:
+          type: string
+          description: Detailed description of the query
+        category:
+          type: string
+          enum: [ACADEMIC, ADMINISTRATIVE, TECHNICAL, EVENT, OTHER]
+          description: Category of the query
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags related to the query
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, URGENT]
+          default: MEDIUM
+          description: Priority level of the query
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentInput'
+          description: Files attached to the query
+
+    QueryUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Brief title of the query
+        description:
+          type: string
+          description: Detailed description of the query
+        category:
+          type: string
+          enum: [ACADEMIC, ADMINISTRATIVE, TECHNICAL, EVENT, OTHER]
+          description: Category of the query
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags related to the query
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, URGENT]
+          description: Priority level of the query
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentInput'
+          description: Files attached to the query
+
+    Query:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Query's unique identifier
+        title:
+          type: string
+          description: Brief title of the query
+        description:
+          type: string
+          description: Detailed description of the query
+        category:
+          type: string
+          enum: [ACADEMIC, ADMINISTRATIVE, TECHNICAL, EVENT, OTHER]
+          description: Category of the query
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags related to the query
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, URGENT]
+          description: Priority level of the query
+        status:
+          type: string
+          enum: [PENDING, ASSIGNED, IN_PROGRESS, RESOLVED, CLOSED]
+          description: Current status of the query
+        createdAt:
+          type: string
+          format: date-time
+          description: When the query was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the query was last updated
+        userId:
+          type: string
+          format: uuid
+          description: ID of the user who created the query
+        assignedExpertId:
+          type: string
+          format: uuid
+          description: ID of the expert assigned to the query
+        assignedAt:
+          type: string
+          format: date-time
+          description: When the query was assigned to an expert
+        resolvedAt:
+          type: string
+          format: date-time
+          description: When the query was resolved
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          description: Files attached to the query
+
+    QuerySummary:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Query's unique identifier
+        title:
+          type: string
+          description: Brief title of the query
+        category:
+          type: string
+          enum: [ACADEMIC, ADMINISTRATIVE, TECHNICAL, EVENT, OTHER]
+          description: Category of the query
+        priority:
+          type: string
+          enum: [LOW, MEDIUM, HIGH, URGENT]
+          description: Priority level of the query
+        status:
+          type: string
+          enum: [PENDING, ASSIGNED, IN_PROGRESS, RESOLVED, CLOSED]
+          description: Current status of the query
+        createdAt:
+          type: string
+          format: date-time
+          description: When the query was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the query was last updated
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags related to the query
+
+    ExpertMatch:
+      type: object
+      properties:
+        expert:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Expert's unique identifier
+            name:
+              type: string
+              description: Expert's full name
+            department:
+              type: string
+              description: Expert's department
+            expertise:
+              type: array
+              items:
+                type: string
+              description: Expert's areas of expertise
+            profilePictureUrl:
+              type: string
+              format: uri
+              description: URL to the expert's profile picture
+        matchScore:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Match score between the query and the expert's expertise
+        matchReason:
+          type: string
+          description: Explanation of why this expert was matched
+        status:
+          type: string
+          enum: [PENDING, ACCEPTED, DECLINED]
+          description: Status of the expert match
+
+    MessageCreate:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: string
+          description: Content of the message
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentInput'
+          description: Files attached to the message
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Message's unique identifier
+        queryId:
+          type: string
+          format: uuid
+          description: ID of the query this message belongs to
+        senderId:
+          type: string
+          format: uuid
+          description: ID of the user who sent the message
+        content:
+          type: string
+          description: Content of the message
+        createdAt:
+          type: string
+          format: date-time
+          description: When the message was sent
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          description: Files attached to the message
+
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Notification's unique identifier
+        type:
+          type: string
+          enum: [QUERY_MATCH, QUERY_ASSIGNED, MESSAGE_RECEIVED, QUERY_STATUS_CHANGED, SYSTEM]
+          description: Type of notification
+        title:
+          type: string
+          description: Brief title of the notification
+        content:
+          type: string
+          description: Detailed content of the notification
+        read:
+          type: boolean
+          description: Whether the notification has been read
+        createdAt:
+          type: string
+          format: date-time
+          description: When the notification was created
+        data:
+          type: object
+          description: Additional data related to the notification
+
+    AttachmentInput:
+      type: object
+      required:
+        - name
+        - url
+      properties:
+        name:
+          type: string
+          description: Name of the file
+        url:
+          type: string
+          format: uri
+          description: URL to the file
+        type:
+          type: string
+          description: MIME type of the file
+
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Attachment's unique identifier
+        name:
+          type: string
+          description: Name of the file
+        url:
+          type: string
+          format: uri
+          description: URL to the file
+        type:
+          type: string
+          description: MIME type of the file
+        createdAt:
+          type: string
+          format: date-time
+          description: When the attachment was created
+
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items
+        page:
+          type: integer
+          description: Current page number
+        limit:
+          type: integer
+          description: Number of items per page
+        pages:
+          type: integer
+          description: Total number of pages
+
+    UserAnalytics:
+      type: object
+      properties:
+        queriesSubmitted:
+          type: integer
+          description: Total number of queries submitted by the user
+        queriesResolved:
+          type: integer
+          description: Total number of resolved queries
+        averageResolutionTime:
+          type: integer
+          description: Average time to resolution in seconds
+        expertInteractions:
+          type: integer
+          description: Number of unique experts interacted with
+        topCategories:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+                description: Query category
+              count:
+                type: integer
+                description: Number of queries in this category
+          description: Top categories of queries submitted
+        responseRateByDay:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+                description: Date
+              submitted:
+                type: integer
+                description: Number of queries submitted on this date
+              resolved:
+                type: integer
+                description: Number of queries resolved on this date
+          description: Daily submission and resolution rates
+
+    ExpertAnalytics:
+      type: object
+      properties:
+        queriesAssigned:
+          type: integer
+          description: Total number of queries assigned to the expert
+        queriesResolved:
+          type: integer
+          description: Total number of queries resolved by the expert
+        averageResolutionTime:
+          type: integer
+          description: Average time to resolution in seconds
+        responseRate:
+          type: number
+          format: float
+          description: Percentage of queries responded to within 24 hours
+        averageRating:
+          type: number
+          format: float
+          description: Average rating received from users
+        topCategories:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+                description: Query category
+              count:
+                type: integer
+                description: Number of queries in this category
+          description: Top categories of queries handled
+        resolutionsByDay:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+                description: Date
+              assigned:
+                type: integer
+                description: Number of queries assigned on this date
+              resolved:
+                type: integer
+                description: Number of queries resolved on this date
+          description: Daily assignment and resolution rates
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+        details:
+          type: object
+          description: Additional error details
