@@ -1,4 +1,4 @@
-/* @import "./themes_css/default.css"; */
+@import "./themes_css/default.css";
 
 /* @import "/themes_css/a11y_cb.css"; */
 /* @import "./themes_css/a11y_hc.css"; */
@@ -21,7 +21,7 @@
 /* @import "./themes_css/oppenheimer.css"; */
 /* @import "./themes_css/blackpink.css"; */
 /* @import "./themes_css/kda.css"; */
-@import "./themes_css/iiit.css";
+/* @import "./themes_css/iiit.css"; */
 /* @import "./themes_css/mit.css"; */
 
 @import "tailwindcss";
@@ -38,10 +38,10 @@
   --chart-5: #cc333e;
   --sidebar: #fff;
   --sidebar-foreground: #000;
-  --sidebar-primary: #9333ea;
-  --sidebar-primary-foreground: #fff;
-  --sidebar-accent: #3ab7bf;
-  --sidebar-accent-foreground: #fff;
+  --sidebar-primary: var(--muted)
+    --sidebar-primary-foreground: var(--muted-foreground);
+  --sidebar-accent: var(--popover);
+  --sidebar-accent-foreground: var(--popover-foreground);
   --sidebar-border: #000;
   --sidebar-ring: #000;
   --font-inter: "Inter", sans-serif;

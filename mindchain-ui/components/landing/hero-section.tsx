@@ -25,7 +25,11 @@ export function HeroSection() {
 
     // Update mouse position on movement
     // Mouse object to track position and interaction radius
-    const mouse = { x: undefined, y: undefined, radius: 150 };
+    const mouse: {
+      x: number | undefined;
+      y: number | undefined;
+      radius: number;
+    } = { x: undefined, y: undefined, radius: 150 };
     const handleMouseMove = (event: MouseEvent) => {
       mouse.x = event.x;
       mouse.y = event.y;
@@ -125,7 +129,7 @@ export function HeroSection() {
             ctx.strokeStyle = `rgba(255, 0, 0, ${1 - distance / mouse.radius})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
           }

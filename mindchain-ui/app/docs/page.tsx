@@ -39,7 +39,9 @@ export default function DocsPage() {
           <div>
             <h2 className="text-2xl font-bold">Explore API Details</h2>
             <p className="text-muted-foreground">
-              Dive into the comprehensive API documentation, including the OpenAPI specification, to integrate and extend MindChain's functionality.
+              Dive into the comprehensive API documentation, including the
+              OpenAPI specification, to integrate and extend MindChain&apos;s
+              functionality.
             </p>
           </div>
         </div>

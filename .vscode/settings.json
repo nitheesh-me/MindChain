@@ -1,0 +1,5 @@
+{
+    "tailwindConfigViewer.workspacePath": "minchain-ui/",
+    "tailwindCSS.experimental.configFile": "minchain-ui/tailwind.config.ts",
+    "liveServer.settings.port": 5501,
+}
