@@ -1,0 +1,19 @@
+docs:
+  - changed-files:
+      - '**/*.md'
+      - '!mindchain-ui/**'
+      - '!mindchain-serve/**'
+      - '!.github/**'
+      - '!scripts/**'
+      - '!.gitignore'
+      - '!.pre-commit-config.yaml'
+
+internal:
+  - changed-files:
+      - .github/**
+      - scripts/**
+      - .gitignore
+      - .pre-commit-config.yaml
+      - '!./**/*.md'
+      - '!mindchain-ui/**'
+      - '!mindchain-serve/**'

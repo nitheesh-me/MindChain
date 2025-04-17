@@ -1,0 +1,13 @@
+FROM oven/bun:1
+
+WORKDIR /app
+
+COPY package*.json bun.lockb /app/
+
+RUN bun install
+
+RUN bunx -y playwright install --with-deps
+
+COPY ./ /app/
+
+ARG VITE_API_URL=${VITE_API_URL}

@@ -113,7 +113,7 @@ Ensure you have the following installed:
    ```bash
    cd backend
    cp .env.example .env
-   npm install
+   bun install
    ```
 
 3. Set up the frontend:
@@ -121,7 +121,7 @@ Ensure you have the following installed:
    ```bash
    cd ../frontend
    cp .env.example .env
-   npm install
+   bun install
    ```
 
 4. Start the development servers:
@@ -129,11 +129,11 @@ Ensure you have the following installed:
    ```bash
    # Backend
    cd backend
-   npm start
+   bun start
 
    # Frontend
    cd ../frontend
-   npm start
+   bun start
    ```
 
 ## 🚀 Deploying Your Own Instance

@@ -1,5 +1,14 @@
 # docs/src/.gitignore
+*-temp
+dist/
+*:Zone.Identifier
 .env
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
